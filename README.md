@@ -17,4 +17,8 @@ npm install
 npm run lite
 ```
 
+# Development
+
+IDE: https://code.visualstudio.com/
+
 Copyright 2015 NightkingCH & ph41314n
