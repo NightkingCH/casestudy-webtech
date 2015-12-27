@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="de">
+  <head>
+        <meta charset="UTF-8" />
+        <title>Buchhaus</title>
+        <meta name="description" content="world best bookstore" />
+        <meta name="keywords" content="bookstore, store, shop, buch" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <link type="image/png" sizes="16x16 32x32 64x64" rel="shortcut icon" href="./content/favico/favicon.png" />
+        <link type="image/png" sizes="16x16 32x32 64x64" rel="apple-touch-icon-precomposed" href="./content/favico/favicon.png" />
+        
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="./content/css/bootstrap/bootstrap-theme.css" />
+        
+        <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css" />
+        
+        <link rel="stylesheet" href="./content/css/colors/colors.css" />
+        
+        <link rel="stylesheet" href="./content/css/site/site.css" />
+        
+        <base href="/">
+  </head>
+  <body>
+    <div data-app="">Loading...</div>
+    <script>
+          function boot(){
+                var systemPromise = System.import('app/boot');
+                
+                systemPromise.catch(function(error){
+                    console.error(error);
+                });
+                
+                systemPromise.then(null, console.error.bind(console));                
+            }
+    </script>
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>    
+    <script src="node_modules/typescript/lib/typescript.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="./app/config.js" onload="boot()"></script>
+  </body>
+</html>
