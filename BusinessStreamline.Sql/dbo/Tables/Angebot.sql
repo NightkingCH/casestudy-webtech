@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Angebot] (
-    [AngebotId]    INT          NOT NULL,
+    [AngebotId]    INT          NOT NULL IDENTITY(1,1),
     [ErstelltAm]   DATETIME     NULL,
     [Status]       INT          NULL,
     [PreisProTeil] DECIMAL (18) NULL,

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e8240b5c7c544e58bf83ef04ce1efbd" Name="Diagram1">
+        <EntityTypeShape EntityType="BusinessStreamlineModel.Anbieter" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.Angebot" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.Bestellung" Width="1.5" PointX="7.5" PointY="1.25" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.Firma" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.Login" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.Nachfrage" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.Produkt" Width="1.5" PointX="5.25" PointY="8.5" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.Teil" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.Typ" Width="1.5" PointX="5.75" PointY="4.75" />
+        <AssociationConnector Association="BusinessStreamlineModel.FK_AnbieterAngebot" />
+        <AssociationConnector Association="BusinessStreamlineModel.FK_LoginAnbieter" />
+        <AssociationConnector Association="BusinessStreamlineModel.FK_AngebotBestellung" />
+        <AssociationConnector Association="BusinessStreamlineModel.FK_NachfrageAngebot" />
+        <AssociationConnector Association="BusinessStreamlineModel.FK_NachfrageBestellung" />
+        <AssociationConnector Association="BusinessStreamlineModel.FK_FirmaProdukt" />
+        <AssociationConnector Association="BusinessStreamlineModel.FK_LoginFirma" />
+        <AssociationConnector Association="BusinessStreamlineModel.FK_TeilNachfrage" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

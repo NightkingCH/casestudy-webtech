@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Bestellung] (
-    [BestellungId] INT      NOT NULL,
+    [BestellungId] INT      NOT NULL IDENTITY(1,1),
     [ErstelltAm]   DATETIME NULL,
     [NachfrageId]  INT      NOT NULL,
     [AngebotId]    INT      NOT NULL,

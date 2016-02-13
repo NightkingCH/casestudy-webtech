@@ -1,0 +1,569 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BusinessStreamlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Anbieter">
+          <Key>
+            <PropertyRef Name="AnbieterId" />
+          </Key>
+          <Property Name="AnbieterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Angebot">
+          <Key>
+            <PropertyRef Name="AngebotId" />
+          </Key>
+          <Property Name="AngebotId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErstelltAm" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PreisProTeil" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AnbieterId" Type="int" Nullable="false" />
+          <Property Name="NachfrageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bestellung">
+          <Key>
+            <PropertyRef Name="BestellungId" />
+          </Key>
+          <Property Name="BestellungId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErstelltAm" Type="datetime" />
+          <Property Name="NachfrageId" Type="int" Nullable="false" />
+          <Property Name="AngebotId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Firma">
+          <Key>
+            <PropertyRef Name="FirmaId" />
+          </Key>
+          <Property Name="FirmaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nachfrage">
+          <Key>
+            <PropertyRef Name="NachfrageId" />
+          </Key>
+          <Property Name="NachfrageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Anzahl" Type="int" />
+          <Property Name="ErstelltAm" Type="datetime" />
+          <Property Name="TeilId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produkt">
+          <Key>
+            <PropertyRef Name="ProduktId" />
+          </Key>
+          <Property Name="ProduktId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="40" />
+          <Property Name="FirmaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teil">
+          <Key>
+            <PropertyRef Name="TeilId" />
+          </Key>
+          <Property Name="TeilId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Anzahl" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Typ">
+          <Key>
+            <PropertyRef Name="TypId" />
+          </Key>
+          <Property Name="TypId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AnbieterAngebot">
+          <End Role="Anbieter" Type="Self.Anbieter" Multiplicity="1" />
+          <End Role="Angebot" Type="Self.Angebot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anbieter">
+              <PropertyRef Name="AnbieterId" />
+            </Principal>
+            <Dependent Role="Angebot">
+              <PropertyRef Name="AnbieterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AngebotBestellung">
+          <End Role="Angebot" Type="Self.Angebot" Multiplicity="1" />
+          <End Role="Bestellung" Type="Self.Bestellung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Angebot">
+              <PropertyRef Name="AngebotId" />
+            </Principal>
+            <Dependent Role="Bestellung">
+              <PropertyRef Name="AngebotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FirmaProdukt">
+          <End Role="Firma" Type="Self.Firma" Multiplicity="1" />
+          <End Role="Produkt" Type="Self.Produkt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firma">
+              <PropertyRef Name="FirmaId" />
+            </Principal>
+            <Dependent Role="Produkt">
+              <PropertyRef Name="FirmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginAnbieter">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="Anbieter" Type="Self.Anbieter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="Anbieter">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginFirma">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="Firma" Type="Self.Firma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="Firma">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NachfrageAngebot">
+          <End Role="Nachfrage" Type="Self.Nachfrage" Multiplicity="1" />
+          <End Role="Angebot" Type="Self.Angebot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nachfrage">
+              <PropertyRef Name="NachfrageId" />
+            </Principal>
+            <Dependent Role="Angebot">
+              <PropertyRef Name="NachfrageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NachfrageBestellung">
+          <End Role="Nachfrage" Type="Self.Nachfrage" Multiplicity="1" />
+          <End Role="Bestellung" Type="Self.Bestellung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nachfrage">
+              <PropertyRef Name="NachfrageId" />
+            </Principal>
+            <Dependent Role="Bestellung">
+              <PropertyRef Name="NachfrageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeilNachfrage">
+          <End Role="Teil" Type="Self.Teil" Multiplicity="1" />
+          <End Role="Nachfrage" Type="Self.Nachfrage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teil">
+              <PropertyRef Name="TeilId" />
+            </Principal>
+            <Dependent Role="Nachfrage">
+              <PropertyRef Name="TeilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BusinessStreamlineModelStoreContainer">
+          <EntitySet Name="Anbieter" EntityType="Self.Anbieter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Angebot" EntityType="Self.Angebot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bestellung" EntityType="Self.Bestellung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Firma" EntityType="Self.Firma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nachfrage" EntityType="Self.Nachfrage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produkt" EntityType="Self.Produkt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teil" EntityType="Self.Teil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Typ" EntityType="Self.Typ" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AnbieterAngebot" Association="Self.FK_AnbieterAngebot">
+            <End Role="Anbieter" EntitySet="Anbieter" />
+            <End Role="Angebot" EntitySet="Angebot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AngebotBestellung" Association="Self.FK_AngebotBestellung">
+            <End Role="Angebot" EntitySet="Angebot" />
+            <End Role="Bestellung" EntitySet="Bestellung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FirmaProdukt" Association="Self.FK_FirmaProdukt">
+            <End Role="Firma" EntitySet="Firma" />
+            <End Role="Produkt" EntitySet="Produkt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginAnbieter" Association="Self.FK_LoginAnbieter">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Anbieter" EntitySet="Anbieter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginFirma" Association="Self.FK_LoginFirma">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Firma" EntitySet="Firma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NachfrageAngebot" Association="Self.FK_NachfrageAngebot">
+            <End Role="Nachfrage" EntitySet="Nachfrage" />
+            <End Role="Angebot" EntitySet="Angebot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NachfrageBestellung" Association="Self.FK_NachfrageBestellung">
+            <End Role="Nachfrage" EntitySet="Nachfrage" />
+            <End Role="Bestellung" EntitySet="Bestellung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeilNachfrage" Association="Self.FK_TeilNachfrage">
+            <End Role="Teil" EntitySet="Teil" />
+            <End Role="Nachfrage" EntitySet="Nachfrage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BusinessStreamlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BusinessStreamlineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Anbieter" EntityType="BusinessStreamlineModel.Anbieter" />
+          <EntitySet Name="Angebot" EntityType="BusinessStreamlineModel.Angebot" />
+          <EntitySet Name="Bestellung" EntityType="BusinessStreamlineModel.Bestellung" />
+          <EntitySet Name="Firma" EntityType="BusinessStreamlineModel.Firma" />
+          <EntitySet Name="Login" EntityType="BusinessStreamlineModel.Login" />
+          <EntitySet Name="Nachfrage" EntityType="BusinessStreamlineModel.Nachfrage" />
+          <EntitySet Name="Produkt" EntityType="BusinessStreamlineModel.Produkt" />
+          <EntitySet Name="Teil" EntityType="BusinessStreamlineModel.Teil" />
+          <EntitySet Name="Typ" EntityType="BusinessStreamlineModel.Typ" />
+          <AssociationSet Name="FK_AnbieterAngebot" Association="BusinessStreamlineModel.FK_AnbieterAngebot">
+            <End Role="Anbieter" EntitySet="Anbieter" />
+            <End Role="Angebot" EntitySet="Angebot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginAnbieter" Association="BusinessStreamlineModel.FK_LoginAnbieter">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Anbieter" EntitySet="Anbieter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AngebotBestellung" Association="BusinessStreamlineModel.FK_AngebotBestellung">
+            <End Role="Angebot" EntitySet="Angebot" />
+            <End Role="Bestellung" EntitySet="Bestellung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NachfrageAngebot" Association="BusinessStreamlineModel.FK_NachfrageAngebot">
+            <End Role="Nachfrage" EntitySet="Nachfrage" />
+            <End Role="Angebot" EntitySet="Angebot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NachfrageBestellung" Association="BusinessStreamlineModel.FK_NachfrageBestellung">
+            <End Role="Nachfrage" EntitySet="Nachfrage" />
+            <End Role="Bestellung" EntitySet="Bestellung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FirmaProdukt" Association="BusinessStreamlineModel.FK_FirmaProdukt">
+            <End Role="Firma" EntitySet="Firma" />
+            <End Role="Produkt" EntitySet="Produkt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginFirma" Association="BusinessStreamlineModel.FK_LoginFirma">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Firma" EntitySet="Firma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeilNachfrage" Association="BusinessStreamlineModel.FK_TeilNachfrage">
+            <End Role="Teil" EntitySet="Teil" />
+            <End Role="Nachfrage" EntitySet="Nachfrage" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Anbieter">
+          <Key>
+            <PropertyRef Name="AnbieterId" />
+          </Key>
+          <Property Name="AnbieterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Angebot" Relationship="BusinessStreamlineModel.FK_AnbieterAngebot" FromRole="Anbieter" ToRole="Angebot" />
+          <NavigationProperty Name="Login" Relationship="BusinessStreamlineModel.FK_LoginAnbieter" FromRole="Anbieter" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Angebot">
+          <Key>
+            <PropertyRef Name="AngebotId" />
+          </Key>
+          <Property Name="AngebotId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PreisProTeil" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AnbieterId" Type="Int32" Nullable="false" />
+          <Property Name="NachfrageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Anbieter" Relationship="BusinessStreamlineModel.FK_AnbieterAngebot" FromRole="Angebot" ToRole="Anbieter" />
+          <NavigationProperty Name="Bestellung" Relationship="BusinessStreamlineModel.FK_AngebotBestellung" FromRole="Angebot" ToRole="Bestellung" />
+          <NavigationProperty Name="Nachfrage" Relationship="BusinessStreamlineModel.FK_NachfrageAngebot" FromRole="Angebot" ToRole="Nachfrage" />
+        </EntityType>
+        <EntityType Name="Bestellung">
+          <Key>
+            <PropertyRef Name="BestellungId" />
+          </Key>
+          <Property Name="BestellungId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="NachfrageId" Type="Int32" Nullable="false" />
+          <Property Name="AngebotId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Angebot" Relationship="BusinessStreamlineModel.FK_AngebotBestellung" FromRole="Bestellung" ToRole="Angebot" />
+          <NavigationProperty Name="Nachfrage" Relationship="BusinessStreamlineModel.FK_NachfrageBestellung" FromRole="Bestellung" ToRole="Nachfrage" />
+        </EntityType>
+        <EntityType Name="Firma">
+          <Key>
+            <PropertyRef Name="FirmaId" />
+          </Key>
+          <Property Name="FirmaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Produkt" Relationship="BusinessStreamlineModel.FK_FirmaProdukt" FromRole="Firma" ToRole="Produkt" />
+          <NavigationProperty Name="Login" Relationship="BusinessStreamlineModel.FK_LoginFirma" FromRole="Firma" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Anbieter" Relationship="BusinessStreamlineModel.FK_LoginAnbieter" FromRole="Login" ToRole="Anbieter" />
+          <NavigationProperty Name="Firma" Relationship="BusinessStreamlineModel.FK_LoginFirma" FromRole="Login" ToRole="Firma" />
+        </EntityType>
+        <EntityType Name="Nachfrage">
+          <Key>
+            <PropertyRef Name="NachfrageId" />
+          </Key>
+          <Property Name="NachfrageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Anzahl" Type="Int32" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="TeilId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Angebot" Relationship="BusinessStreamlineModel.FK_NachfrageAngebot" FromRole="Nachfrage" ToRole="Angebot" />
+          <NavigationProperty Name="Bestellung" Relationship="BusinessStreamlineModel.FK_NachfrageBestellung" FromRole="Nachfrage" ToRole="Bestellung" />
+          <NavigationProperty Name="Teil" Relationship="BusinessStreamlineModel.FK_TeilNachfrage" FromRole="Nachfrage" ToRole="Teil" />
+        </EntityType>
+        <EntityType Name="Produkt">
+          <Key>
+            <PropertyRef Name="ProduktId" />
+          </Key>
+          <Property Name="ProduktId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="FirmaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Firma" Relationship="BusinessStreamlineModel.FK_FirmaProdukt" FromRole="Produkt" ToRole="Firma" />
+        </EntityType>
+        <EntityType Name="Teil">
+          <Key>
+            <PropertyRef Name="TeilId" />
+          </Key>
+          <Property Name="TeilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Anzahl" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Nachfrage" Relationship="BusinessStreamlineModel.FK_TeilNachfrage" FromRole="Teil" ToRole="Nachfrage" />
+        </EntityType>
+        <EntityType Name="Typ">
+          <Key>
+            <PropertyRef Name="TypId" />
+          </Key>
+          <Property Name="TypId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_AnbieterAngebot">
+          <End Type="BusinessStreamlineModel.Anbieter" Role="Anbieter" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Angebot" Role="Angebot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anbieter">
+              <PropertyRef Name="AnbieterId" />
+            </Principal>
+            <Dependent Role="Angebot">
+              <PropertyRef Name="AnbieterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginAnbieter">
+          <End Type="BusinessStreamlineModel.Login" Role="Login" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Anbieter" Role="Anbieter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="Anbieter">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AngebotBestellung">
+          <End Type="BusinessStreamlineModel.Angebot" Role="Angebot" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Bestellung" Role="Bestellung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Angebot">
+              <PropertyRef Name="AngebotId" />
+            </Principal>
+            <Dependent Role="Bestellung">
+              <PropertyRef Name="AngebotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NachfrageAngebot">
+          <End Type="BusinessStreamlineModel.Nachfrage" Role="Nachfrage" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Angebot" Role="Angebot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nachfrage">
+              <PropertyRef Name="NachfrageId" />
+            </Principal>
+            <Dependent Role="Angebot">
+              <PropertyRef Name="NachfrageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NachfrageBestellung">
+          <End Type="BusinessStreamlineModel.Nachfrage" Role="Nachfrage" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Bestellung" Role="Bestellung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nachfrage">
+              <PropertyRef Name="NachfrageId" />
+            </Principal>
+            <Dependent Role="Bestellung">
+              <PropertyRef Name="NachfrageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FirmaProdukt">
+          <End Type="BusinessStreamlineModel.Firma" Role="Firma" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Produkt" Role="Produkt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firma">
+              <PropertyRef Name="FirmaId" />
+            </Principal>
+            <Dependent Role="Produkt">
+              <PropertyRef Name="FirmaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginFirma">
+          <End Type="BusinessStreamlineModel.Login" Role="Login" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Firma" Role="Firma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="Firma">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeilNachfrage">
+          <End Type="BusinessStreamlineModel.Teil" Role="Teil" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Nachfrage" Role="Nachfrage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teil">
+              <PropertyRef Name="TeilId" />
+            </Principal>
+            <Dependent Role="Nachfrage">
+              <PropertyRef Name="TeilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BusinessStreamlineModelStoreContainer" CdmEntityContainer="BusinessStreamlineEntities">
+          <EntitySetMapping Name="Anbieter">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Anbieter">
+              <MappingFragment StoreEntitySet="Anbieter">
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="AnbieterId" ColumnName="AnbieterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Angebot">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Angebot">
+              <MappingFragment StoreEntitySet="Angebot">
+                <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
+                <ScalarProperty Name="AnbieterId" ColumnName="AnbieterId" />
+                <ScalarProperty Name="PreisProTeil" ColumnName="PreisProTeil" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
+                <ScalarProperty Name="AngebotId" ColumnName="AngebotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bestellung">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Bestellung">
+              <MappingFragment StoreEntitySet="Bestellung">
+                <ScalarProperty Name="AngebotId" ColumnName="AngebotId" />
+                <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
+                <ScalarProperty Name="BestellungId" ColumnName="BestellungId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Firma">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Firma">
+              <MappingFragment StoreEntitySet="Firma">
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="FirmaId" ColumnName="FirmaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nachfrage">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Nachfrage">
+              <MappingFragment StoreEntitySet="Nachfrage">
+                <ScalarProperty Name="TeilId" ColumnName="TeilId" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
+                <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
+                <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produkt">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Produkt">
+              <MappingFragment StoreEntitySet="Produkt">
+                <ScalarProperty Name="FirmaId" ColumnName="FirmaId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teil">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Teil">
+              <MappingFragment StoreEntitySet="Teil">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
+                <ScalarProperty Name="TeilId" ColumnName="TeilId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Typ">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Typ">
+              <MappingFragment StoreEntitySet="Typ">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypId" ColumnName="TypId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

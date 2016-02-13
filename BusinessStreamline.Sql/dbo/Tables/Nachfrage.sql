@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Nachfrage] (
-    [NachfrageId] INT      NOT NULL,
+    [NachfrageId] INT      NOT NULL IDENTITY(1,1),
     [Anzahl]      INT      NULL,
     [ErstelltAm]  DATETIME NULL,
     [TeilId]      INT      NOT NULL,
