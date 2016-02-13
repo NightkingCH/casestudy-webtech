@@ -69,6 +69,7 @@
             <PropertyRef Name="TeilId" />
           </Key>
           <Property Name="TeilId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProduktId" Type="int" Nullable="false" />
           <Property Name="Anzahl" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="40" />
         </EntityType>
@@ -164,6 +165,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProduktTeil">
+          <End Role="Produkt" Type="Self.Produkt" Multiplicity="1" />
+          <End Role="Teil" Type="Self.Teil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkt">
+              <PropertyRef Name="ProduktId" />
+            </Principal>
+            <Dependent Role="Teil">
+              <PropertyRef Name="ProduktId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TeilNachfrage">
           <End Role="Teil" Type="Self.Teil" Multiplicity="1" />
           <End Role="Nachfrage" Type="Self.Nachfrage" Multiplicity="*" />
@@ -213,6 +226,10 @@
           <AssociationSet Name="FK_NachfrageBestellung" Association="Self.FK_NachfrageBestellung">
             <End Role="Nachfrage" EntitySet="Nachfrage" />
             <End Role="Bestellung" EntitySet="Bestellung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProduktTeil" Association="Self.FK_ProduktTeil">
+            <End Role="Produkt" EntitySet="Produkt" />
+            <End Role="Teil" EntitySet="Teil" />
           </AssociationSet>
           <AssociationSet Name="FK_TeilNachfrage" Association="Self.FK_TeilNachfrage">
             <End Role="Teil" EntitySet="Teil" />
@@ -264,6 +281,10 @@
           <AssociationSet Name="FK_TeilNachfrage" Association="BusinessStreamlineModel.FK_TeilNachfrage">
             <End Role="Teil" EntitySet="Teil" />
             <End Role="Nachfrage" EntitySet="Nachfrage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProduktTeil" Association="BusinessStreamlineModel.FK_ProduktTeil">
+            <End Role="Produkt" EntitySet="Produkt" />
+            <End Role="Teil" EntitySet="Teil" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Anbieter">
@@ -339,15 +360,18 @@
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="FirmaId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Firma" Relationship="BusinessStreamlineModel.FK_FirmaProdukt" FromRole="Produkt" ToRole="Firma" />
+          <NavigationProperty Name="Teil" Relationship="BusinessStreamlineModel.FK_ProduktTeil" FromRole="Produkt" ToRole="Teil" />
         </EntityType>
         <EntityType Name="Teil">
           <Key>
             <PropertyRef Name="TeilId" />
           </Key>
           <Property Name="TeilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProduktId" Type="Int32" Nullable="false" />
           <Property Name="Anzahl" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Nachfrage" Relationship="BusinessStreamlineModel.FK_TeilNachfrage" FromRole="Teil" ToRole="Nachfrage" />
+          <NavigationProperty Name="Produkt" Relationship="BusinessStreamlineModel.FK_ProduktTeil" FromRole="Teil" ToRole="Produkt" />
         </EntityType>
         <EntityType Name="Typ">
           <Key>
@@ -453,7 +477,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_ProduktTeil">
+          <End Type="BusinessStreamlineModel.Produkt" Role="Produkt" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Teil" Role="Teil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkt">
+              <PropertyRef Name="ProduktId" />
+            </Principal>
+            <Dependent Role="Teil">
+              <PropertyRef Name="ProduktId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -530,6 +566,7 @@
               <MappingFragment StoreEntitySet="Teil">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
+                <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
                 <ScalarProperty Name="TeilId" ColumnName="TeilId" />
               </MappingFragment>
             </EntityTypeMapping>

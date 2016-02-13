@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Angebot] (
     [AngebotId]    INT          NOT NULL IDENTITY(1,1),
-    [ErstelltAm]   DATETIME     NULL,
-    [Status]       INT          NULL,
-    [PreisProTeil] DECIMAL (18) NULL,
+    [ErstelltAm]   DATETIME     NOT NULL DEFAULT GETDATE(),
+    [Status]       INT          NOT NULL DEFAULT 0, --0 = Offen; 1 = Akzeptiert; 2 = Abgelehnt
+    [PreisProTeil] DECIMAL (18,2) NOT NULL,
     [AnbieterId]   INT          NOT NULL,
     [NachfrageId]  INT          NOT NULL,
     CONSTRAINT [PK_Angebot] PRIMARY KEY CLUSTERED ([AngebotId] ASC),

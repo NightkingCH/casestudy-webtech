@@ -14,10 +14,18 @@ namespace BusinessStreamline.Data
     
     public partial class Produkt
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Produkt()
+        {
+            this.Teil = new HashSet<Teil>();
+        }
+    
         public int ProduktId { get; set; }
         public string Name { get; set; }
         public int FirmaId { get; set; }
     
         public virtual Firma Firma { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Teil> Teil { get; set; }
     }
 }

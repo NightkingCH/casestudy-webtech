@@ -5,6 +5,7 @@
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
@@ -119,10 +120,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\FormatterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WebAPI\AnbieterController.cs" />
+    <Compile Include="Controllers\WebAPI\AngebotController.cs" />
+    <Compile Include="Controllers\WebAPI\BestellungController.cs" />
+    <Compile Include="Controllers\WebAPI\FirmaController.cs" />
+    <Compile Include="Controllers\WebAPI\LoginController.cs" />
+    <Compile Include="Controllers\WebAPI\NachfrageController.cs" />
     <Compile Include="Controllers\WebAPI\ProduktController.cs" />
+    <Compile Include="Controllers\WebAPI\TeilController.cs" />
+    <Compile Include="Controllers\WebAPI\TypController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -145,6 +156,7 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\models\definition.d.ts" />
     <TypeScriptCompile Include="app\sites\suche\suche.ts" />
   </ItemGroup>
   <ItemGroup>

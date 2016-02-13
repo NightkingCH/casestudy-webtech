@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Bestellung] (
     [BestellungId] INT      NOT NULL IDENTITY(1,1),
-    [ErstelltAm]   DATETIME NULL,
+    [ErstelltAm]   DATETIME NOT NULL DEFAULT GETDATE(),
     [NachfrageId]  INT      NOT NULL,
     [AngebotId]    INT      NOT NULL,
     CONSTRAINT [PK_Bestellung] PRIMARY KEY CLUSTERED ([BestellungId] ASC),
