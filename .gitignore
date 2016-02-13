@@ -240,3 +240,6 @@ build/Release
 node_modules
 
 build
+
+.dbmdl
+.user
