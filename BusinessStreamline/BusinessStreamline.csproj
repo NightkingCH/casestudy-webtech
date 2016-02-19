@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -144,6 +144,7 @@
     <Content Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="package.json" />
+    <Content Include="typings.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -156,8 +157,20 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\app.ts" />
+    <TypeScriptCompile Include="app\bootstrap.ts" />
+    <TypeScriptCompile Include="app\configuration\endpoints.ts" />
     <TypeScriptCompile Include="app\models\models.ts" />
+    <TypeScriptCompile Include="app\repository\baseRepository.ts" />
+    <TypeScriptCompile Include="app\repository\produktRepository.ts" />
+    <TypeScriptCompile Include="app\repository\repository.ts" />
     <TypeScriptCompile Include="app\sites\suche\suche.ts" />
+    <None Include="tsconfig.json" />
+    <TypeScriptCompile Include="typings\browser.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\whatwg-fetch\whatwg-fetch.d.ts" />
+    <TypeScriptCompile Include="typings\main.d.ts" />
+    <TypeScriptCompile Include="typings\main\ambient\whatwg-fetch\whatwg-fetch.d.ts" />
+    <TypeScriptCompile Include="typings\typings.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -185,6 +198,7 @@
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>False</TypeScriptNoEmitOnError>
     <TypeScriptSourceMap>False</TypeScriptSourceMap>
+    <TypeScriptModuleResolution>node</TypeScriptModuleResolution>
     <TypeScriptMapRoot />
     <TypeScriptSourceRoot />
   </PropertyGroup>

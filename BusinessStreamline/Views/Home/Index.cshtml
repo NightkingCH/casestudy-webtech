@@ -17,17 +17,16 @@
     <script src="https://code.angularjs.org/2.0.0-beta.6/Rx.js"></script>
     <script src="https://code.angularjs.org/2.0.0-beta.6/angular2.dev.js"></script>
     <script>
-      //System.config({
-      //  transpiler: 'typescript',
-      //  typescriptOptions: { emitDecoratorMetadata: true },
-      //  packages: {'app': {defaultExtension: 'ts'}}
-      //});
-      //System.import('app/main')
-      //      .then(null, console.error.bind(console));
+      System.config({
+        transpiler: 'typescript',
+        typescriptOptions: { emitDecoratorMetadata: true },
+        packages: {'app': {defaultExtension: 'ts'}}
+      });
+      System.import('app/bootstrap')
+            .then(null, console.error.bind(console));
     </script>
 </head>
 <body>
-    <div> 
-    </div>
+    <app></app>
 </body>
 </html>

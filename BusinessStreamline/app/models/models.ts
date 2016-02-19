@@ -1,69 +1,69 @@
 ﻿export class Login {
-    Anbieter: Anbieter[];
-    Firma: Firma[];
-    LoginId: number;
-    Name: string;
-    Password: string;
+    anbieter: Anbieter[];
+    firma: Firma[];
+    loginId: number;
+    name: string;
+    password: string;
 }
 
 export class Firma {
-    Produkt: Produkt[];
-    Login: Login;
-    FirmaId: number;
-    LoginId: number;
+    produkt: Produkt[];
+    login: Login;
+    firmaId: number;
+    loginId: number;
 }
 
 export class Anbieter {
-    Angebot: Angebot[];
-    Login: Login;
-    AnbieterId: number;
-    LoginId: number;
+    angebot: Angebot[];
+    login: Login;
+    anbieterId: number;
+    loginId: number;
 }
 
 export class Bestellung {
-    Angebot: Angebot;
-    Nachfrage: Nachfrage;
-    BestellungId: number;
-    ErstelltAm: string;
-    NachfrageId: number;
-    AngebotId: number;
+    angebot: Angebot;
+    nachfrage: Nachfrage;
+    bestellungId: number;
+    erstelltAm: string;
+    nachfrageId: number;
+    angebotId: number;
 }
 
 export class Angebot {
-    Anbieter: Anbieter;
-    Bestellung: Bestellung[];
-    Nachfrage: Nachfrage;
-    AngebotId: number;
-    ErstelltAm: string;
-    Status: number;
-    PreisProTeil: number;
-    AnbieterId: number;
-    NachfrageId: number;
+    anbieter: Anbieter;
+    bestellung: Bestellung[];
+    nachfrage: Nachfrage;
+    angebotId: number;
+    erstelltAm: string;
+    status: number;
+    preisProTeil: number;
+    anbieterId: number;
+    nachfrageId: number;
 }
 
 export class Nachfrage {
-    Angebot: Angebot[];
-    Bestellung: Bestellung[];
-    Teil: Teil;
-    NachfrageId: number;
-    Anzahl: number;
-    ErstelltAm: string;
-    TeilId: number;
+    angebot: Angebot[];
+    bestellung: Bestellung[];
+    teil: Teil;
+    nachfrageId: number;
+    anzahl: number;
+    erstelltAm: string;
+    teilId: number;
 }
 
 export class Teil {
-    Nachfrage: Nachfrage[];
-    Produkt: Produkt;
-    TeilId: number;
-    ProduktId: number;
-    Anzahl: number;
-    Name: string;
+    nachfrage: Nachfrage[];
+    produkt: Produkt;
+    teilId: number;
+    produktId: number;
+    anzahl: number;
+    name: string;
 }
 
 export class Produkt {
-    Firma: Firma;
-    Teil: Teil[];
-    ProduktId: number;
-    Name: string;
-    FirmaId: number;
+    firma: Firma;
+    teil: Teil[];
+    produktId: number;
+    name: string;
+    firmaId: number;
 }
