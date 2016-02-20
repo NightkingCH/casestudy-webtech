@@ -16,89 +16,36 @@ namespace BusinessStreamline.Controllers.WebAPI
     {
         private BusinessStreamlineEntities db = new BusinessStreamlineEntities();
 
-        // GET: api/Login
-        public IQueryable<Login> GetLogin()
-        {
-            return db.Login;
-        }
-
-        // GET: api/Login/5
-        [ResponseType(typeof(Login))]
-        public IHttpActionResult GetLogin(int id)
-        {
-            Login login = db.Login.Find(id);
-            if (login == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(login);
-        }
-
-        // PUT: api/Login/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutLogin(int id, Login login)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != login.LoginId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(login).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LoginExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
         // POST: api/Login
         [ResponseType(typeof(Login))]
         public IHttpActionResult PostLogin(Login login)
         {
-            if (!ModelState.IsValid)
+            // logon function => never expose any validation information about the provided login details!
+
+            if (string.IsNullOrWhiteSpace(login.Name))
             {
-                return BadRequest(ModelState);
+                return BadRequest();
             }
 
-            db.Login.Add(login);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = login.LoginId }, login);
-        }
-
-        // DELETE: api/Login/5
-        [ResponseType(typeof(Login))]
-        public IHttpActionResult DeleteLogin(int id)
-        {
-            Login login = db.Login.Find(id);
-            if (login == null)
+            if (string.IsNullOrWhiteSpace(login.Password))
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            db.Login.Remove(login);
-            db.SaveChanges();
+            var entity = db.Login.FirstOrDefault(x => x.Name == login.Name);
 
-            return Ok(login);
+            if (entity == null) {
+                return BadRequest();
+            }
+
+            if (entity.Password != login.Password)
+            {
+                return BadRequest();
+            }
+
+            entity.Password = ""; // goes over the network => never send a password back!
+
+            return Ok(entity);
         }
 
         protected override void Dispose(bool disposing)

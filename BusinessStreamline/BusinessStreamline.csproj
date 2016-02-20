@@ -132,6 +132,7 @@
     <Compile Include="Controllers\WebAPI\LoginController.cs" />
     <Compile Include="Controllers\WebAPI\NachfrageController.cs" />
     <Compile Include="Controllers\WebAPI\ProduktController.cs" />
+    <Compile Include="Controllers\WebAPI\SucheNachfrageController.cs" />
     <Compile Include="Controllers\WebAPI\TeilController.cs" />
     <Compile Include="Controllers\WebAPI\TypController.cs" />
     <Compile Include="Global.asax.cs">
@@ -162,6 +163,7 @@
     <TypeScriptCompile Include="app\configuration\endpoints.ts" />
     <TypeScriptCompile Include="app\models\models.ts" />
     <TypeScriptCompile Include="app\repository\baseRepository.ts" />
+    <TypeScriptCompile Include="app\repository\loginRepository.ts" />
     <TypeScriptCompile Include="app\repository\produktRepository.ts" />
     <TypeScriptCompile Include="app\repository\repository.ts" />
     <TypeScriptCompile Include="app\sites\suche\suche.ts" />
