@@ -42,6 +42,7 @@ namespace BusinessStreamline.Controllers.WebAPI
 
         // GET: api/search
         // Test: api/search/nachfrage/{"typ": 0, "search": "Schraube", "page": 0, "take": 10}
+        // REMARK: http://stackoverflow.com/questions/6025522/getting-a-potentially-dangerous-request-path-value-was-detected-from-the-client
         [HttpGet()]
         [Route("nachfrage/{src}")]
         [ResponseType(typeof(IQueryable<Nachfrage>))]
