@@ -22,8 +22,8 @@ namespace BusinessStreamline.Data
         }
     
         public int NachfrageId { get; set; }
-        public Nullable<int> Anzahl { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public int Anzahl { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
         public int TeilId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -17,9 +17,9 @@
             <PropertyRef Name="AngebotId" />
           </Key>
           <Property Name="AngebotId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ErstelltAm" Type="datetime" />
-          <Property Name="Status" Type="int" />
-          <Property Name="PreisProTeil" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ErstelltAm" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="PreisProTeil" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="AnbieterId" Type="int" Nullable="false" />
           <Property Name="NachfrageId" Type="int" Nullable="false" />
         </EntityType>
@@ -28,7 +28,7 @@
             <PropertyRef Name="BestellungId" />
           </Key>
           <Property Name="BestellungId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ErstelltAm" Type="datetime" />
+          <Property Name="ErstelltAm" Type="datetime" Nullable="false" />
           <Property Name="NachfrageId" Type="int" Nullable="false" />
           <Property Name="AngebotId" Type="int" Nullable="false" />
         </EntityType>
@@ -52,8 +52,8 @@
             <PropertyRef Name="NachfrageId" />
           </Key>
           <Property Name="NachfrageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Anzahl" Type="int" />
-          <Property Name="ErstelltAm" Type="datetime" />
+          <Property Name="Anzahl" Type="int" Nullable="false" />
+          <Property Name="ErstelltAm" Type="datetime" Nullable="false" />
           <Property Name="TeilId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Produkt">
@@ -70,6 +70,7 @@
           </Key>
           <Property Name="TeilId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProduktId" Type="int" Nullable="false" />
+          <Property Name="TypId" Type="int" Nullable="false" />
           <Property Name="Anzahl" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="40" />
         </EntityType>
@@ -189,6 +190,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TypTeil">
+          <End Role="Typ" Type="Self.Typ" Multiplicity="1" />
+          <End Role="Teil" Type="Self.Teil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Typ">
+              <PropertyRef Name="TypId" />
+            </Principal>
+            <Dependent Role="Teil">
+              <PropertyRef Name="TypId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BusinessStreamlineModelStoreContainer">
           <EntitySet Name="Anbieter" EntityType="Self.Anbieter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Angebot" EntityType="Self.Angebot" Schema="dbo" store:Type="Tables" />
@@ -234,6 +247,10 @@
           <AssociationSet Name="FK_TeilNachfrage" Association="Self.FK_TeilNachfrage">
             <End Role="Teil" EntitySet="Teil" />
             <End Role="Nachfrage" EntitySet="Nachfrage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypTeil" Association="Self.FK_TypTeil">
+            <End Role="Typ" EntitySet="Typ" />
+            <End Role="Teil" EntitySet="Teil" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -286,6 +303,10 @@
             <End Role="Produkt" EntitySet="Produkt" />
             <End Role="Teil" EntitySet="Teil" />
           </AssociationSet>
+          <AssociationSet Name="FK_TypTeil" Association="BusinessStreamlineModel.FK_TypTeil">
+            <End Role="Typ" EntitySet="Typ" />
+            <End Role="Teil" EntitySet="Teil" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Anbieter">
           <Key>
@@ -301,9 +322,9 @@
             <PropertyRef Name="AngebotId" />
           </Key>
           <Property Name="AngebotId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="PreisProTeil" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="PreisProTeil" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="AnbieterId" Type="Int32" Nullable="false" />
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Anbieter" Relationship="BusinessStreamlineModel.FK_AnbieterAngebot" FromRole="Angebot" ToRole="Anbieter" />
@@ -315,7 +336,7 @@
             <PropertyRef Name="BestellungId" />
           </Key>
           <Property Name="BestellungId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
           <Property Name="AngebotId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Angebot" Relationship="BusinessStreamlineModel.FK_AngebotBestellung" FromRole="Bestellung" ToRole="Angebot" />
@@ -345,8 +366,8 @@
             <PropertyRef Name="NachfrageId" />
           </Key>
           <Property Name="NachfrageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Anzahl" Type="Int32" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="Anzahl" Type="Int32" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TeilId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Angebot" Relationship="BusinessStreamlineModel.FK_NachfrageAngebot" FromRole="Nachfrage" ToRole="Angebot" />
           <NavigationProperty Name="Bestellung" Relationship="BusinessStreamlineModel.FK_NachfrageBestellung" FromRole="Nachfrage" ToRole="Bestellung" />
@@ -368,10 +389,12 @@
           </Key>
           <Property Name="TeilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProduktId" Type="Int32" Nullable="false" />
+          <Property Name="TypId" Type="Int32" Nullable="false" />
           <Property Name="Anzahl" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Nachfrage" Relationship="BusinessStreamlineModel.FK_TeilNachfrage" FromRole="Teil" ToRole="Nachfrage" />
           <NavigationProperty Name="Produkt" Relationship="BusinessStreamlineModel.FK_ProduktTeil" FromRole="Teil" ToRole="Produkt" />
+          <NavigationProperty Name="Typ" Relationship="BusinessStreamlineModel.FK_TypTeil" FromRole="Teil" ToRole="Typ" />
         </EntityType>
         <EntityType Name="Typ">
           <Key>
@@ -380,6 +403,7 @@
           <Property Name="TypId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Teil" Relationship="BusinessStreamlineModel.FK_TypTeil" FromRole="Typ" ToRole="Teil" />
         </EntityType>
         <Association Name="FK_AnbieterAngebot">
           <End Type="BusinessStreamlineModel.Anbieter" Role="Anbieter" Multiplicity="1" />
@@ -489,6 +513,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TypTeil">
+          <End Type="BusinessStreamlineModel.Typ" Role="Typ" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Teil" Role="Teil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Typ">
+              <PropertyRef Name="TypId" />
+            </Principal>
+            <Dependent Role="Teil">
+              <PropertyRef Name="TypId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -566,6 +602,7 @@
               <MappingFragment StoreEntitySet="Teil">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
+                <ScalarProperty Name="TypId" ColumnName="TypId" />
                 <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
                 <ScalarProperty Name="TeilId" ColumnName="TeilId" />
               </MappingFragment>

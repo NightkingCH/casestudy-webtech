@@ -54,10 +54,19 @@ export class Nachfrage {
 export class Teil {
     nachfrage: Nachfrage[];
     produkt: Produkt;
+    typ: Typ;
     teilId: number;
     produktId: number;
+    typId: number;
     anzahl: number;
     name: string;
+}
+
+export class Typ {
+    teilId: number;
+    name: string;
+    code: string;
+    teil: Teil[];
 }
 
 export class Produkt {

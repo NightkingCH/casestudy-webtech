@@ -14,8 +14,17 @@ namespace BusinessStreamline.Data
     
     public partial class Typ
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Typ()
+        {
+            this.Teil = new HashSet<Teil>();
+        }
+    
         public int TypId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Teil> Teil { get; set; }
     }
 }

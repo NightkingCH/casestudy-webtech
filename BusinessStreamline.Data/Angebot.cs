@@ -21,9 +21,9 @@ namespace BusinessStreamline.Data
         }
     
         public int AngebotId { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<decimal> PreisProTeil { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
+        public int Status { get; set; }
+        public decimal PreisProTeil { get; set; }
         public int AnbieterId { get; set; }
         public int NachfrageId { get; set; }
     

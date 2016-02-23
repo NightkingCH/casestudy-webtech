@@ -32,14 +32,9 @@ namespace BusinessStreamline.Controllers.WebAPI
                 return BadRequest();
             }
 
-            var entity = db.Login.FirstOrDefault(x => x.Name == login.Name);
+            var entity = db.Login.FirstOrDefault(x => x.Name == login.Name && x.Password == login.Password); // OPT: add crypto provider to hash password on db and on validation.
 
             if (entity == null) {
-                return BadRequest();
-            }
-
-            if (entity.Password != login.Password)
-            {
                 return BadRequest();
             }
 

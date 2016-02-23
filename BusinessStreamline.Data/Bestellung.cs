@@ -15,7 +15,7 @@ namespace BusinessStreamline.Data
     public partial class Bestellung
     {
         public int BestellungId { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
         public int NachfrageId { get; set; }
         public int AngebotId { get; set; }
     
