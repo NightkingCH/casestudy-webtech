@@ -18,6 +18,7 @@ namespace BusinessStreamline.Data
         public BusinessStreamlineEntities()
             : base("name=BusinessStreamlineEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

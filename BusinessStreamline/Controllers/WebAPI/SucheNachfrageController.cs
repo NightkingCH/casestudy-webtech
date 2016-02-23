@@ -68,7 +68,9 @@ namespace BusinessStreamline.Controllers.WebAPI
                 search.page = 0;
             }
 
-            IQueryable<Nachfrage> query = db.Nachfrage;
+            IQueryable<Nachfrage> query = db.Nachfrage
+                                            .Include(x => x.Teil.Produkt.Firma)
+                                            .Include(x => x.Angebot);
 
             // search through all parts
             if (!string.IsNullOrWhiteSpace(search.search))
