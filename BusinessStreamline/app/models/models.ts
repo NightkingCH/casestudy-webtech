@@ -76,3 +76,18 @@ export class Produkt {
     name: string;
     firmaId: number;
 }
+
+/* Hilfsklassen / Models */
+export class Search {
+    public search: string;
+    public typ: number;
+    public page: number;
+    public take: number;
+
+    constructor() {
+        this.search = null;
+        this.typ = 0;
+        this.page = 0;
+        this.take = 10;
+    }
+}

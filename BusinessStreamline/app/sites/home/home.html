@@ -1,0 +1,20 @@
+﻿<section>
+    <table>
+        <tr>
+            <th>
+                Nachfrage
+            </th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Teil
+            </th>
+        </tr>
+        <tr *ngFor="#nachfrage of data">
+            <td>{{nachfrage?.nachfrageId}}</td>
+            <td>{{nachfrage?.teil?.name}}</td>
+            <td>{{nachfrage?.teil?.produkt?.name}}</td>
+        </tr>
+    </table>
+</section>

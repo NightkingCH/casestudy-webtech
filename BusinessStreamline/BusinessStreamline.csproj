@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -113,6 +113,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\sites\home\home.html" />
     <Content Include="app\sites\produkt\produkt.html" />
     <Content Include="app\sites\suche\suche.html" />
     <Content Include="content\css\site.css" />
@@ -164,8 +165,10 @@
     <TypeScriptCompile Include="app\models\models.ts" />
     <TypeScriptCompile Include="app\repository\baseRepository.ts" />
     <TypeScriptCompile Include="app\repository\loginRepository.ts" />
+    <TypeScriptCompile Include="app\repository\sucheNachfrageRepository.ts" />
     <TypeScriptCompile Include="app\repository\produktRepository.ts" />
     <TypeScriptCompile Include="app\repository\repository.ts" />
+    <TypeScriptCompile Include="app\sites\home\home.ts" />
     <TypeScriptCompile Include="app\sites\suche\suche.ts" />
     <None Include="tsconfig.json" />
     <TypeScriptCompile Include="typings\browser.d.ts" />
