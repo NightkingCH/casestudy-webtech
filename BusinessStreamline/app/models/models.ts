@@ -88,6 +88,14 @@ export class Search {
         this.search = null;
         this.typ = 0;
         this.page = 0;
-        this.take = 10;
+        this.take = 20;
+    }
+}
+
+export class SuchModel {
+    public stichwort: string;
+
+    constructor() {
+        this.stichwort = "";
     }
 }

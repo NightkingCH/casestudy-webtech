@@ -1,13 +1,33 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-    <link href="../../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="../../../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
-    <link href="../../../content/css/site.css" rel="stylesheet" />
-</head>
-<body>
-    <button class="btn btn-danger">Test</button>
-</body>
-</html>
+﻿<section>
+    <div class="page-header">
+        <h1>Suchen</h1>
+        <div class="row">
+            <div class="col-xs-2 col-xs-9">
+                <div class="input-group">
+                    <input [(ngModel)]="model.stichwort" type="text" class="form-control" placeholder="Suchen nach...">
+                    <span class="input-group-btn">
+                        <button (click)="onSearch($event)" class="btn btn-default" type="button">Suchen</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 col-xs-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nachfrage</th>
+                        <th>Produkt</th>
+                        <th>Teil</th>
+                        <th>Typ</th>
+                    </tr>
+                    <tr *ngFor="#nachfrage of data">
+                        <td>{{ nachfrage?.nachfrageId }}</td>
+                        <td>{{ nachfrage?.teil?.produkt?.name }}</td>
+                        <td>{{ nachfrage?.teil?.name }}</td>
+                        <td>{{ nachfrage?.teil?.typ?.name }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
