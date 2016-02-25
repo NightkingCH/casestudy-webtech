@@ -87,7 +87,7 @@ namespace BusinessStreamline.Controllers.WebAPI
             // apply default sort => otherwise we can't add skip or take (paging)
             query = query.OrderBy(x => x.Teil.Name);
 
-            return query.Skip(search.page * search.take).Take(10);
+            return query.Skip(search.page * search.take).Take(search.take);
         }
     }
 }

@@ -12,12 +12,7 @@ export class SucheNachfrageRepository extends Repository {
         super(EndpointConfiguration.WEB_API_HOST + EndpointConfiguration.WEB_API_SEARCH_NACHFRAGE);
     }
 
-    public get(model: Search): Promise<Array<Nachfrage>>;
-
-    public get(src: string | Search, page: number = 0, typ: number = 0): Promise<Array<Nachfrage>> {
-
-        if (Utilities.isOfType(src, Search)) {
-        }
+    public get(src: string = "", page: number = 0, typ: number = 0): Promise<Array<Nachfrage>> {
         
         var callConfiguration: RequestInit = {
             method: "get",
@@ -29,7 +24,7 @@ export class SucheNachfrageRepository extends Repository {
 
         var srcParam = new Search();
 
-        //srcParam.search = src;
+        srcParam.search = src;
         srcParam.page = page || 0;
         srcParam.typ = typ || 0;
 

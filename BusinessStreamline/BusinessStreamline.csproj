@@ -113,12 +113,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\components\navigation\navigation.html" />
     <Content Include="app\sites\home\home.html" />
     <Content Include="app\sites\produkt\produkt.html" />
     <Content Include="app\sites\suche\suche.html" />
+    <Content Include="content\css\ie10-viewport-bug-workaround.css" />
     <Content Include="content\css\site.css" />
+    <Content Include="content\css\theme.css" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -161,6 +166,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\bootstrap.ts" />
+    <TypeScriptCompile Include="app\components\navigation\navigation.ts" />
     <TypeScriptCompile Include="app\configuration\endpoints.ts" />
     <TypeScriptCompile Include="app\directives\routerOutlet.ts" />
     <TypeScriptCompile Include="app\models\models.ts" />
@@ -216,7 +222,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59788</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
