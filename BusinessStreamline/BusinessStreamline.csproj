@@ -162,6 +162,7 @@
     <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\bootstrap.ts" />
     <TypeScriptCompile Include="app\configuration\endpoints.ts" />
+    <TypeScriptCompile Include="app\directives\routerOutlet.ts" />
     <TypeScriptCompile Include="app\models\models.ts" />
     <TypeScriptCompile Include="app\repository\baseRepository.ts" />
     <TypeScriptCompile Include="app\repository\loginRepository.ts" />
@@ -171,6 +172,7 @@
     <TypeScriptCompile Include="app\sites\home\home.ts" />
     <TypeScriptCompile Include="app\sites\suche\suche.ts" />
     <None Include="tsconfig.json" />
+    <TypeScriptCompile Include="app\utils\utilities.ts" />
     <TypeScriptCompile Include="typings\browser.d.ts" />
     <TypeScriptCompile Include="typings\browser\ambient\whatwg-fetch\whatwg-fetch.d.ts" />
     <TypeScriptCompile Include="typings\main.d.ts" />

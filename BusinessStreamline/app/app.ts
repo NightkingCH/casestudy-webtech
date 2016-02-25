@@ -6,10 +6,12 @@ import { Produkt, Login } from './models/models';
 
 import { HomeComponent } from './sites/home/home';
 
+import { ExtendedRouterOutlet } from './directives/routerOutlet';
+
 @Component({
-    selector: 'app',
-    template: '<div><router-outlet></router-outlet></div>',
-    directives: [COMMON_DIRECTIVES, ROUTER_DIRECTIVES]
+    selector: '[data-app]',
+    template: '<div class="container"><div data-router-outlet=""></div></div>',
+    directives: [COMMON_DIRECTIVES, ROUTER_DIRECTIVES, ExtendedRouterOutlet]
 })
 @RouteConfig([
         { path: "/home", name: "Home", component: HomeComponent, useAsDefault: true }

@@ -1,7 +1,10 @@
 ﻿import { EndpointConfiguration } from '../configuration/endpoints';
 import { Repository } from './baseRepository';
+import { Utilities } from '../utils/utilities';
 
 import { Search, Nachfrage } from '../models/models';
+
+
 
 export class SucheNachfrageRepository extends Repository {
 
@@ -9,7 +12,13 @@ export class SucheNachfrageRepository extends Repository {
         super(EndpointConfiguration.WEB_API_HOST + EndpointConfiguration.WEB_API_SEARCH_NACHFRAGE);
     }
 
-    public get(src: string = "", page: number = 0, typ: number = 0): Promise<Array<Nachfrage>> {
+    public get(model: Search): Promise<Array<Nachfrage>>;
+
+    public get(src: string | Search, page: number = 0, typ: number = 0): Promise<Array<Nachfrage>> {
+
+        if (Utilities.isOfType(src, Search)) {
+        }
+        
         var callConfiguration: RequestInit = {
             method: "get",
             headers: {
@@ -20,7 +29,7 @@ export class SucheNachfrageRepository extends Repository {
 
         var srcParam = new Search();
 
-        srcParam.search = src;
+        //srcParam.search = src;
         srcParam.page = page || 0;
         srcParam.typ = typ || 0;
 

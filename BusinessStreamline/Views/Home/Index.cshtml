@@ -7,18 +7,26 @@
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
     <link href="~/content/css/site.css" rel="stylesheet" />
-
+</head>
+<body>
+    <div data-app=""></div>
     <!-- IE required polyfills, in this exact order -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
+    <script src="~/node_modules/angular2/ts/src/testing/shims_for_IE.js"></script>
+    <script src="~/node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="~/node_modules/systemjs/dist/system-polyfills.js"></script>
 
-    <script src="https://code.angularjs.org/2.0.0-beta.6/angular2-polyfills.js"></script>
-    <script src="https://code.angularjs.org/tools/system.js"></script>
-    <script src="https://code.angularjs.org/tools/typescript.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.6/Rx.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.6/angular2.dev.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.6/router.dev.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.6/http.js"></script>
+    <script src="~/node_modules/jquery/dist/jquery.js"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="~/node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="~/node_modules/systemjs/dist/system.js"></script>
+    <script src="~/node_modules/typescript/lib/typescript.js"></script>
+    <script src="~/node_modules/rxjs/bundles/Rx.js"></script>
+
+    <script src="~/node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="~/node_modules/angular2/bundles/router.dev.js"></script>
+    <script src="~/node_modules/angular2/bundles/http.js"></script>
+
     <script>
       System.config({
         transpiler: 'typescript',
@@ -28,8 +36,5 @@
       System.import('app/bootstrap')
             .then(null, console.error.bind(console));
     </script>
-</head>
-<body>
-    <app></app>
 </body>
 </html>
