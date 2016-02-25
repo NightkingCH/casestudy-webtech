@@ -40,11 +40,15 @@
                     <th>
                         Teil
                     </th>
+                    <th>
+                        Typ
+                    </th>
                 </tr>
                 <tr *ngFor="#nachfrage of data">
                     <td>{{nachfrage?.nachfrageId}}</td>
-                    <td>{{nachfrage?.teil?.name}}</td>
                     <td>{{nachfrage?.teil?.produkt?.name}}</td>
+                    <td>{{nachfrage?.teil?.name}}</td>
+                    <td>{{nachfrage?.teil?.typ?.name}}</td>
                 </tr>
             </table>
         </div>
