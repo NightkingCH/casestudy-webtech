@@ -9,16 +9,16 @@
                     <div class="col-md-6">
                         <label>Zum Produkt</label>
                         <div class="input-group">
-                            <a href="#/produkt/{{ model?.teil?.produktId }}">
-                                <h3 class="detail-label form-control-static">{{ model?.teil?.produkt?.name }}</h3>
+                            <a href="#/produkt/{{ model?.produktId }}">
+                                <h3 class="detail-label form-control-static">{{ model?.produktName }}</h3>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label>Zum Teil</label>
                         <div class="input-group">
-                            <a href="#/produkt/{{ model?.teil?.produktId }}">
-                                <h3 class="detail-label form-control-static">{{ model?.teil?.name }}</h3>
+                            <a href="#/produkt/{{ model?.produktId }}">
+                                <h3 class="detail-label form-control-static">{{ model?.teilName }}</h3>
                             </a>
                         </div>
                     </div>
@@ -28,6 +28,13 @@
                         <label>Geforderte Stückzahl</label>
                         <div class="input-group">
                             <span class="form-control-static">{{ model?.anzahl }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Erledigt</label>
+                        <div class="input-group">
+                            <i *ngIf="model?.istOffen" class="glyphicon glyphicon-minus form-control-static state-sign open"></i>
+                            <i *ngIf="!model?.istOffen" class="glyphicon glyphicon-ok form-control-static state-sign closed"></i>
                         </div>
                     </div>
                 </div>

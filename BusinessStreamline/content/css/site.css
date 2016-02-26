@@ -78,3 +78,15 @@ span.label.label-as-badge {
     vertical-align: middle !important;
     text-align: center !important;
 }
+
+.state-sign {
+    font-size: 18px;
+}
+
+    .state-sign.open {
+        color: #ff6a00;
+    }
+
+    .state-sign.closed {
+        color: forestgreen;
+    }

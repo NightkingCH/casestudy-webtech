@@ -128,6 +128,10 @@ export class ViewNachfrage {
     public besterPreis: number;
     public firmaId: number;
     public loginId: number;
+    public istOffen: boolean;
+    public produktName: string;
+    public produktId: number;
+    public teilName: string;
 }
 
 export class ViewAngebot {

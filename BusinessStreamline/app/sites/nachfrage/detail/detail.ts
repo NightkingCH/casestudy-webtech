@@ -8,7 +8,7 @@ declare var $: JQueryStatic;
 import { PIPES } from '../../../pipes/pipes';
 
 import { AngebotRepository, NachfrageRepository } from '../../../repository/repository';
-import { Nachfrage, ViewAngebot } from '../../../models/models';
+import { ViewNachfrage, ViewAngebot } from '../../../models/models';
 
 @Component({
     selector: '[data-site-detail-nachfrage]',
@@ -19,7 +19,7 @@ import { Nachfrage, ViewAngebot } from '../../../models/models';
 export class NachfrageDetailComponent {
 
     private detailId: number;
-    private model: Nachfrage;
+    private model: ViewNachfrage;
     private data: Array<ViewAngebot> = [];
 
     private repository: NachfrageRepository = new NachfrageRepository();
@@ -42,7 +42,7 @@ export class NachfrageDetailComponent {
             return;
         }
 
-        this.repository.get(this.detailId).then((data: Nachfrage) => {
+        this.repository.get(this.detailId).then((data: ViewNachfrage) => {
             this.model = data;
         }).then(() => {
             return this.teilRepository.getByNachfrage(this.detailId).then((data: Array<ViewAngebot>) => {

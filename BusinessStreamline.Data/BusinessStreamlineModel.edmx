@@ -129,6 +129,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewNachfrage' does not hav
             <PropertyRef Name="NachfrageId" />
             <PropertyRef Name="Anzahl" />
             <PropertyRef Name="ErstelltAm" />
+            <PropertyRef Name="ProduktId" />
             <PropertyRef Name="FirmaId" />
             <PropertyRef Name="LoginId" />
           </Key>
@@ -137,6 +138,10 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewNachfrage' does not hav
           <Property Name="ErstelltAm" Type="datetime" Nullable="false" />
           <Property Name="AnzahlAngebote" Type="int" />
           <Property Name="BesterPreis" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IstOffen" Type="bit" />
+          <Property Name="ProduktId" Type="int" Nullable="false" />
+          <Property Name="ProduktName" Type="varchar" MaxLength="40" />
+          <Property Name="TeilName" Type="varchar" MaxLength="40" />
           <Property Name="FirmaId" Type="int" Nullable="false" />
           <Property Name="LoginId" Type="int" Nullable="false" />
         </EntityType>
@@ -354,6 +359,10 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewNachfrage].[ErstelltAm] AS [ErstelltAm], 
     [ViewNachfrage].[AnzahlAngebote] AS [AnzahlAngebote], 
     [ViewNachfrage].[BesterPreis] AS [BesterPreis], 
+    [ViewNachfrage].[IstOffen] AS [IstOffen], 
+    [ViewNachfrage].[ProduktId] AS [ProduktId], 
+    [ViewNachfrage].[ProduktName] AS [ProduktName], 
+    [ViewNachfrage].[TeilName] AS [TeilName], 
     [ViewNachfrage].[FirmaId] AS [FirmaId], 
     [ViewNachfrage].[LoginId] AS [LoginId]
     FROM [dbo].[ViewNachfrage] AS [ViewNachfrage]</DefiningQuery>
@@ -491,8 +500,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySet Name="ViewTeil" EntityType="BusinessStreamlineModel.ViewTeil" />
           <EntitySet Name="ViewAngebotBesterPreisNachfrage" EntityType="BusinessStreamlineModel.ViewAngebotBesterPreisNachfrage" />
           <EntitySet Name="ViewAnzahlAngeboteNachfrage" EntityType="BusinessStreamlineModel.ViewAnzahlAngeboteNachfrage" />
-          <EntitySet Name="ViewNachfrage" EntityType="BusinessStreamlineModel.ViewNachfrage" />
           <EntitySet Name="ViewAngebot" EntityType="BusinessStreamlineModel.ViewAngebot" />
+          <EntitySet Name="ViewNachfrage" EntityType="BusinessStreamlineModel.ViewNachfrage" />
           </EntityContainer>
         <EntityType Name="Anbieter">
           <Key>
@@ -773,22 +782,6 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
           <Property Name="AnzahlAngebote" Type="Int32" />
         </EntityType>
-        <EntityType Name="ViewNachfrage">
-          <Key>
-            <PropertyRef Name="NachfrageId" />
-            <PropertyRef Name="Anzahl" />
-            <PropertyRef Name="ErstelltAm" />
-            <PropertyRef Name="FirmaId" />
-            <PropertyRef Name="LoginId" />
-          </Key>
-          <Property Name="NachfrageId" Type="Int32" Nullable="false" />
-          <Property Name="Anzahl" Type="Int32" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="AnzahlAngebote" Type="Int32" />
-          <Property Name="BesterPreis" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="FirmaId" Type="Int32" Nullable="false" />
-          <Property Name="LoginId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="ViewAngebot">
           <Key>
             <PropertyRef Name="AngebotId" />
@@ -806,6 +799,27 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
           <Property Name="PreisTotal" Type="Decimal" Precision="29" Scale="2" />
           <Property Name="IstBestesAngebot" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ViewNachfrage">
+          <Key>
+            <PropertyRef Name="NachfrageId" />
+            <PropertyRef Name="Anzahl" />
+            <PropertyRef Name="ErstelltAm" />
+            <PropertyRef Name="ProduktId" />
+            <PropertyRef Name="FirmaId" />
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="NachfrageId" Type="Int32" Nullable="false" />
+          <Property Name="Anzahl" Type="Int32" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AnzahlAngebote" Type="Int32" />
+          <Property Name="BesterPreis" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IstOffen" Type="Boolean" />
+          <Property Name="ProduktId" Type="Int32" Nullable="false" />
+          <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="TeilName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="FirmaId" Type="Int32" Nullable="false" />
+          <Property Name="LoginId" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -955,19 +969,6 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ViewNachfrage">
-            <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewNachfrage">
-              <MappingFragment StoreEntitySet="ViewNachfrage">
-                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
-                <ScalarProperty Name="FirmaId" ColumnName="FirmaId" />
-                <ScalarProperty Name="BesterPreis" ColumnName="BesterPreis" />
-                <ScalarProperty Name="AnzahlAngebote" ColumnName="AnzahlAngebote" />
-                <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
-                <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
-                <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ViewAngebot">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewAngebot">
               <MappingFragment StoreEntitySet="ViewAngebot">
@@ -979,6 +980,23 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
                 <ScalarProperty Name="PreisProTeil" ColumnName="PreisProTeil" />
                 <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
                 <ScalarProperty Name="AngebotId" ColumnName="AngebotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewNachfrage">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewNachfrage">
+              <MappingFragment StoreEntitySet="ViewNachfrage">
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="FirmaId" ColumnName="FirmaId" />
+                <ScalarProperty Name="TeilName" ColumnName="TeilName" />
+                <ScalarProperty Name="ProduktName" ColumnName="ProduktName" />
+                <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
+                <ScalarProperty Name="IstOffen" ColumnName="IstOffen" />
+                <ScalarProperty Name="BesterPreis" ColumnName="BesterPreis" />
+                <ScalarProperty Name="AnzahlAngebote" ColumnName="AnzahlAngebote" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
+                <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
+                <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

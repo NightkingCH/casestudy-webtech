@@ -19,6 +19,10 @@ namespace BusinessStreamline.Data
         public System.DateTime ErstelltAm { get; set; }
         public Nullable<int> AnzahlAngebote { get; set; }
         public Nullable<decimal> BesterPreis { get; set; }
+        public Nullable<bool> IstOffen { get; set; }
+        public int ProduktId { get; set; }
+        public string ProduktName { get; set; }
+        public string TeilName { get; set; }
         public int FirmaId { get; set; }
         public int LoginId { get; set; }
     }
