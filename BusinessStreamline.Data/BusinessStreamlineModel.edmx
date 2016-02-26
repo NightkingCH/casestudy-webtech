@@ -171,6 +171,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewSucheNachfrage' does no
           <Property Name="TypName" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="ProduktId" Type="int" Nullable="false" />
           <Property Name="ProduktName" Type="varchar" MaxLength="40" />
+          <Property Name="HatBestellung" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -373,7 +374,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewSucheNachfrage].[TypId] AS [TypId], 
     [ViewSucheNachfrage].[TypName] AS [TypName], 
     [ViewSucheNachfrage].[ProduktId] AS [ProduktId], 
-    [ViewSucheNachfrage].[ProduktName] AS [ProduktName]
+    [ViewSucheNachfrage].[ProduktName] AS [ProduktName], 
+    [ViewSucheNachfrage].[HatBestellung] AS [HatBestellung]
     FROM [dbo].[ViewSucheNachfrage] AS [ViewSucheNachfrage]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewTeil" EntityType="Self.ViewTeil" store:Type="Views" store:Schema="dbo">
@@ -736,6 +738,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="TypName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="ProduktId" Type="Int32" Nullable="false" />
           <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="HatBestellung" Type="Boolean" />
         </EntityType>
         <EntityType Name="ViewTeil">
           <Key>
@@ -907,6 +910,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="ViewSucheNachfrage">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewSucheNachfrage">
               <MappingFragment StoreEntitySet="ViewSucheNachfrage">
+                <ScalarProperty Name="HatBestellung" ColumnName="HatBestellung" />
                 <ScalarProperty Name="ProduktName" ColumnName="ProduktName" />
                 <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
                 <ScalarProperty Name="TypName" ColumnName="TypName" />

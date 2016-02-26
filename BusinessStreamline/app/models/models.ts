@@ -123,6 +123,7 @@ export class ViewSucheNachfrage {
     public typName: string;
     public produktId: number;
     public produktName: string;
+    public hatBestellung: boolean;
 }
 
 export class ViewNachfrage {

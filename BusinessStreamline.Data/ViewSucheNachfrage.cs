@@ -23,5 +23,6 @@ namespace BusinessStreamline.Data
         public string TypName { get; set; }
         public int ProduktId { get; set; }
         public string ProduktName { get; set; }
+        public Nullable<bool> HatBestellung { get; set; }
     }
 }

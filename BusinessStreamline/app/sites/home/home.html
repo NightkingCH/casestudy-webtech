@@ -37,6 +37,9 @@
                         Typ
                     </th>
                     <th>
+                        Status
+                    </th>
+                    <th>
                         Aktionen
                     </th>
                 </tr>
@@ -49,8 +52,12 @@
                     </td>
                     <td>{{nachfrage?.teilName}}</td>
                     <td>{{nachfrage?.typName}}</td>
+                    <td class="table-cell-badge">
+                        <span *ngIf="!nachfrage?.hatBestellung" class="label label-warning label-as-badge center-block">Offen</span>
+                        <span *ngIf="nachfrage?.hatBestellung" class="label label-primary label-as-badge center-block">Geschlossen</span>
+                    </td>
                     <td>
-                        <a href="#/angebot/add/{{nachfrage?.nachfrageId}}" class="btn btn-primary center-block">
+                        <a *ngIf="!nachfrage?.hatBestellung" href="#/angebot/add/{{nachfrage?.nachfrageId}}" class="btn btn-default center-block">
                             <i class="glyphicon glyphicon-plus"></i>
                         </a>
                     </td>
