@@ -8,7 +8,7 @@ export class LoginRepository extends Repository {
         super(EndpointConfiguration.WEB_API_HOST + EndpointConfiguration.WEB_API_LOGIN);
     }
 
-    public login(model: Login): Promise<any> {
+    public login(model: Login): Promise<Login> {
 
         var callConfiguration: RequestInit = {
             method: "post",
@@ -23,8 +23,8 @@ export class LoginRepository extends Repository {
             .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
-            .then((data: any) => {
-                return data;
+            .then((data: Login) => {
+                return (<ExtendedJSON> JSON).restore(data);
             });
 
         return queryPromise;
