@@ -42,3 +42,12 @@ body {
 select.btn {
     border: 1px solid #CCC;
 }
+
+span.navbar-login {
+    color: #FFF;
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
