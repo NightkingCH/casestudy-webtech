@@ -34,10 +34,10 @@ namespace BusinessStreamline.Controllers.WebAPI
     {
         private BusinessStreamlineEntities db = new BusinessStreamlineEntities();
 
-        // GET: api/Produkt
-        public IQueryable<Produkt> GetProdukt()
+        // GET: api/suchenachfrage
+        public IQueryable<SucheNachfrage> GetSucheNachfrage()
         {
-            return db.Produkt;
+            return db.SucheNachfrage;
         }
 
         // GET: api/search
@@ -45,8 +45,8 @@ namespace BusinessStreamline.Controllers.WebAPI
         // REMARK: http://stackoverflow.com/questions/6025522/getting-a-potentially-dangerous-request-path-value-was-detected-from-the-client
         [HttpGet()]
         [Route("nachfrage/{src}")]
-        [ResponseType(typeof(IQueryable<Nachfrage>))]
-        public IQueryable<Nachfrage> SearchNachfrage(string src)
+        [ResponseType(typeof(IQueryable<SucheNachfrage>))]
+        public IQueryable<SucheNachfrage> SearchNachfrage(string src)
         {
             var search = new Search();
 
@@ -68,24 +68,22 @@ namespace BusinessStreamline.Controllers.WebAPI
                 search.page = 0;
             }
 
-            IQueryable<Nachfrage> query = db.Nachfrage
-                                            .Include(x => x.Teil.Produkt.Firma)
-                                            .Include(x => x.Angebot);
+            IQueryable<SucheNachfrage> query = db.SucheNachfrage;
 
             // search through all parts
             if (!string.IsNullOrWhiteSpace(search.search))
             {
-                query = query.Where(x => x.Teil.Name.Contains(search.search));
+                query = query.Where(x => x.TeilName.Contains(search.search));
             }
 
             // add a type constraint
             if (search.typ != 0)
             {
-                query = query.Where(x => x.Teil.Typ.TypId == search.typ);
+                query = query.Where(x => x.TypId == search.typ);
             }
 
             // apply default sort => otherwise we can't add skip or take (paging)
-            query = query.OrderBy(x => x.Teil.Name);
+            query = query.OrderBy(x => x.TeilName);
 
             return query.Skip(search.page * search.take).Take(search.take);
         }

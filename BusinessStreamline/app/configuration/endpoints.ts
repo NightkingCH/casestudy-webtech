@@ -3,4 +3,5 @@
     static WEB_API_PRODUKT: string = "api/produkt";
     static WEB_API_LOGIN: string = "api/login";
     static WEB_API_SEARCH_NACHFRAGE: string = "api/search/nachfrage";
+    static WEB_API_TYP: string = "api/typ";
 }

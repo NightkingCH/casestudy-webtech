@@ -1,10 +1,8 @@
 ﻿import { Component, ViewChildren, QueryList, ElementRef } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 
-import { SucheNachfrageRepository } from '../../repository/repository';
-import { Nachfrage, Search } from '../../models/models';
-
-
+import { SucheNachfrageRepository, TypRepository } from '../../repository/repository';
+import { SucheNachfrage, Search, Typ } from '../../models/models';
 
 @Component({
     selector: '[data-site-home]',
@@ -13,15 +11,19 @@ import { Nachfrage, Search } from '../../models/models';
 })
 export class HomeComponent {
 
-    private data: Array<Nachfrage> = [];
+    private sucheRepository: SucheNachfrageRepository = new SucheNachfrageRepository();
+    private typRepository: TypRepository = new TypRepository();
+    private data: Array<SucheNachfrage> = [];
+    private typList: Array<Typ> = [];
     private model: Search = new Search();
 
     @ViewChildren("dropdown")
     private items: QueryList<ElementRef>
 
     public ngOnInit(): void {
-        new SucheNachfrageRepository().get().then((data: Array<Nachfrage>) => {
-            this.data = data;
+        this.fetchTyp().then(() => {
+            // trigger search AFTER the types are loaded!
+            return this.fetchNachfrage();
         });
     }
 
@@ -32,7 +34,26 @@ export class HomeComponent {
     }
 
     public onSubmit(): void {
-        console.log(this.model);
+        this.fetchNachfrage();        
+    }
+
+    private fetchTyp(): Promise<void> {
+        return this.typRepository.getAll().then((data: Array<Typ>) => {
+
+            // add a selection element to the top.
+            var nulloTyp = new Typ();
+
+            nulloTyp.name = "Auswählen";
+            nulloTyp.typId = 0;
+
+            this.typList = [nulloTyp].concat(data);
+        });
+    }
+
+    private fetchNachfrage(): Promise<void> {
+        return this.sucheRepository.get(this.model.search, this.model.page, this.model.typ, this.model.take).then((data: Array<SucheNachfrage>) => {
+            this.data = data;
+        });
     }
 
 }

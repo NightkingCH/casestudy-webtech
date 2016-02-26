@@ -172,6 +172,7 @@
     <TypeScriptCompile Include="app\models\models.ts" />
     <TypeScriptCompile Include="app\repository\baseRepository.ts" />
     <TypeScriptCompile Include="app\repository\loginRepository.ts" />
+    <TypeScriptCompile Include="app\repository\typRepository.ts" />
     <TypeScriptCompile Include="app\repository\sucheNachfrageRepository.ts" />
     <TypeScriptCompile Include="app\repository\produktRepository.ts" />
     <TypeScriptCompile Include="app\repository\repository.ts" />

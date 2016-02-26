@@ -6,18 +6,11 @@
                     <legend>Suche</legend>
                     <div class="input-group">
                         <input [(ngModel)]="model.search" ngControl="search" type="text" class="form-control" id="txtSrc" placeholder="Suchen...">
-                        <div class="input-group-btn">
-                            <button #dropdown type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" aria-haspopup="true" aria-expanded="false">
-                                Action <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
+                        <span class="input-group-btn">
+                            <select class="btn" [(ngModel)]="model.typ">
+                                <option *ngFor="#typ of typList" [value]="typ.typId">{{ typ.name }}</option>
+                            </select>
+                        </span>
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-primary">Auf gehts!</button>
                         </div>
@@ -46,9 +39,9 @@
                 </tr>
                 <tr *ngFor="#nachfrage of data">
                     <td>{{nachfrage?.nachfrageId}}</td>
-                    <td>{{nachfrage?.teil?.produkt?.name}}</td>
-                    <td>{{nachfrage?.teil?.name}}</td>
-                    <td>{{nachfrage?.teil?.typ?.name}}</td>
+                    <td>{{nachfrage?.produktName}}</td>
+                    <td>{{nachfrage?.teilName}}</td>
+                    <td>{{nachfrage?.typName}}</td>
                 </tr>
             </table>
         </div>

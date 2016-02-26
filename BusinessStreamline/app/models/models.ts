@@ -63,7 +63,7 @@ export class Teil {
 }
 
 export class Typ {
-    teilId: number;
+    typId: number;
     name: string;
     code: string;
     teil: Teil[];
@@ -98,4 +98,25 @@ export class SuchModel {
     constructor() {
         this.stichwort = "";
     }
+}
+
+export class SucheNachfrage {
+
+    public nachfrageId: number;
+
+    public anzahl: number;
+
+    public erstelltAm: Date;
+
+    public teilId: number;
+
+    public teilName: string;
+
+    public typId: number;
+
+    public typName: string;
+
+    public produktId: number;
+
+    public produktName: string;
 }
