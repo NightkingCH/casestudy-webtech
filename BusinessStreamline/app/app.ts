@@ -22,6 +22,12 @@ import { NachfrageAddComponent } from './sites/nachfrage/add/add';
 import { NachfrageDetailComponent } from './sites/nachfrage/detail/detail';
 import { NachfrageListComponent } from './sites/nachfrage/list/list';
 
+/* About */
+import { AboutComponent } from './sites/about/about';
+
+/* Kontakt */
+import { KontaktComponent } from './sites/kontakt/kontakt';
+
 @Component({
     selector: '[data-app]',
     template: `
@@ -40,7 +46,9 @@ import { NachfrageListComponent } from './sites/nachfrage/list/list';
         { path: "/produkt/add", name: "ProduktAdd", component: ProduktAddComponent },
         { path: "/nachfrage", name: "Nachfrage", component: NachfrageListComponent },
         { path: "/nachfrage/:id", name: "Produkt", component: NachfrageDetailComponent },
-        { path: "/nachfrage/add", name: "AddProdukt", component: NachfrageAddComponent }
+        { path: "/nachfrage/add", name: "AddProdukt", component: NachfrageAddComponent },
+        { path: "/about", name: "About", component: AboutComponent },
+        { path: "/kontakt", name: "Kontakt", component: KontaktComponent }
 ])
 export class AppComponent {
 
