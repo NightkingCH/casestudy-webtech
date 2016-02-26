@@ -142,4 +142,5 @@ export class ViewAngebot {
     public status: number;
     public name: string;
     public nachfrageId: number;
+    public preisTotal: number;
 }

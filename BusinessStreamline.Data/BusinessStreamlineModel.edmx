@@ -99,6 +99,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewAngebot' does not have 
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="NachfrageId" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="PreisTotal" Type="decimal" Precision="29" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BusinessStreamline.dbo.ViewAngebotBesterPreisNachfrage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -324,7 +325,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewAngebot].[PreisProTeil] AS [PreisProTeil], 
     [ViewAngebot].[Status] AS [Status], 
     [ViewAngebot].[NachfrageId] AS [NachfrageId], 
-    [ViewAngebot].[Name] AS [Name]
+    [ViewAngebot].[Name] AS [Name], 
+    [ViewAngebot].[PreisTotal] AS [PreisTotal]
     FROM [dbo].[ViewAngebot] AS [ViewAngebot]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewAngebotBesterPreisNachfrage" EntityType="Self.ViewAngebotBesterPreisNachfrage" store:Type="Views" store:Schema="dbo">
@@ -792,6 +794,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
+          <Property Name="PreisTotal" Type="Decimal" Precision="29" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -955,6 +958,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="ViewAngebot">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewAngebot">
               <MappingFragment StoreEntitySet="ViewAngebot">
+                <ScalarProperty Name="PreisTotal" ColumnName="PreisTotal" />
                 <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

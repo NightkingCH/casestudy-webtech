@@ -20,5 +20,6 @@ namespace BusinessStreamline.Data
         public int Status { get; set; }
         public string Name { get; set; }
         public int NachfrageId { get; set; }
+        public Nullable<decimal> PreisTotal { get; set; }
     }
 }
