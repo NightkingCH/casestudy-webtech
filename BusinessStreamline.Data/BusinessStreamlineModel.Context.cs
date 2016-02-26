@@ -41,5 +41,6 @@ namespace BusinessStreamline.Data
         public virtual DbSet<ViewAngebotBesterPreisNachfrage> ViewAngebotBesterPreisNachfrage { get; set; }
         public virtual DbSet<ViewAnzahlAngeboteNachfrage> ViewAnzahlAngeboteNachfrage { get; set; }
         public virtual DbSet<ViewNachfrage> ViewNachfrage { get; set; }
+        public virtual DbSet<ViewAngebot> ViewAngebot { get; set; }
     }
 }

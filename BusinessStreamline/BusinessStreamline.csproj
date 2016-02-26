@@ -181,6 +181,7 @@
     <TypeScriptCompile Include="app\repository\baseRepository.ts" />
     <TypeScriptCompile Include="app\repository\loginRepository.ts" />
     <TypeScriptCompile Include="app\repository\nachfrageRepository.ts" />
+    <TypeScriptCompile Include="app\repository\angebotRepository.ts" />
     <TypeScriptCompile Include="app\repository\teilRepository.ts" />
     <TypeScriptCompile Include="app\repository\typRepository.ts" />
     <TypeScriptCompile Include="app\repository\sucheNachfrageRepository.ts" />

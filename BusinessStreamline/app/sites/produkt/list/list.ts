@@ -19,10 +19,10 @@ export class ProduktListComponent {
     }
 
     public ngOnInit(): void {
-        this.fetchProdukt();
+        this.fetchData();
     }
 
-    private fetchProdukt(): Promise<void> {
+    private fetchData(): Promise<void> {
         //TODO change to user service!
         return this.produktRepository.getByFirma(4, 559).then((data: Array<Produkt>) => {
             this.data = data;

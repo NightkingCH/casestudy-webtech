@@ -3,7 +3,7 @@
         <div class="col-xs-offset-2 col-xs-9">
             <form class="form">
                 <fieldset>
-                    <legend>Produkt</legend>
+                    <legend>Produkt - {{ model?.produktId }}</legend>
                 </fieldset>
                 <div class="input-group">
                     <h3 class="detail-label form-control-static">{{ model?.name }}</h3>
@@ -14,6 +14,11 @@
     <hr />
     <div class="row">
         <div class="col-xs-offset-2 col-xs-9">
+            <form class="form">
+                <fieldset>
+                    <legend>Vorhandene Teile</legend>
+                </fieldset>
+            </form>
             <table class="table table-bordered">
                 <tr>
                     <th>
@@ -36,8 +41,8 @@
                     <td>
                         <div class="row">
                             <div class="col-md-6">
-                                <span *ngIf="teil.hatOffeneNachfrage" class="label label-info label-as-badge">
-                                    <a href="#/nachfrage/{{ teil?.offeneNachfrageId }}">Nachfrage vorhanden</a>
+                                <span *ngIf="teil.hatOffeneNachfrage" class="label label-info label-as-badge center-block">
+                                    <a href="#/nachfrage/{{ teil?.offeneNachfrageId }}">Offene Nachfrage</a>
                                 </span>
                             </div>
                             <div class="col-md-6">

@@ -1,2 +1,53 @@
 ﻿<section>
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-9">
+            <form class="form">
+                <fieldset>
+                    <legend>Nachfragen</legend>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-9">
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        Nachfrage
+                    </th>
+                    <th>
+                        Anzahl
+                    </th>
+                    <th>
+                        Erstellt Am
+                    </th>
+                    <th>
+                        Vorhandene Angebote
+                    </th>
+                    <th>
+                        Bester Preis
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                <tr *ngFor="#nachfrage of data">
+                    <td>
+                        <a href="#/nachfrage/{{nachfrage?.nachfrageId}}">
+                            {{nachfrage?.nachfrageId}}
+                        </a>
+                    </td>
+                    <td>{{nachfrage?.anzahl}}</td>
+                    <td>{{nachfrage?.erstelltAm}}</td>
+                    <td>{{nachfrage?.anzahlAngebote}}</td>
+                    <td>{{nachfrage?.besterPreis}}</td>
+                    <td>
+                        <a href="#/nachfrage/{{nachfrage?.nachfrageId}}" class="btn btn-info pull-right">
+                            <i class="glyphicon glyphicon-arrow-right"></i>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </section>

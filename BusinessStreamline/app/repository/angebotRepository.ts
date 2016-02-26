@@ -1,15 +1,15 @@
 ﻿import { EndpointConfiguration } from '../configuration/endpoints';
 import { Repository } from './baseRepository';
 
-import { ViewNachfrage, Nachfrage } from '../models/models';
+import { Angebot, ViewAngebot } from '../models/models';
 
-export class NachfrageRepository extends Repository {
+export class AngebotRepository extends Repository {
 
     constructor() {
-        super(EndpointConfiguration.WEB_API_HOST + EndpointConfiguration.WEB_API_NACHFRAGE);
+        super(EndpointConfiguration.WEB_API_HOST + EndpointConfiguration.WEB_API_ANGEBOT);
     }
 
-    public get(id: number): Promise<Nachfrage> {
+    public get(id: number): Promise<Angebot> {
         var callConfiguration: RequestInit = {
             method: "get",
             headers: {
@@ -23,14 +23,14 @@ export class NachfrageRepository extends Repository {
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseText)
             .then(this.parseJson)
-            .then((data: Nachfrage) => {
+            .then((data: Angebot) => {
                 return data;
             });
 
         return queryPromise;
     }
 
-    public getByFirma(firma: number, login: number): Promise<Array<ViewNachfrage>> {
+    public getByNachfrage(nachfrage: number): Promise<Array<ViewAngebot>> {
         var callConfiguration: RequestInit = {
             method: "get",
             headers: {
@@ -39,13 +39,13 @@ export class NachfrageRepository extends Repository {
             }
         };
 
-        var callUri = this.serviceConfig + "/firma/" + firma + "/login/" + login;
+        var callUri = this.serviceConfig + "/nachfrage/" + nachfrage;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseText)
             .then(this.parseJson)
-            .then((data: Array<ViewNachfrage>) => {
-                return data;
+            .then((data: Array<ViewAngebot>) => {
+                return (<ExtendedJSON> JSON).restore(data);
             });
 
         return queryPromise;

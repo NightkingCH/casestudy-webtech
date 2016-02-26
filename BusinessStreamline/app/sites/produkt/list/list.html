@@ -1,7 +1,7 @@
 ﻿<section>
     <div class="row">
         <div class="col-xs-offset-2 col-xs-9">
-            <form class="form" (ngSubmit)="onSubmit($event)">
+            <form class="form">
                 <fieldset>
                     <legend>Produkte</legend>
                 </fieldset>
@@ -19,6 +19,8 @@
                     <th>
                         Name
                     </th>
+                    <th>
+                    </th>
                 </tr>
                 <tr *ngFor="#produkt of data">
                     <td>
@@ -27,6 +29,11 @@
                         </a>
                     </td>
                     <td>{{produkt?.name}}</td>
+                    <td>
+                        <a href="#/produkt/{{produkt?.produktId}}" class="btn btn-info pull-right">
+                            <i class="glyphicon glyphicon-arrow-right"></i>
+                        </a>
+                    </td>
                 </tr>
             </table>
         </div>

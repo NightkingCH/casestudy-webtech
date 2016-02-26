@@ -23,7 +23,7 @@ namespace BusinessStreamline.Controllers.WebAPI
             return db.Teil;
         }
 
-        // GET: api/produkt/firma/1
+        // GET: api/teil/produkt/1
         [HttpGet()]
         [Route("produkt/{produkt:int}")]
         [ResponseType(typeof(IQueryable<ViewTeil>))]

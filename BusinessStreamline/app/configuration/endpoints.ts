@@ -6,4 +6,5 @@
     static WEB_API_SEARCH_NACHFRAGE: string = "api/search/nachfrage";
     static WEB_API_TYP: string = "api/typ";
     static WEB_API_NACHFRAGE: string = "api/nachfrage";
+    static WEB_API_ANGEBOT: string = "api/angebot";
 }

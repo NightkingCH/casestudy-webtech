@@ -1,2 +1,86 @@
 ﻿<section>
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-9">
+            <form class="form">
+                <fieldset>
+                    <legend>Nachfrage - {{ model?.nachfrageId }}</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Zum Produkt</label>
+                        <div class="input-group">
+                            <a href="#/produkt/{{ model?.teil?.produktId }}">
+                                <h3 class="detail-label form-control-static">{{ model?.teil?.produkt?.name }}</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Zum Teil</label>
+                        <div class="input-group">
+                            <a href="#/produkt/{{ model?.teil?.produktId }}">
+                                <h3 class="detail-label form-control-static">{{ model?.teil?.name }}</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Geforderte Stückzahl</label>
+                        <div class="input-group">
+                            <span class="form-control-static">{{ model?.anzahl }}</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-9">
+            <form class="form">
+                <fieldset>
+                    <legend>Vorhandene Angebote</legend>
+                </fieldset>
+            </form>
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        Angebot
+                    </th>
+                    <th>
+                        Erstellt Am
+                    </th>
+                    <th>
+                        Preis pro Teil
+                    </th>
+                    <th>
+                        Gesamtpreis
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th colspan="2">
+                        Aktionen
+                    </th>
+                </tr>
+                <tr *ngFor="#angebot of data">
+                    <td>{{ angebot?.angebotId }}</td>
+                    <td>{{ angebot?.erstelltAm }}</td>
+                    <td>{{ angebot?.preisProTeil }}</td>
+                    <td>{{ angebot?.preisTotal }}</td>
+                    <td>
+                        <span *ngIf="angebot?.status == 0" class="label label-warning label-as-badge center-block">Offen</span>
+                        <span *ngIf="angebot?.status == 1" class="label label-success label-as-badge center-block">Akzeptiert</span>
+                        <span *ngIf="angebot?.status == 2" class="label label-primary label-as-badge center-block">Abgelehnt</span>
+                    </td>
+                    <td>
+                        <button (click)="onAcceptAngebot($event, angebot)" type="button" class="btn btn-success center-block" data-toggle="tooltip" data-placement="top" title="Annehmen"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+                    </td>
+                    <td>
+                        <button (click)="onDeclineAngebot($event, angebot)" type="button" class="btn btn-warning center-block" data-toggle="tooltip" data-placement="top" title="Ablehnen"><i class="glyphicon glyphicon-thumbs-down"></i></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </section>

@@ -51,8 +51,8 @@ export class ProduktDetailComponent {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    public onAddNachfrage(event: MouseEvent, teil: ViewTeil): void {
-        if (teil.hatOffeneNachfrage) {
+    public onAddNachfrage(event: MouseEvent, entity: ViewTeil): void {
+        if (entity.hatOffeneNachfrage) {
             return;
         }
     }

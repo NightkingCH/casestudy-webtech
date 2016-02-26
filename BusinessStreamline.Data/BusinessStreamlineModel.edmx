@@ -83,6 +83,25 @@
           <Property Name="Code" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'BusinessStreamline.dbo.ViewAngebot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewAngebot">
+          <Key>
+            <PropertyRef Name="AngebotId" />
+            <PropertyRef Name="ErstelltAm" />
+            <PropertyRef Name="PreisProTeil" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="NachfrageId" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="AngebotId" Type="int" Nullable="false" />
+          <Property Name="ErstelltAm" Type="datetime" Nullable="false" />
+          <Property Name="PreisProTeil" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="NachfrageId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="PreisTotal" Type="decimal" Precision="29" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'BusinessStreamline.dbo.ViewAngebotBesterPreisNachfrage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewAngebotBesterPreisNachfrage">
           <Key>
@@ -299,6 +318,17 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySet Name="Produkt" EntityType="Self.Produkt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teil" EntityType="Self.Teil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Typ" EntityType="Self.Typ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewAngebot" EntityType="Self.ViewAngebot" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewAngebot].[AngebotId] AS [AngebotId], 
+    [ViewAngebot].[ErstelltAm] AS [ErstelltAm], 
+    [ViewAngebot].[PreisProTeil] AS [PreisProTeil], 
+    [ViewAngebot].[Status] AS [Status], 
+    [ViewAngebot].[NachfrageId] AS [NachfrageId], 
+    [ViewAngebot].[Name] AS [Name], 
+    [ViewAngebot].[PreisTotal] AS [PreisTotal]
+    FROM [dbo].[ViewAngebot] AS [ViewAngebot]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ViewAngebotBesterPreisNachfrage" EntityType="Self.ViewAngebotBesterPreisNachfrage" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewAngebotBesterPreisNachfrage].[NachfrageId] AS [NachfrageId], 
@@ -455,6 +485,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySet Name="ViewAngebotBesterPreisNachfrage" EntityType="BusinessStreamlineModel.ViewAngebotBesterPreisNachfrage" />
           <EntitySet Name="ViewAnzahlAngeboteNachfrage" EntityType="BusinessStreamlineModel.ViewAnzahlAngeboteNachfrage" />
           <EntitySet Name="ViewNachfrage" EntityType="BusinessStreamlineModel.ViewNachfrage" />
+          <EntitySet Name="ViewAngebot" EntityType="BusinessStreamlineModel.ViewAngebot" />
           </EntityContainer>
         <EntityType Name="Anbieter">
           <Key>
@@ -748,6 +779,23 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="FirmaId" Type="Int32" Nullable="false" />
           <Property Name="LoginId" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="ViewAngebot">
+          <Key>
+            <PropertyRef Name="AngebotId" />
+            <PropertyRef Name="ErstelltAm" />
+            <PropertyRef Name="PreisProTeil" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="NachfrageId" />
+          </Key>
+          <Property Name="AngebotId" Type="Int32" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PreisProTeil" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="NachfrageId" Type="Int32" Nullable="false" />
+          <Property Name="PreisTotal" Type="Decimal" Precision="29" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -904,6 +952,19 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
                 <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
                 <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
                 <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewAngebot">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewAngebot">
+              <MappingFragment StoreEntitySet="ViewAngebot">
+                <ScalarProperty Name="PreisTotal" ColumnName="PreisTotal" />
+                <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PreisProTeil" ColumnName="PreisProTeil" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
+                <ScalarProperty Name="AngebotId" ColumnName="AngebotId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
