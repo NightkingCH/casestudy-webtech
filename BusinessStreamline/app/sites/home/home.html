@@ -36,6 +36,9 @@
                     <th>
                         Typ
                     </th>
+                    <th>
+                        Aktionen
+                    </th>
                 </tr>
                 <tr *ngFor="#nachfrage of data">
                     <td>
@@ -46,6 +49,11 @@
                     </td>
                     <td>{{nachfrage?.teilName}}</td>
                     <td>{{nachfrage?.typName}}</td>
+                    <td>
+                        <a href="#/angebot/add/{{nachfrage?.nachfrageId}}" class="btn btn-primary center-block">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </a>
+                    </td>
                 </tr>
             </table>
         </div>

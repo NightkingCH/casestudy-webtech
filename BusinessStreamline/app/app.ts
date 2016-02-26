@@ -48,7 +48,8 @@ import { KontaktComponent } from './sites/kontakt/kontakt';
         { path: "/nachfrage/:id", name: "Produkt", component: NachfrageDetailComponent },
         { path: "/nachfrage/add", name: "AddProdukt", component: NachfrageAddComponent },
         { path: "/about", name: "About", component: AboutComponent },
-        { path: "/kontakt", name: "Kontakt", component: KontaktComponent }
+        { path: "/kontakt", name: "Kontakt", component: KontaktComponent },
+        { path: "/angebot/add/:id", name: "AddAngebot", component: NachfrageAddComponent }
 ])
 export class AppComponent {
 
