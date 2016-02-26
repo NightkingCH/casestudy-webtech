@@ -57,8 +57,8 @@
                     <td>{{ nachfrage?.anzahlAngebote }}</td>
                     <td>{{ nachfrage?.besterPreis | currency:'CHF':false  }}</td>
                     <td class="table-cell-badge">
-                        <span *ngIf="nachfrage?.istOffen == 0" class="label label-warning label-as-badge center-block">Offen</span>
-                        <span *ngIf="nachfrage?.istOffen == 1" class="label label-success label-as-badge center-block">Abgeschlossen</span>
+                        <span *ngIf="nachfrage?.istOffen == 1" class="label label-warning label-as-badge center-block">Offen</span>
+                        <span *ngIf="nachfrage?.istOffen == 0" class="label label-success label-as-badge center-block">Abgeschlossen</span>
                     </td>
                     <td>
                         <a href="#/nachfrage/{{nachfrage?.nachfrageId}}" class="btn btn-info pull-right">
