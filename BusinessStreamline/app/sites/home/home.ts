@@ -15,6 +15,7 @@ export class HomeComponent {
     private sucheRepository: SucheNachfrageRepository = new SucheNachfrageRepository();
     private typRepository: TypRepository = new TypRepository();
     private data: Array<ViewSucheNachfrage> = [];
+    private count: number = 0;
     private typList: Array<Typ> = [];
     private statusList: Array<NachfrageStatus> = [];
 
@@ -27,14 +28,14 @@ export class HomeComponent {
     public ngOnInit(): void {
         this.fetchTyp().then(() => {
             // trigger search AFTER the types are loaded!
-            return this.fetchNachfrage();
+            return Promise.all([this.countNachfrage(), this.fetchNachfrage()]);
         });
 
         this.setUpState();
     }
 
     public onSubmit(): void {
-        this.fetchNachfrage();        
+        Promise.all([this.countNachfrage(), this.fetchNachfrage()]);;        
     }
 
     private fetchTyp(): Promise<void> {
@@ -53,6 +54,12 @@ export class HomeComponent {
     private fetchNachfrage(): Promise<void> {
         return this.sucheRepository.get(this.model).then((data: Array<ViewSucheNachfrage>) => {
             this.data = data;
+        });
+    }
+
+    private countNachfrage(): Promise<void> {
+        return this.sucheRepository.count(this.model).then((data: number) => {
+            this.count = data;
         });
     }
 

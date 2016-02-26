@@ -33,4 +33,26 @@ export class SucheNachfrageRepository extends Repository {
 
         return queryPromise;
     }
+
+    public count(src: NachfrageSearch): Promise<number> {
+
+        var callConfiguration: RequestInit = {
+            method: "get",
+            headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json"
+            }
+        };
+
+        var callUri = this.serviceConfig + "/count/" + JSON.stringify(src);
+
+        var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseText)
+            .then(this.parseJson)
+            .then((data: number) => {
+                return data;
+            });
+
+        return queryPromise;
+    }
 }
