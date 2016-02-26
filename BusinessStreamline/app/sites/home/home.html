@@ -38,8 +38,12 @@
                     </th>
                 </tr>
                 <tr *ngFor="#nachfrage of data">
-                    <td>{{nachfrage?.nachfrageId}}</td>
-                    <td>{{nachfrage?.produktName}}</td>
+                    <td>
+                        <a href="#/nachfrage/{{ nachfrage?.nachfrageId }}">{{ nachfrage?.nachfrageId }}</a>
+                    </td>
+                    <td>
+                        <a href="#/produkt/{{nachfrage?.produktId }}">{{ nachfrage?.produktName }}</a>
+                    </td>
                     <td>{{nachfrage?.teilName}}</td>
                     <td>{{nachfrage?.typName}}</td>
                 </tr>
