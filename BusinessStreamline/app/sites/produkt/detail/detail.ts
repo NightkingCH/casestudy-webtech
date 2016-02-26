@@ -2,6 +2,8 @@
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { Router, RouteParams } from 'angular2/router';
 
+declare var $: JQueryStatic;
+
 import { ProduktRepository, TeilRepository } from '../../../repository/repository';
 import { Produkt, Teil } from '../../../models/models';
 
@@ -40,6 +42,18 @@ export class ProduktDetailComponent {
             return this.teilRepository.getByProdukt(this.detailId).then((data: Array<Teil>) => {
                 this.data = data;
             });
+        }).then(() => {
+            this.setUpUI();
         });
+    }
+
+    private setUpUI(): void {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+    public onAddNachfrage(): void { }
+
+    public onDeleteTeil(): void {
+        alert("Nicht implementiert :)");
     }
 }

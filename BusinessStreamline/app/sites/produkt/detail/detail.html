@@ -26,11 +26,20 @@
                     <th>
                         Menge
                     </th>
+                    <th>
+                        Aktionen
+                    </th>
                 </tr>
                 <tr *ngFor="#teil of data">
                     <td>{{ teil?.name }}</td>
                     <td>{{ teil?.typ?.name }}</td>
                     <td>{{ teil?.anzahl }}</td>
+                    <td>
+                        <div class="btn-group pull-right" role="group">
+                            <button (click)="onAddNachfrage($event, teil)" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nachfrage erfassen"><i class="glyphicon glyphicon-plus"></i></button>
+                            <button (click)="onDeleteTeil($event, teil)" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Teil löschen"><i class="glyphicon glyphicon-trash"></i></button>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
