@@ -12,6 +12,7 @@ using BusinessStreamline.Data;
 
 namespace BusinessStreamline.Controllers.WebAPI
 {
+    [RoutePrefix("api/angebot")]
     public class AngebotController : ApiController
     {
         private BusinessStreamlineEntities db = new BusinessStreamlineEntities();
@@ -20,6 +21,16 @@ namespace BusinessStreamline.Controllers.WebAPI
         public IQueryable<Angebot> GetAngebot()
         {
             return db.Angebot;
+        }
+
+        // GET: api/angebot/produkt/1
+        [HttpGet()]
+        [Route("nachfrage/{nachfrage:int}")]
+        [ResponseType(typeof(IQueryable<ViewAngebot>))]
+        public IQueryable<ViewAngebot> GetAngebotByNachfrage(int nachfrage)
+        {
+            return db.ViewAngebot
+                .Where(x => x.NachfrageId == nachfrage);
         }
 
         // GET: api/Angebot/5

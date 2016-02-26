@@ -78,6 +78,7 @@
     <Build Include="dbo\Views\ViewAnzahlAngeboteNachfrage.sql" />
     <Build Include="dbo\Views\ViewAngebotBesterPreisNachfrage.sql" />
     <Build Include="dbo\Views\ViewNachfrage.sql" />
+    <Build Include="dbo\Views\ViewAngebot.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BusinessStreamline.bak" />

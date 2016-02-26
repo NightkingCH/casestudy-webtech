@@ -37,7 +37,10 @@ namespace BusinessStreamline.Controllers.WebAPI
         [ResponseType(typeof(Nachfrage))]
         public IHttpActionResult GetNachfrage(int id)
         {
-            Nachfrage nachfrage = db.Nachfrage.Find(id);
+            Nachfrage nachfrage = db.Nachfrage
+                .Include(x => x.Teil.Produkt)
+                .FirstOrDefault( x=> x.NachfrageId == id);
+
             if (nachfrage == null)
             {
                 return NotFound();

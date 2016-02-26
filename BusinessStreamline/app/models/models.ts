@@ -134,3 +134,12 @@ export class ViewNachfrage {
     public firmaId: number;
     public loginId: number;
 }
+
+export class ViewAngebot {
+    public angebotId: number;
+    public erstelltAm: Date;
+    public preisProTeil: number;
+    public status: number;
+    public name: string;
+    public nachfrageId: number;
+}
