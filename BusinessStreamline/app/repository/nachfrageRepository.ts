@@ -1,7 +1,7 @@
 ﻿import { EndpointConfiguration } from '../configuration/endpoints';
 import { Repository } from './baseRepository';
 
-import { Nachfrage } from '../models/models';
+import { ViewNachfrage, Nachfrage } from '../models/models';
 
 export class NachfrageRepository extends Repository {
 
@@ -30,7 +30,7 @@ export class NachfrageRepository extends Repository {
         return queryPromise;
     }
 
-    public getByFirma(firma: number, login: number): Promise<Array<Nachfrage>> {
+    public getByFirma(firma: number, login: number): Promise<Array<ViewNachfrage>> {
         var callConfiguration: RequestInit = {
             method: "get",
             headers: {
@@ -44,7 +44,7 @@ export class NachfrageRepository extends Repository {
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseText)
             .then(this.parseJson)
-            .then((data: Array<Nachfrage>) => {
+            .then((data: Array<ViewNachfrage>) => {
                 return data;
             });
 

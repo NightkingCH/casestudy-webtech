@@ -114,7 +114,6 @@ export class ViewTeil {
 }
 
 export class ViewSucheNachfrage {
-
     public nachfrageId: number;
     public anzahl: number;
     public erstelltAm: Date;
@@ -124,4 +123,14 @@ export class ViewSucheNachfrage {
     public typName: string;
     public produktId: number;
     public produktName: string;
+}
+
+export class ViewNachfrage {
+    public nachfrageId: number;
+    public anzahl: number;
+    public erstelltAm: Date;
+    public anzahlAngebote: number;
+    public besterPreis: number;
+    public firmaId: number;
+    public loginId: number;
 }

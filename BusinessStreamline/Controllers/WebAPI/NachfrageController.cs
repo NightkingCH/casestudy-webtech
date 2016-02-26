@@ -12,6 +12,7 @@ using BusinessStreamline.Data;
 
 namespace BusinessStreamline.Controllers.WebAPI
 {
+    [RoutePrefix("api/nachfrage")]
     public class NachfrageController : ApiController
     {
         private BusinessStreamlineEntities db = new BusinessStreamlineEntities();
@@ -20,6 +21,16 @@ namespace BusinessStreamline.Controllers.WebAPI
         public IQueryable<Nachfrage> GetNachfrage()
         {
             return db.Nachfrage;
+        }
+
+        // GET: api/nachfrage/firma/1
+        [HttpGet()]
+        [Route("firma/{firma:int}/login/{login:int}")]
+        [ResponseType(typeof(IQueryable<ViewNachfrage>))]
+        public IQueryable<ViewNachfrage> GetNachfrageByFirma(int firma, int login)
+        {
+            return db.ViewNachfrage
+                .Where(x => x.FirmaId == firma && x.LoginId == login);
         }
 
         // GET: api/Nachfrage/5
