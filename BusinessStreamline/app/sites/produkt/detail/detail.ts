@@ -1,6 +1,7 @@
 ﻿import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { Router, RouteParams } from 'angular2/router';
+import { Title } from 'angular2/platform/browser';
 
 declare var $: JQueryStatic;
 
@@ -22,13 +23,15 @@ export class ProduktDetailComponent {
     private teilRepository: TeilRepository = new TeilRepository();
 
     // inject router to navigate to home after logout;
-    constructor(private router: Router, private params: RouteParams) {
+    constructor(private router: Router, private params: RouteParams, private title: Title) {
         this.detailId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.detailId)) {
             router.navigateByUrl("/home");
         }
+        
+        this.title.setTitle("Produkt " + this.detailId.toString() + " - BLS");
     }
 
     public ngOnInit(): void {
@@ -38,6 +41,7 @@ export class ProduktDetailComponent {
 
         this.repository.get(this.detailId).then((data: Produkt) => {
             this.model = data;
+            this.title.setTitle("Produkt | " + this.model.name + " - BLS");
         }).then(() => {
             return this.teilRepository.getByProdukt(this.detailId).then((data: Array<ViewTeil>) => {
                 this.data = data;

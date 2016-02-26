@@ -1,8 +1,11 @@
 ﻿import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { Router, RouteParams } from 'angular2/router';
+import { Title } from 'angular2/platform/browser';
 
 declare var $: JQueryStatic;
+
+import { PIPES } from '../../../pipes/pipes';
 
 import { AngebotRepository, NachfrageRepository } from '../../../repository/repository';
 import { Nachfrage, ViewAngebot } from '../../../models/models';
@@ -10,7 +13,8 @@ import { Nachfrage, ViewAngebot } from '../../../models/models';
 @Component({
     selector: '[data-site-detail-nachfrage]',
     templateUrl: 'app/sites/nachfrage/detail/detail.html',
-    directives: [COMMON_DIRECTIVES]
+    directives: [COMMON_DIRECTIVES],
+    pipes: [PIPES]
 })
 export class NachfrageDetailComponent {
 
@@ -22,13 +26,15 @@ export class NachfrageDetailComponent {
     private teilRepository: AngebotRepository = new AngebotRepository();
 
     // inject router to navigate to home after logout;
-    constructor(private router: Router, private params: RouteParams) {
+    constructor(private router: Router, private params: RouteParams, private title: Title) {
         this.detailId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.detailId)) {
             router.navigateByUrl("/home");
         }
+
+        this.title.setTitle("Nachfrage " + this.detailId.toString() + " - BLS");
     }
 
     public ngOnInit(): void {

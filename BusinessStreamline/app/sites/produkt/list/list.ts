@@ -1,5 +1,6 @@
 ﻿import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
+import { Title } from 'angular2/platform/browser';
 
 import { UserService } from '../../../services/services';
 import { ProduktRepository } from '../../../repository/repository';
@@ -15,7 +16,8 @@ export class ProduktListComponent {
     private produktRepository: ProduktRepository = new ProduktRepository();
     private data: Array<Produkt> = [];
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private title: Title) {
+        this.title.setTitle("Produkteliste - BLS");
     }
 
     public ngOnInit(): void {

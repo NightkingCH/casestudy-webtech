@@ -1,5 +1,6 @@
 ﻿import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
+import { Title } from 'angular2/platform/browser';
 
 import { SucheNachfrageRepository, TypRepository } from '../../repository/repository';
 import { ViewSucheNachfrage, NachfrageSearch, Typ, NachfrageStatus } from '../../models/models';
@@ -18,6 +19,10 @@ export class HomeComponent {
     private statusList: Array<NachfrageStatus> = [];
 
     private model: NachfrageSearch = new NachfrageSearch();
+
+    constructor(private title: Title) {
+        this.title.setTitle("Home - BLS");
+    }
 
     public ngOnInit(): void {
         this.fetchTyp().then(() => {

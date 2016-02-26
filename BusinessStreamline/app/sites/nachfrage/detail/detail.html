@@ -70,7 +70,7 @@
                     <td>
                         <span>{{ angebot?.angebotId }}</span>
                     </td>
-                    <td>{{ angebot?.erstelltAm }}</td>
+                    <td>{{ angebot.erstelltAm | momentdate }}</td>
                     <td>{{ angebot?.preisProTeil }}</td>
                     <td>{{ angebot?.preisTotal }}</td>
                     <td class="table-cell-badge">

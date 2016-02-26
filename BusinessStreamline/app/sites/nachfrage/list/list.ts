@@ -1,5 +1,6 @@
 ﻿import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
+import { Title } from 'angular2/platform/browser';
 
 import { UserService } from '../../../services/services';
 
@@ -16,7 +17,8 @@ export class NachfrageListComponent {
     private nachfrageRepository: NachfrageRepository = new NachfrageRepository();
     private data: Array<ViewNachfrage> = [];
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private title: Title) {
+        this.title.setTitle("Nachfrageliste - BLS");
     }
 
     public ngOnInit(): void {
