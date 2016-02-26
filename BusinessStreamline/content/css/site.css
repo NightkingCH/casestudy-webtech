@@ -51,3 +51,12 @@ span.navbar-login {
     font-size: 18px;
     line-height: 20px;
 }
+
+legend {
+    margin-bottom: 14px;
+}
+
+h3.detail-label {
+    margin-top: 0;
+    padding-top: 0;
+}
