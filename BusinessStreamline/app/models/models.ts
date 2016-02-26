@@ -110,6 +110,7 @@ export class ViewTeil {
     public produktId: number;
     public produktName: string;
     public hatOffeneNachfrage: boolean;
+    public offeneNachfrageId: number;
 }
 
 export class ViewSucheNachfrage {

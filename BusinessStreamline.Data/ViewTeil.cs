@@ -22,5 +22,6 @@ namespace BusinessStreamline.Data
         public int ProduktId { get; set; }
         public string ProduktName { get; set; }
         public Nullable<bool> HatOffeneNachfrage { get; set; }
+        public Nullable<int> OffeneNachfrageId { get; set; }
     }
 }

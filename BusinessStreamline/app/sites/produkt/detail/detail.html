@@ -36,7 +36,9 @@
                     <td>
                         <div class="row">
                             <div class="col-md-6">
-                                <span *ngIf="teil.hatOffeneNachfrage" class="label label-info label-as-badge">Nachfrage vorhanden</span>
+                                <span *ngIf="teil.hatOffeneNachfrage" class="label label-info label-as-badge">
+                                    <a href="#/nachfrage/{{ teil?.offeneNachfrageId }}">Nachfrage vorhanden</a>
+                                </span>
                             </div>
                             <div class="col-md-6">
                                 <div class="btn-group pull-right" role="group">

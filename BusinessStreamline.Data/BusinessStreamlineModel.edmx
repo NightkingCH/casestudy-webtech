@@ -131,6 +131,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="ProduktId" Type="int" Nullable="false" />
           <Property Name="ProduktName" Type="varchar" MaxLength="40" />
           <Property Name="HatOffeneNachfrage" Type="bit" />
+          <Property Name="OffeneNachfrageId" Type="int" />
         </EntityType>
         <Association Name="FK_AnbieterAngebot">
           <End Role="Anbieter" Type="Self.Anbieter" Multiplicity="1" />
@@ -290,7 +291,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewTeil].[TypName] AS [TypName], 
     [ViewTeil].[ProduktId] AS [ProduktId], 
     [ViewTeil].[ProduktName] AS [ProduktName], 
-    [ViewTeil].[HatOffeneNachfrage] AS [HatOffeneNachfrage]
+    [ViewTeil].[HatOffeneNachfrage] AS [HatOffeneNachfrage], 
+    [ViewTeil].[OffeneNachfrageId] AS [OffeneNachfrageId]
     FROM [dbo].[ViewTeil] AS [ViewTeil]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_AnbieterAngebot" Association="Self.FK_AnbieterAngebot">
@@ -652,6 +654,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="ProduktId" Type="Int32" Nullable="false" />
           <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="HatOffeneNachfrage" Type="Boolean" />
+          <Property Name="OffeneNachfrageId" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -771,6 +774,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="ViewTeil">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewTeil">
               <MappingFragment StoreEntitySet="ViewTeil">
+                <ScalarProperty Name="OffeneNachfrageId" ColumnName="OffeneNachfrageId" />
                 <ScalarProperty Name="HatOffeneNachfrage" ColumnName="HatOffeneNachfrage" />
                 <ScalarProperty Name="ProduktName" ColumnName="ProduktName" />
                 <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
