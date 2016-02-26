@@ -2,7 +2,7 @@
 import { COMMON_DIRECTIVES } from 'angular2/common';
 
 import { SucheNachfrageRepository, TypRepository } from '../../repository/repository';
-import { SucheNachfrage, Search, Typ } from '../../models/models';
+import { ViewSucheNachfrage, Search, Typ } from '../../models/models';
 
 @Component({
     selector: '[data-site-home]',
@@ -13,7 +13,7 @@ export class HomeComponent {
 
     private sucheRepository: SucheNachfrageRepository = new SucheNachfrageRepository();
     private typRepository: TypRepository = new TypRepository();
-    private data: Array<SucheNachfrage> = [];
+    private data: Array<ViewSucheNachfrage> = [];
     private typList: Array<Typ> = [];
     private model: Search = new Search();
 
@@ -42,7 +42,7 @@ export class HomeComponent {
     }
 
     private fetchNachfrage(): Promise<void> {
-        return this.sucheRepository.get(this.model.search, this.model.page, this.model.typ, this.model.take).then((data: Array<SucheNachfrage>) => {
+        return this.sucheRepository.get(this.model.search, this.model.page, this.model.typ, this.model.take).then((data: Array<ViewSucheNachfrage>) => {
             this.data = data;
         });
     }

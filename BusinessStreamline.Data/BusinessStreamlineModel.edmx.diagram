@@ -26,7 +26,9 @@
         <AssociationConnector Association="BusinessStreamlineModel.FK_TypTeil" />
       </Diagram>
       <Diagram DiagramId="3d0dbcf47b29486e89f27014e58f4c2d" Name="Views" >
-        <EntityTypeShape EntityType="BusinessStreamlineModel.SucheNachfrage" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.ViewOffeneNachfrage" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.ViewSucheNachfrage" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.ViewTeil" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

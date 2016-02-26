@@ -72,9 +72,9 @@
     <Build Include="dbo\Tables\Bestellung.sql" />
     <Build Include="dbo\Tables\Angebot.sql" />
     <Build Include="dbo\Tables\Anbieter.sql" />
-    <Build Include="dbo\Views\SucheNachfrage.sql" />
-    <Build Include="dbo\Views\OffeneNachfrage.sql" />
-    <Build Include="dbo\Views\Teile.sql" />
+    <Build Include="dbo\Views\ViewSucheNachfrage.sql" />
+    <Build Include="dbo\Views\ViewOffeneNachfrage.sql" />
+    <Build Include="dbo\Views\ViewTeil.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BusinessStreamline.bak" />

@@ -35,9 +35,9 @@ namespace BusinessStreamline.Controllers.WebAPI
         private BusinessStreamlineEntities db = new BusinessStreamlineEntities();
 
         // GET: api/suchenachfrage
-        public IQueryable<SucheNachfrage> GetSucheNachfrage()
+        public IQueryable<ViewSucheNachfrage> GetSucheNachfrage()
         {
-            return db.SucheNachfrage;
+            return db.ViewSucheNachfrage;
         }
 
         // GET: api/search
@@ -45,8 +45,8 @@ namespace BusinessStreamline.Controllers.WebAPI
         // REMARK: http://stackoverflow.com/questions/6025522/getting-a-potentially-dangerous-request-path-value-was-detected-from-the-client
         [HttpGet()]
         [Route("nachfrage/{src}")]
-        [ResponseType(typeof(IQueryable<SucheNachfrage>))]
-        public IQueryable<SucheNachfrage> SearchNachfrage(string src)
+        [ResponseType(typeof(IQueryable<ViewSucheNachfrage>))]
+        public IQueryable<ViewSucheNachfrage> SearchNachfrage(string src)
         {
             var search = new Search();
 
@@ -68,7 +68,7 @@ namespace BusinessStreamline.Controllers.WebAPI
                 search.page = 0;
             }
 
-            IQueryable<SucheNachfrage> query = db.SucheNachfrage;
+            IQueryable<ViewSucheNachfrage> query = db.ViewSucheNachfrage;
 
             // search through all parts
             if (!string.IsNullOrWhiteSpace(search.search))

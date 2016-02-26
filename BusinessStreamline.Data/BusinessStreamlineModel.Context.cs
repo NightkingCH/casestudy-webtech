@@ -35,6 +35,8 @@ namespace BusinessStreamline.Data
         public virtual DbSet<Produkt> Produkt { get; set; }
         public virtual DbSet<Teil> Teil { get; set; }
         public virtual DbSet<Typ> Typ { get; set; }
-        public virtual DbSet<SucheNachfrage> SucheNachfrage { get; set; }
+        public virtual DbSet<ViewOffeneNachfrage> ViewOffeneNachfrage { get; set; }
+        public virtual DbSet<ViewSucheNachfrage> ViewSucheNachfrage { get; set; }
+        public virtual DbSet<ViewTeil> ViewTeil { get; set; }
     }
 }

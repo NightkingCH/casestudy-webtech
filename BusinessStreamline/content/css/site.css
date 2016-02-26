@@ -60,3 +60,7 @@ h3.detail-label {
     margin-top: 0;
     padding-top: 0;
 }
+
+span.label.label-as-badge {
+    font-size: inherit;
+}

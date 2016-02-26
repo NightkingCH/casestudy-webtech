@@ -1,7 +1,7 @@
 ﻿import { EndpointConfiguration } from '../configuration/endpoints';
 import { Repository } from './baseRepository';
 
-import { Teil } from '../models/models';
+import { Teil, ViewTeil } from '../models/models';
 
 export class TeilRepository extends Repository {
 
@@ -30,7 +30,7 @@ export class TeilRepository extends Repository {
         return queryPromise;
     }
 
-    public getByProdukt(produkt: number): Promise<Array<Teil>> {
+    public getByProdukt(produkt: number): Promise<Array<ViewTeil>> {
         var callConfiguration: RequestInit = {
             method: "get",
             headers: {
@@ -44,7 +44,7 @@ export class TeilRepository extends Repository {
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseText)
             .then(this.parseJson)
-            .then((data: Array<Teil>) => {
+            .then((data: Array<ViewTeil>) => {
                 return (<ExtendedJSON> JSON).restore(data);
             });
 

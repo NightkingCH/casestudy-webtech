@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.OffeneNachfrage
+﻿CREATE VIEW dbo.ViewOffeneNachfrage
 	AS
 SELECT 
 	n.NachfrageId

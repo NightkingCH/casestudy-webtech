@@ -26,11 +26,10 @@ namespace BusinessStreamline.Controllers.WebAPI
         // GET: api/produkt/firma/1
         [HttpGet()]
         [Route("produkt/{produkt:int}")]
-        [ResponseType(typeof(IQueryable<Teil>))]
-        public IQueryable<Teil> GetTeilByProdukt(int produkt)
+        [ResponseType(typeof(IQueryable<ViewTeil>))]
+        public IQueryable<ViewTeil> GetTeilByProdukt(int produkt)
         {
-            return db.Teil
-                .Include(x => x.Typ)
+            return db.ViewTeil
                 .Where(x => x.ProduktId == produkt);
         }
 

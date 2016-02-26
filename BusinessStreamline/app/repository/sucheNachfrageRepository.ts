@@ -2,7 +2,7 @@
 import { Repository } from './baseRepository';
 import { Utilities } from '../utils/utilities';
 
-import { Search, SucheNachfrage } from '../models/models';
+import { Search, ViewSucheNachfrage } from '../models/models';
 
 
 
@@ -12,7 +12,7 @@ export class SucheNachfrageRepository extends Repository {
         super(EndpointConfiguration.WEB_API_HOST + EndpointConfiguration.WEB_API_SEARCH_NACHFRAGE);
     }
 
-    public get(src: string = "", page: number = 0, typ: number = 0, take: number = 10): Promise<Array<SucheNachfrage>> {
+    public get(src: string = "", page: number = 0, typ: number = 0, take: number = 10): Promise<Array<ViewSucheNachfrage>> {
         
         var callConfiguration: RequestInit = {
             method: "get",
@@ -34,7 +34,7 @@ export class SucheNachfrageRepository extends Repository {
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseText)
             .then(this.parseJson)
-            .then((data: Array<Nachfrage>) => {
+            .then((data: Array<ViewSucheNachfrage>) => {
                 return data;
             });
 

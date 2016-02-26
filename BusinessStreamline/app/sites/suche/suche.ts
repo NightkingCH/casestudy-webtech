@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChildren, QueryList, ElementRef } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 
-import { SuchModel, Nachfrage } from '../../models/models';
+import { SuchModel, ViewSucheNachfrage } from '../../models/models';
 
 import { SucheNachfrageRepository } from '../../repository/repository';
 
@@ -15,7 +15,7 @@ export class SucheComponent {
     private repository: SucheNachfrageRepository = new SucheNachfrageRepository();
     private model: SuchModel = new SuchModel();
 
-    private data: Array<Nachfrage> = [];
+    private data: Array<ViewSucheNachfrage> = [];
 
     public ngOnInit(): void {
         this.fetchData();
@@ -26,7 +26,7 @@ export class SucheComponent {
     }
 
     private fetchData(str: string = ""): void {
-        this.repository.get(str).then((data: Array<Nachfrage>) => {
+        this.repository.get(str).then((data: Array<ViewSucheNachfrage>) => {
             this.data = data;
         });
     }

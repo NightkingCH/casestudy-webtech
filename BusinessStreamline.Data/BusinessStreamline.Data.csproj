@@ -88,13 +88,19 @@
       <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SucheNachfrage.cs">
-      <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Teil.cs">
       <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Typ.cs">
+      <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewOffeneNachfrage.cs">
+      <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSucheNachfrage.cs">
+      <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewTeil.cs">
       <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

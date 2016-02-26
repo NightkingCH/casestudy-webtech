@@ -30,13 +30,20 @@
                     </th>
                 </tr>
                 <tr *ngFor="#teil of data">
-                    <td>{{ teil?.name }}</td>
-                    <td>{{ teil?.typ?.name }}</td>
+                    <td>{{ teil?.teilName }}</td>
+                    <td>{{ teil?.typName }}</td>
                     <td>{{ teil?.anzahl }}</td>
                     <td>
-                        <div class="btn-group pull-right" role="group">
-                            <button (click)="onAddNachfrage($event, teil)" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nachfrage erfassen"><i class="glyphicon glyphicon-plus"></i></button>
-                            <button (click)="onDeleteTeil($event, teil)" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Teil löschen"><i class="glyphicon glyphicon-trash"></i></button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span *ngIf="teil.hatOffeneNachfrage" class="label label-info label-as-badge">Nachfrage vorhanden</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="btn-group pull-right" role="group">
+                                    <button [disabled]="teil.hatOffeneNachfrage" (click)="onAddNachfrage($event, teil)" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nachfrage erfassen"><i class="glyphicon glyphicon-plus"></i></button>
+                                    <button (click)="onDeleteTeil($event, teil)" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Teil löschen"><i class="glyphicon glyphicon-trash"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </td>
                 </tr>

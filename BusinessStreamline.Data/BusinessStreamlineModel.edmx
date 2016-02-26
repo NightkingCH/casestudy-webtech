@@ -83,8 +83,18 @@
           <Property Name="Code" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'BusinessStreamline.dbo.SucheNachfrage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="SucheNachfrage">
+warning 6002: The table/view 'BusinessStreamline.dbo.ViewOffeneNachfrage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewOffeneNachfrage">
+          <Key>
+            <PropertyRef Name="NachfrageId" />
+            <PropertyRef Name="TeilId" />
+          </Key>
+          <Property Name="NachfrageId" Type="int" Nullable="false" />
+          <Property Name="TeilId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BusinessStreamline.dbo.ViewSucheNachfrage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewSucheNachfrage">
           <Key>
             <PropertyRef Name="NachfrageId" />
             <PropertyRef Name="Anzahl" />
@@ -103,6 +113,24 @@ warning 6002: The table/view 'BusinessStreamline.dbo.SucheNachfrage' does not ha
           <Property Name="TypName" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="ProduktId" Type="int" Nullable="false" />
           <Property Name="ProduktName" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewTeil">
+          <Key>
+            <PropertyRef Name="TeilId" />
+            <PropertyRef Name="TypId" />
+            <PropertyRef Name="TypName" />
+            <PropertyRef Name="ProduktId" />
+          </Key>
+          <Property Name="TeilId" Type="int" Nullable="false" />
+          <Property Name="TeilName" Type="varchar" MaxLength="40" />
+          <Property Name="Anzahl" Type="int" />
+          <Property Name="TypId" Type="int" Nullable="false" />
+          <Property Name="TypName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ProduktId" Type="int" Nullable="false" />
+          <Property Name="ProduktName" Type="varchar" MaxLength="40" />
+          <Property Name="HatOffeneNachfrage" Type="bit" />
         </EntityType>
         <Association Name="FK_AnbieterAngebot">
           <End Role="Anbieter" Type="Self.Anbieter" Multiplicity="1" />
@@ -234,18 +262,36 @@ warning 6002: The table/view 'BusinessStreamline.dbo.SucheNachfrage' does not ha
           <EntitySet Name="Produkt" EntityType="Self.Produkt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teil" EntityType="Self.Teil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Typ" EntityType="Self.Typ" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SucheNachfrage" EntityType="Self.SucheNachfrage" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="ViewOffeneNachfrage" EntityType="Self.ViewOffeneNachfrage" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [SucheNachfrage].[NachfrageId] AS [NachfrageId], 
-    [SucheNachfrage].[Anzahl] AS [Anzahl], 
-    [SucheNachfrage].[ErstelltAm] AS [ErstelltAm], 
-    [SucheNachfrage].[TeilId] AS [TeilId], 
-    [SucheNachfrage].[TeilName] AS [TeilName], 
-    [SucheNachfrage].[TypId] AS [TypId], 
-    [SucheNachfrage].[TypName] AS [TypName], 
-    [SucheNachfrage].[ProduktId] AS [ProduktId], 
-    [SucheNachfrage].[ProduktName] AS [ProduktName]
-    FROM [dbo].[SucheNachfrage] AS [SucheNachfrage]</DefiningQuery>
+    [ViewOffeneNachfrage].[NachfrageId] AS [NachfrageId], 
+    [ViewOffeneNachfrage].[TeilId] AS [TeilId]
+    FROM [dbo].[ViewOffeneNachfrage] AS [ViewOffeneNachfrage]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewSucheNachfrage" EntityType="Self.ViewSucheNachfrage" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewSucheNachfrage].[NachfrageId] AS [NachfrageId], 
+    [ViewSucheNachfrage].[Anzahl] AS [Anzahl], 
+    [ViewSucheNachfrage].[ErstelltAm] AS [ErstelltAm], 
+    [ViewSucheNachfrage].[TeilId] AS [TeilId], 
+    [ViewSucheNachfrage].[TeilName] AS [TeilName], 
+    [ViewSucheNachfrage].[TypId] AS [TypId], 
+    [ViewSucheNachfrage].[TypName] AS [TypName], 
+    [ViewSucheNachfrage].[ProduktId] AS [ProduktId], 
+    [ViewSucheNachfrage].[ProduktName] AS [ProduktName]
+    FROM [dbo].[ViewSucheNachfrage] AS [ViewSucheNachfrage]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewTeil" EntityType="Self.ViewTeil" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewTeil].[TeilId] AS [TeilId], 
+    [ViewTeil].[TeilName] AS [TeilName], 
+    [ViewTeil].[Anzahl] AS [Anzahl], 
+    [ViewTeil].[TypId] AS [TypId], 
+    [ViewTeil].[TypName] AS [TypName], 
+    [ViewTeil].[ProduktId] AS [ProduktId], 
+    [ViewTeil].[ProduktName] AS [ProduktName], 
+    [ViewTeil].[HatOffeneNachfrage] AS [HatOffeneNachfrage]
+    FROM [dbo].[ViewTeil] AS [ViewTeil]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_AnbieterAngebot" Association="Self.FK_AnbieterAngebot">
             <End Role="Anbieter" EntitySet="Anbieter" />
@@ -342,8 +388,10 @@ warning 6002: The table/view 'BusinessStreamline.dbo.SucheNachfrage' does not ha
             <End Role="Typ" EntitySet="Typ" />
             <End Role="Teil" EntitySet="Teil" />
           </AssociationSet>
-          <EntitySet Name="SucheNachfrage" EntityType="BusinessStreamlineModel.SucheNachfrage" />
-        </EntityContainer>
+          <EntitySet Name="ViewOffeneNachfrage" EntityType="BusinessStreamlineModel.ViewOffeneNachfrage" />
+          <EntitySet Name="ViewSucheNachfrage" EntityType="BusinessStreamlineModel.ViewSucheNachfrage" />
+          <EntitySet Name="ViewTeil" EntityType="BusinessStreamlineModel.ViewTeil" />
+          </EntityContainer>
         <EntityType Name="Anbieter">
           <Key>
             <PropertyRef Name="AnbieterId" />
@@ -561,7 +609,15 @@ warning 6002: The table/view 'BusinessStreamline.dbo.SucheNachfrage' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="SucheNachfrage">
+        <EntityType Name="ViewOffeneNachfrage">
+          <Key>
+            <PropertyRef Name="NachfrageId" />
+            <PropertyRef Name="TeilId" />
+          </Key>
+          <Property Name="NachfrageId" Type="Int32" Nullable="false" />
+          <Property Name="TeilId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewSucheNachfrage">
           <Key>
             <PropertyRef Name="NachfrageId" />
             <PropertyRef Name="Anzahl" />
@@ -580,6 +636,22 @@ warning 6002: The table/view 'BusinessStreamline.dbo.SucheNachfrage' does not ha
           <Property Name="TypName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="ProduktId" Type="Int32" Nullable="false" />
           <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ViewTeil">
+          <Key>
+            <PropertyRef Name="TeilId" />
+            <PropertyRef Name="TypId" />
+            <PropertyRef Name="TypName" />
+            <PropertyRef Name="ProduktId" />
+          </Key>
+          <Property Name="TeilId" Type="Int32" Nullable="false" />
+          <Property Name="TeilName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Anzahl" Type="Int32" />
+          <Property Name="TypId" Type="Int32" Nullable="false" />
+          <Property Name="TypName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ProduktId" Type="Int32" Nullable="false" />
+          <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="HatOffeneNachfrage" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -673,9 +745,17 @@ warning 6002: The table/view 'BusinessStreamline.dbo.SucheNachfrage' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SucheNachfrage">
-            <EntityTypeMapping TypeName="BusinessStreamlineModel.SucheNachfrage">
-              <MappingFragment StoreEntitySet="SucheNachfrage">
+          <EntitySetMapping Name="ViewOffeneNachfrage">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewOffeneNachfrage">
+              <MappingFragment StoreEntitySet="ViewOffeneNachfrage">
+                <ScalarProperty Name="TeilId" ColumnName="TeilId" />
+                <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewSucheNachfrage">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewSucheNachfrage">
+              <MappingFragment StoreEntitySet="ViewSucheNachfrage">
                 <ScalarProperty Name="ProduktName" ColumnName="ProduktName" />
                 <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
                 <ScalarProperty Name="TypName" ColumnName="TypName" />
@@ -688,7 +768,21 @@ warning 6002: The table/view 'BusinessStreamline.dbo.SucheNachfrage' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="ViewTeil">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewTeil">
+              <MappingFragment StoreEntitySet="ViewTeil">
+                <ScalarProperty Name="HatOffeneNachfrage" ColumnName="HatOffeneNachfrage" />
+                <ScalarProperty Name="ProduktName" ColumnName="ProduktName" />
+                <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
+                <ScalarProperty Name="TypName" ColumnName="TypName" />
+                <ScalarProperty Name="TypId" ColumnName="TypId" />
+                <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
+                <ScalarProperty Name="TeilName" ColumnName="TeilName" />
+                <ScalarProperty Name="TeilId" ColumnName="TeilId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

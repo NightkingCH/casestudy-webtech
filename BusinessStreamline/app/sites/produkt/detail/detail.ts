@@ -5,7 +5,7 @@ import { Router, RouteParams } from 'angular2/router';
 declare var $: JQueryStatic;
 
 import { ProduktRepository, TeilRepository } from '../../../repository/repository';
-import { Produkt, Teil } from '../../../models/models';
+import { Produkt, ViewTeil } from '../../../models/models';
 
 @Component({
     selector: '[data-site-detail-product]',
@@ -16,7 +16,7 @@ export class ProduktDetailComponent {
 
     private detailId: number;
     private model: Produkt;
-    private data: Array<Teil> = [];
+    private data: Array<ViewTeil> = [];
 
     private repository: ProduktRepository = new ProduktRepository();
     private teilRepository: TeilRepository = new TeilRepository();
@@ -39,7 +39,7 @@ export class ProduktDetailComponent {
         this.repository.get(this.detailId).then((data: Produkt) => {
             this.model = data;
         }).then(() => {
-            return this.teilRepository.getByProdukt(this.detailId).then((data: Array<Teil>) => {
+            return this.teilRepository.getByProdukt(this.detailId).then((data: Array<ViewTeil>) => {
                 this.data = data;
             });
         }).then(() => {
@@ -51,7 +51,11 @@ export class ProduktDetailComponent {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    public onAddNachfrage(): void { }
+    public onAddNachfrage(event: MouseEvent, teil: ViewTeil): void {
+        if (teil.hatOffeneNachfrage) {
+            return;
+        }
+    }
 
     public onDeleteTeil(): void {
         alert("Nicht implementiert :)");

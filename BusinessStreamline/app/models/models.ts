@@ -100,23 +100,27 @@ export class SuchModel {
     }
 }
 
-export class SucheNachfrage {
-
-    public nachfrageId: number;
-
-    public anzahl: number;
-
-    public erstelltAm: Date;
+export class ViewTeil {
 
     public teilId: number;
-
     public teilName: string;
-
+    public anzahl: number;
     public typId: number;
-
     public typName: string;
-
     public produktId: number;
+    public produktName: string;
+    public hatOffeneNachfrage: boolean;
+}
 
+export class ViewSucheNachfrage {
+
+    public nachfrageId: number;
+    public anzahl: number;
+    public erstelltAm: Date;
+    public teilId: number;
+    public teilName: string;
+    public typId: number;
+    public typName: string;
+    public produktId: number;
     public produktName: string;
 }
