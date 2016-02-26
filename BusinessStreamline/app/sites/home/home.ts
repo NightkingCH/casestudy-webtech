@@ -1,4 +1,4 @@
-﻿import { Component, ViewChildren, QueryList, ElementRef } from 'angular2/core';
+﻿import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 
 import { SucheNachfrageRepository, TypRepository } from '../../repository/repository';
@@ -17,19 +17,10 @@ export class HomeComponent {
     private typList: Array<Typ> = [];
     private model: Search = new Search();
 
-    @ViewChildren("dropdown")
-    private items: QueryList<ElementRef>
-
     public ngOnInit(): void {
         this.fetchTyp().then(() => {
             // trigger search AFTER the types are loaded!
             return this.fetchNachfrage();
-        });
-    }
-
-    public ngAfterViewInit(): void {
-        this.items.toArray().forEach((element: ElementRef) => {
-            $(element.nativeElement).dropdown();
         });
     }
 

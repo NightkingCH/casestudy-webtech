@@ -12,6 +12,7 @@ using BusinessStreamline.Data;
 
 namespace BusinessStreamline.Controllers.WebAPI
 {
+    [RoutePrefix("api/produkt")]
     public class ProduktController : ApiController
     {
         private BusinessStreamlineEntities db = new BusinessStreamlineEntities();
@@ -20,6 +21,17 @@ namespace BusinessStreamline.Controllers.WebAPI
         public IQueryable<Produkt> GetProdukt()
         {
             return db.Produkt;
+        }
+
+        // GET: api/produkt/firma/1
+        [HttpGet()]
+        [Route("firma/{firma:int}/login/{login:int}")]
+        [ResponseType(typeof(IQueryable<Produkt>))]
+        public IQueryable<Produkt> GetProduktByFirma(int firma, int login)
+        {
+            return db.Produkt
+                .Include(x => x.Firma)
+                .Where(x => x.FirmaId == firma && x.Firma.LoginId == login);
         }
 
         // GET: api/Produkt/5

@@ -9,6 +9,10 @@ import { NavigationComponent } from './components/navigation/navigation';
 import { HomeComponent } from './sites/home/home';
 import { SucheComponent } from './sites/suche/suche';
 
+import { ProduktAddComponent } from './sites/produkt/add/add';
+import { ProduktDetailComponent } from './sites/produkt/detail/detail';
+import { ProduktListComponent } from './sites/produkt/list/list';
+
 import { ExtendedRouterOutlet } from './directives/routerOutlet';
 
 @Component({
@@ -23,7 +27,10 @@ import { ExtendedRouterOutlet } from './directives/routerOutlet';
 })
 @RouteConfig([
         { path: "/home", name: "Home", component: HomeComponent, useAsDefault: true },
-        { path: "/suche", name: "Suche", component: SucheComponent }
+        { path: "/suche", name: "Suche", component: SucheComponent },
+        { path: "/produkte", name: "Produkte", component: ProduktListComponent },
+        { path: "/produkt/:id", name: "Produkt", component: ProduktDetailComponent },
+        { path: "/produkt/add", name: "AddProdukt", component: ProduktAddComponent }
 ])
 export class AppComponent {
 
