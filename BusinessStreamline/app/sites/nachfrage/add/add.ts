@@ -2,10 +2,10 @@
 import { COMMON_DIRECTIVES } from 'angular2/common';
 
 @Component({
-    selector: '[data-site-add-produkt]',
-    templateUrl: 'app/sites/produkt/add/add.html',
+    selector: '[data-site-add-nachfrage]',
+    templateUrl: 'app/sites/nachfrage/add/add.html',
     directives: [COMMON_DIRECTIVES]
 })
-export class ProduktAddComponent {
+export class NachfrageAddComponent {
 
 }

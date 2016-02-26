@@ -8,7 +8,7 @@ import { ProduktRepository, TeilRepository } from '../../../repository/repositor
 import { Produkt, ViewTeil } from '../../../models/models';
 
 @Component({
-    selector: '[data-site-detail-product]',
+    selector: '[data-site-detail-produkt]',
     templateUrl: 'app/sites/produkt/detail/detail.html',
     directives: [COMMON_DIRECTIVES]
 })

@@ -115,6 +115,9 @@
   <ItemGroup>
     <Content Include="app\components\navigation\navigation.html" />
     <Content Include="app\sites\home\home.html" />
+    <Content Include="app\sites\nachfrage\add\add.html" />
+    <Content Include="app\sites\nachfrage\detail\detail.html" />
+    <Content Include="app\sites\nachfrage\list\list.html" />
     <Content Include="app\sites\produkt\add\add.html" />
     <Content Include="app\sites\produkt\detail\detail.html" />
     <Content Include="app\sites\produkt\list\list.html" />
@@ -175,6 +178,7 @@
     <TypeScriptCompile Include="app\models\models.ts" />
     <TypeScriptCompile Include="app\repository\baseRepository.ts" />
     <TypeScriptCompile Include="app\repository\loginRepository.ts" />
+    <TypeScriptCompile Include="app\repository\nachfrageRepository.ts" />
     <TypeScriptCompile Include="app\repository\teilRepository.ts" />
     <TypeScriptCompile Include="app\repository\typRepository.ts" />
     <TypeScriptCompile Include="app\repository\sucheNachfrageRepository.ts" />
@@ -183,6 +187,9 @@
     <TypeScriptCompile Include="app\services\services.ts" />
     <TypeScriptCompile Include="app\services\userService.ts" />
     <TypeScriptCompile Include="app\sites\home\home.ts" />
+    <TypeScriptCompile Include="app\sites\nachfrage\add\add.ts" />
+    <TypeScriptCompile Include="app\sites\nachfrage\detail\detail.ts" />
+    <TypeScriptCompile Include="app\sites\nachfrage\list\list.ts" />
     <TypeScriptCompile Include="app\sites\produkt\add\add.ts" />
     <TypeScriptCompile Include="app\sites\produkt\detail\detail.ts" />
     <TypeScriptCompile Include="app\sites\produkt\list\list.ts" />

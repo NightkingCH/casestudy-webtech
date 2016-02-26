@@ -6,7 +6,7 @@ import { ProduktRepository } from '../../../repository/repository';
 import { Produkt } from '../../../models/models';
 
 @Component({
-    selector: '[data-site-list-product]',
+    selector: '[data-site-list-produkt]',
     templateUrl: 'app/sites/produkt/list/list.html',
     directives: [COMMON_DIRECTIVES]
 })

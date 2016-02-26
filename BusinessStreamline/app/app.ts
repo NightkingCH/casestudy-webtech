@@ -1,6 +1,9 @@
 ﻿import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { RouteConfig, ROUTER_DIRECTIVES } from 'angular2/router';
+
+import { ExtendedRouterOutlet } from './directives/routerOutlet';
+
 import { ProduktRepository, LoginRepository } from './repository/repository';
 import { Produkt, Login } from './models/models';
 
@@ -9,11 +12,15 @@ import { NavigationComponent } from './components/navigation/navigation';
 import { HomeComponent } from './sites/home/home';
 import { SucheComponent } from './sites/suche/suche';
 
+/* Produkt */
 import { ProduktAddComponent } from './sites/produkt/add/add';
 import { ProduktDetailComponent } from './sites/produkt/detail/detail';
 import { ProduktListComponent } from './sites/produkt/list/list';
 
-import { ExtendedRouterOutlet } from './directives/routerOutlet';
+/* Nachfrage */
+import { NachfrageAddComponent } from './sites/nachfrage/add/add';
+import { NachfrageDetailComponent } from './sites/nachfrage/detail/detail';
+import { NachfrageListComponent } from './sites/nachfrage/list/list';
 
 @Component({
     selector: '[data-app]',
@@ -29,8 +36,11 @@ import { ExtendedRouterOutlet } from './directives/routerOutlet';
         { path: "/home", name: "Home", component: HomeComponent, useAsDefault: true },
         { path: "/suche", name: "Suche", component: SucheComponent },
         { path: "/produkte", name: "Produkte", component: ProduktListComponent },
-        { path: "/produkt/:id", name: "Produkt", component: ProduktDetailComponent },
-        { path: "/produkt/add", name: "AddProdukt", component: ProduktAddComponent }
+        { path: "/produkt/:id", name: "ProduktDetail", component: ProduktDetailComponent },
+        { path: "/produkt/add", name: "ProduktAdd", component: ProduktAddComponent },
+        { path: "/nachfrage", name: "Nachfrage", component: NachfrageListComponent },
+        { path: "/nachfrage/:id", name: "Produkt", component: NachfrageDetailComponent },
+        { path: "/nachfrage/add", name: "AddProdukt", component: NachfrageAddComponent }
 ])
 export class AppComponent {
 
