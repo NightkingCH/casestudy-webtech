@@ -62,13 +62,18 @@
                     <th colspan="2">
                         Aktionen
                     </th>
+                    <th>
+                        Bestes
+                    </th>
                 </tr>
                 <tr *ngFor="#angebot of data">
-                    <td>{{ angebot?.angebotId }}</td>
+                    <td>
+                        <span>{{ angebot?.angebotId }}</span>
+                    </td>
                     <td>{{ angebot?.erstelltAm }}</td>
                     <td>{{ angebot?.preisProTeil }}</td>
                     <td>{{ angebot?.preisTotal }}</td>
-                    <td>
+                    <td class="table-cell-badge">
                         <span *ngIf="angebot?.status == 0" class="label label-warning label-as-badge center-block">Offen</span>
                         <span *ngIf="angebot?.status == 1" class="label label-success label-as-badge center-block">Akzeptiert</span>
                         <span *ngIf="angebot?.status == 2" class="label label-primary label-as-badge center-block">Abgelehnt</span>
@@ -78,6 +83,11 @@
                     </td>
                     <td>
                         <button (click)="onDeclineAngebot($event, angebot)" type="button" class="btn btn-warning center-block" data-toggle="tooltip" data-placement="top" title="Ablehnen"><i class="glyphicon glyphicon-thumbs-down"></i></button>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <i *ngIf="angebot.istBestesAngebot" class="glyphicon glyphicon-star star-offer"></i>
+                        </div>
                     </td>
                 </tr>
             </table>

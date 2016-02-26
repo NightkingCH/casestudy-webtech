@@ -143,4 +143,5 @@ export class ViewAngebot {
     public name: string;
     public nachfrageId: number;
     public preisTotal: number;
+    public istBestesAngebot: number;
 }

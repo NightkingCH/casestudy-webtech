@@ -68,3 +68,13 @@ span.label.label-as-badge {
 .label > a {
     color: #FFF;
 }
+
+.star-offer {
+    color: #337ab7;
+    font-size: 28px;
+}
+
+.table-cell-badge {
+    vertical-align: middle !important;
+    text-align: center !important;
+}

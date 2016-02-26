@@ -21,5 +21,6 @@ namespace BusinessStreamline.Data
         public string Name { get; set; }
         public int NachfrageId { get; set; }
         public Nullable<decimal> PreisTotal { get; set; }
+        public Nullable<bool> IstBestesAngebot { get; set; }
     }
 }
