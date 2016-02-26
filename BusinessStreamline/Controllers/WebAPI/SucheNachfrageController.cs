@@ -19,6 +19,7 @@ namespace BusinessStreamline.Controllers.WebAPI
         public int typ { get; set; }
         public int page { get; set; }
         public int take { get; set; }
+        public int state { get; set; }
 
         public Search()
         {
@@ -26,6 +27,7 @@ namespace BusinessStreamline.Controllers.WebAPI
             this.typ = 0;
             this.page = 0;
             this.take = 10;
+            this.state = -1;
         }
     }
 
@@ -80,6 +82,16 @@ namespace BusinessStreamline.Controllers.WebAPI
             if (search.typ != 0)
             {
                 query = query.Where(x => x.TypId == search.typ);
+            }
+
+            if (search.state == 0)
+            {
+                query = query.Where(x => x.HatBestellung == false);
+            }
+
+            if (search.state == 1)
+            {
+                query = query.Where(x => x.HatBestellung == true);
             }
 
             // apply default sort => otherwise we can't add skip or take (paging)

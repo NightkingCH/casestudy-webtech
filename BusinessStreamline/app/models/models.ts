@@ -78,25 +78,19 @@ export class Produkt {
 }
 
 /* Hilfsklassen / Models */
-export class Search {
+export class NachfrageSearch {
     public search: string;
     public typ: number;
     public page: number;
     public take: number;
+    public state: number;
 
     constructor() {
         this.search = null;
+        this.state = -1;
         this.typ = 0;
         this.page = 0;
         this.take = 20;
-    }
-}
-
-export class SuchModel {
-    public stichwort: string;
-
-    constructor() {
-        this.stichwort = "";
     }
 }
 
@@ -145,4 +139,9 @@ export class ViewAngebot {
     public nachfrageId: number;
     public preisTotal: number;
     public istBestesAngebot: number;
+}
+
+export class NachfrageStatus {
+    public status: number = -1;
+    public name: string = "Status Auswählen";
 }

@@ -2,7 +2,7 @@
 import { COMMON_DIRECTIVES } from 'angular2/common';
 
 import { SucheNachfrageRepository, TypRepository } from '../../repository/repository';
-import { ViewSucheNachfrage, Search, Typ } from '../../models/models';
+import { ViewSucheNachfrage, NachfrageSearch, Typ, NachfrageStatus } from '../../models/models';
 
 @Component({
     selector: '[data-site-home]',
@@ -15,13 +15,17 @@ export class HomeComponent {
     private typRepository: TypRepository = new TypRepository();
     private data: Array<ViewSucheNachfrage> = [];
     private typList: Array<Typ> = [];
-    private model: Search = new Search();
+    private statusList: Array<NachfrageStatus> = [];
+
+    private model: NachfrageSearch = new NachfrageSearch();
 
     public ngOnInit(): void {
         this.fetchTyp().then(() => {
             // trigger search AFTER the types are loaded!
             return this.fetchNachfrage();
         });
+
+        this.setUpState();
     }
 
     public onSubmit(): void {
@@ -34,7 +38,7 @@ export class HomeComponent {
             // add a selection element to the top.
             var nulloTyp = new Typ();
 
-            nulloTyp.name = "Auswählen";
+            nulloTyp.name = "Typ Auswählen";
             nulloTyp.typId = 0;
 
             this.typList = [nulloTyp].concat(data);
@@ -42,9 +46,22 @@ export class HomeComponent {
     }
 
     private fetchNachfrage(): Promise<void> {
-        return this.sucheRepository.get(this.model.search, this.model.page, this.model.typ, this.model.take).then((data: Array<ViewSucheNachfrage>) => {
+        return this.sucheRepository.get(this.model).then((data: Array<ViewSucheNachfrage>) => {
             this.data = data;
         });
     }
 
+    private setUpState(): void {
+        var bothState = new NachfrageStatus();
+
+        var openState = new NachfrageStatus();
+        openState.status = 0;
+        openState.name = "Offen";
+
+        var closeState = new NachfrageStatus();
+        closeState.status = 1;
+        closeState.name = "Geschlossen";
+
+        this.statusList = [bothState, openState, closeState];        
+    }
 }

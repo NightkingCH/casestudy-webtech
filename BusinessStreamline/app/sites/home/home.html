@@ -11,6 +11,11 @@
                                 <option *ngFor="#typ of typList" [value]="typ.typId">{{ typ.name }}</option>
                             </select>
                         </span>
+                        <span class="input-group-btn">
+                            <select class="btn" [(ngModel)]="model.state">
+                                <option *ngFor="#status of statusList" [value]="status.status">{{ status.name }}</option>
+                            </select>
+                        </span>
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-primary">Auf gehts!</button>
                         </div>
