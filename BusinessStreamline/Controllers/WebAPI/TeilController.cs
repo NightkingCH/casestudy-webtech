@@ -12,6 +12,7 @@ using BusinessStreamline.Data;
 
 namespace BusinessStreamline.Controllers.WebAPI
 {
+    [RoutePrefix("api/teil")]
     public class TeilController : ApiController
     {
         private BusinessStreamlineEntities db = new BusinessStreamlineEntities();
@@ -20,6 +21,17 @@ namespace BusinessStreamline.Controllers.WebAPI
         public IQueryable<Teil> GetTeil()
         {
             return db.Teil;
+        }
+
+        // GET: api/produkt/firma/1
+        [HttpGet()]
+        [Route("produkt/{produkt:int}")]
+        [ResponseType(typeof(IQueryable<Teil>))]
+        public IQueryable<Teil> GetTeilByProdukt(int produkt)
+        {
+            return db.Teil
+                .Include(x => x.Typ)
+                .Where(x => x.ProduktId == produkt);
         }
 
         // GET: api/Teil/5

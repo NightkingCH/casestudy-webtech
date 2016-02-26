@@ -3,10 +3,36 @@
         <div class="col-xs-offset-2 col-xs-9">
             <form class="form">
                 <fieldset>
-                    <legend>Suche</legend>
+                    <legend>Produkt</legend>
                 </fieldset>
+                <div class="input-group">
+                    <label>Name</label>
+                    <h3 class="form-control-static">{{ model?.name }}</h3>
+                </div>
             </form>
         </div>
     </div>
     <hr />
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-9">
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        Teil
+                    </th>
+                    <th>
+                        Typ
+                    </th>
+                    <th>
+                        Menge
+                    </th>
+                </tr>
+                <tr *ngFor="#teil of data">
+                    <td>{{ teil?.name }}</td>
+                    <td>{{ teil?.typ?.name }}</td>
+                    <td>{{ teil?.anzahl }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </section>
