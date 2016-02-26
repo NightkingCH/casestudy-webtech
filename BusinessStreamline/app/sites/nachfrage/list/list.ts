@@ -4,13 +4,16 @@ import { Title } from 'angular2/platform/browser';
 
 import { UserService } from '../../../services/services';
 
+import { PIPES } from '../../../pipes/pipes';
+
 import { NachfrageRepository } from '../../../repository/repository';
 import { ViewNachfrage } from '../../../models/models';
 
 @Component({
     selector: '[data-site-list-nachfrage]',
     templateUrl: 'app/sites/nachfrage/list/list.html',
-    directives: [COMMON_DIRECTIVES]
+    directives: [COMMON_DIRECTIVES],
+    pipes: [PIPES]
 })
 export class NachfrageListComponent {
 

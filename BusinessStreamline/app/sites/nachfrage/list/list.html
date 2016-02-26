@@ -37,10 +37,10 @@
                             {{nachfrage?.nachfrageId}}
                         </a>
                     </td>
-                    <td>{{nachfrage?.anzahl}}</td>
-                    <td>{{nachfrage?.erstelltAm}}</td>
-                    <td>{{nachfrage?.anzahlAngebote}}</td>
-                    <td>{{nachfrage?.besterPreis}}</td>
+                    <td>{{ nachfrage?.anzahl }}</td>
+                    <td>{{ nachfrage?.erstelltAm | momentdate }}</td>
+                    <td>{{ nachfrage?.anzahlAngebote }}</td>
+                    <td>{{ nachfrage?.besterPreis | currency:'CHF':false  }}</td>
                     <td>
                         <a href="#/nachfrage/{{nachfrage?.nachfrageId}}" class="btn btn-info pull-right">
                             <i class="glyphicon glyphicon-arrow-right"></i>

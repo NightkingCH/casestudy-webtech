@@ -71,8 +71,8 @@
                         <span>{{ angebot?.angebotId }}</span>
                     </td>
                     <td>{{ angebot.erstelltAm | momentdate }}</td>
-                    <td>{{ angebot?.preisProTeil }}</td>
-                    <td>{{ angebot?.preisTotal }}</td>
+                    <td>{{ angebot?.preisProTeil | currency:'CHF':false }}</td>
+                    <td>{{ angebot?.preisTotal | currency:'CHF':false  }}</td>
                     <td class="table-cell-badge">
                         <span *ngIf="angebot?.status == 0" class="label label-warning label-as-badge center-block">Offen</span>
                         <span *ngIf="angebot?.status == 1" class="label label-success label-as-badge center-block">Akzeptiert</span>
@@ -86,7 +86,7 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <i *ngIf="angebot.istBestesAngebot" class="glyphicon glyphicon-star star-offer"></i>
+                            <i *ngIf="angebot.istBestesAngebot" class="glyphicon glyphicon-star-empty star-offer"></i>
                         </div>
                     </td>
                 </tr>
@@ -94,7 +94,7 @@
             <hr />
             <form class="form">
                 <div class="input-group pull-right">
-                    <a href="#/angebot/add/{{ model?.nachfrageId }}" class="btn btn-primary">
+                    <a href="#/angebot/add/{{ model?.nachfrageId }}" class="btn btn-primary" title="Neues Angebot erstellen">
                         <i class="glyphicon glyphicon-plus"></i>
                         <span>Angebot erstellen</span>
                     </a>
