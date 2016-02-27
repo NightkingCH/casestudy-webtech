@@ -47,7 +47,7 @@
                         </span>
                     </td>
                     <td>
-                        <div class="btn-group pull-right" role="group">
+                        <div class="btn-group" role="group">
                             <a *ngIf="!teil.hatOffeneNachfrage" href="#/nachfrage/add/{{teil.teilId}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nachfrage erfassen"><i class="glyphicon glyphicon-plus"></i></a>
                             <button *ngIf="teil.hatOffeneNachfrage" disabled="disabled" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nachfrage bereits vorhanden"><i class="glyphicon glyphicon-plus"></i></button>
                         </div>
