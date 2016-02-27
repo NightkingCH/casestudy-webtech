@@ -73,7 +73,7 @@
                         Bestes
                     </th>
                 </tr>
-                <tr *ngFor="#angebot of data">
+                <tr *ngFor="#angebot of data" [class.warning]="angebot.istBestesAngebot">
                     <td>
                         <span>{{ angebot?.angebotId }}</span>
                     </td>
@@ -93,7 +93,7 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <i *ngIf="angebot.istBestesAngebot" class="glyphicon glyphicon-star-empty star-offer"></i>
+                            <i *ngIf="angebot.istBestesAngebot" class="glyphicon glyphicon-star-empty star-offer" data-toggle="tooltip" data-placement="top" title="Bestes Angebot"></i>
                         </div>
                     </td>
                 </tr>
