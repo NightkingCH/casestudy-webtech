@@ -7,6 +7,7 @@
     [NachfrageId]  INT          NOT NULL,
     CONSTRAINT [PK_Angebot] PRIMARY KEY CLUSTERED ([AngebotId] ASC),
     CONSTRAINT [FK_AnbieterAngebot] FOREIGN KEY ([AnbieterId]) REFERENCES [dbo].[Anbieter] ([AnbieterId]),
-    CONSTRAINT [FK_NachfrageAngebot] FOREIGN KEY ([NachfrageId]) REFERENCES [dbo].[Nachfrage] ([NachfrageId])
+    CONSTRAINT [FK_NachfrageAngebot] FOREIGN KEY ([NachfrageId]) REFERENCES [dbo].[Nachfrage] ([NachfrageId]),
+	CONSTRAINT [CHK_Angebot_PreisProTeil] CHECK (PreisProTeil > 0)
 );
 

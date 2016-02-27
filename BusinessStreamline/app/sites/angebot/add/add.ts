@@ -53,6 +53,14 @@ export class AngebotAddComponent {
         //    return; // companies can't create an offer.
         //}
 
+        if (this.model.preisProTeil <= 0) {
+            return;
+        }
+
+        if (isNaN(this.model.preisProTeil)) {
+            return;
+        }
+
         this.model.nachfrageId = this.nachfrageId;
         this.model.anbieterId = 1; // TODO: Add proper user! => this.userService.anbieter.anbieterId;
         this.model.erstelltAm = moment().toDate();

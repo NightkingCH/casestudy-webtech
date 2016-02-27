@@ -58,6 +58,10 @@ export class NachfrageAddComponent {
         //    return; // suppliers can't create a request.
         //}
 
+        if (this.model.anzahl <= 0) {
+            return;
+        }
+
         this.model.teilId = this.teilId;
         this.model.erstelltAm = moment().toDate();
 
