@@ -28,6 +28,9 @@ import { AboutComponent } from './sites/about/about';
 /* Kontakt */
 import { KontaktComponent } from './sites/kontakt/kontakt';
 
+/* Login */
+import { LoginComponent } from './sites/login/login';
+
 @Component({
     selector: '[data-app]',
     template: `
@@ -49,6 +52,7 @@ import { KontaktComponent } from './sites/kontakt/kontakt';
         { path: "/nachfrage/add", name: "AddProdukt", component: NachfrageAddComponent },
         { path: "/about", name: "About", component: AboutComponent },
         { path: "/kontakt", name: "Kontakt", component: KontaktComponent },
+        { path: "/login", name: "Login", component: LoginComponent },
         { path: "/angebot/add/:id", name: "AddAngebot", component: NachfrageAddComponent }
 ])
 export class AppComponent {
