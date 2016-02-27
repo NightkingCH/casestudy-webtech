@@ -1,12 +1,32 @@
 ﻿<section>
     <div class="row">
-        <div class="col-xs-offset-2 col-xs-9">
-            <form class="form">
+        <div class="col-md-offset-1 col-md-10">
+            <form class="form" (ngSubmit)="onAdd($event)">
                 <fieldset>
-                    <legend>Suche</legend>
+                    <legend>Produk erstellen</legend>
                 </fieldset>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input class="form-control" [(ngModel)]="model.name" ngControl="name" />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group pull-right">
+                            <div class="input-group">
+                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Produkt erstellen">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Erstellen</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
-    <hr />
 </section>

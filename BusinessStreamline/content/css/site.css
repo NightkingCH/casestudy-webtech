@@ -12,11 +12,11 @@ body {
 }
 
 .ng-valid {
-  border-left: 5px solid #42A948; /* green */
+    border-left: 5px solid #42A948; /* green */
 }
 
 .ng-invalid {
-  border-left: 5px solid #a94442; /* red */
+    border-left: 5px solid #a94442; /* red */
 }
 
 .dropdown-menu > li > button {
@@ -35,9 +35,9 @@ body {
     background-color: #FFF;
 }
 
-.btn-dropdown:hover {
-    background-color: #E6E6E6;
-}
+    .btn-dropdown:hover {
+        background-color: #E6E6E6;
+    }
 
 select.btn {
     border: 1px solid #CCC;
@@ -90,3 +90,21 @@ span.label.label-as-badge {
     .state-sign.closed {
         color: forestgreen;
     }
+
+@media (min-width: 1200px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
