@@ -117,6 +117,7 @@
     <Content Include="app\sites\about\about.html" />
     <Content Include="app\sites\home\home.html" />
     <Content Include="app\sites\kontakt\kontakt.html" />
+    <Content Include="app\sites\login\login.html" />
     <Content Include="app\sites\nachfrage\add\add.html" />
     <Content Include="app\sites\nachfrage\detail\detail.html" />
     <Content Include="app\sites\nachfrage\list\list.html" />
@@ -194,6 +195,7 @@
     <TypeScriptCompile Include="app\sites\about\about.ts" />
     <TypeScriptCompile Include="app\sites\home\home.ts" />
     <TypeScriptCompile Include="app\sites\kontakt\kontakt.ts" />
+    <TypeScriptCompile Include="app\sites\login\login.ts" />
     <TypeScriptCompile Include="app\sites\nachfrage\add\add.ts" />
     <TypeScriptCompile Include="app\sites\nachfrage\detail\detail.ts" />
     <TypeScriptCompile Include="app\sites\nachfrage\list\list.ts" />
