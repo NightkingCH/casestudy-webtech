@@ -204,8 +204,17 @@
     <None Include="tsconfig.json" />
     <TypeScriptCompile Include="app\utils\utilities.ts" />
     <TypeScriptCompile Include="typings\browser.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\bootstrap\bootstrap.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\moment-node\moment-node.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\moment\moment.d.ts" />
     <TypeScriptCompile Include="typings\browser\ambient\whatwg-fetch\whatwg-fetch.d.ts" />
+    <TypeScriptCompile Include="typings\linqjs\linq.d.ts" />
     <TypeScriptCompile Include="typings\main.d.ts" />
+    <TypeScriptCompile Include="typings\main\ambient\bootstrap\bootstrap.d.ts" />
+    <TypeScriptCompile Include="typings\main\ambient\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="typings\main\ambient\moment-node\moment-node.d.ts" />
+    <TypeScriptCompile Include="typings\main\ambient\moment\moment.d.ts" />
     <TypeScriptCompile Include="typings\main\ambient\whatwg-fetch\whatwg-fetch.d.ts" />
     <TypeScriptCompile Include="typings\typings.d.ts" />
   </ItemGroup>

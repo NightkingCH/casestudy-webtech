@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "linq": "^3.0.5"
   },
   "devDependencies": {
     "bootstrap": "^3.3.6",

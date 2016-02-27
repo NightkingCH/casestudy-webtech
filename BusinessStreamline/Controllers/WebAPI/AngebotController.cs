@@ -33,6 +33,83 @@ namespace BusinessStreamline.Controllers.WebAPI
                 .Where(x => x.NachfrageId == nachfrage);
         }
 
+        // POST: api/angebot/accept
+        [HttpPost()]
+        [Route("accept")]
+        [ResponseType(typeof(ViewAngebot))]
+        public IHttpActionResult PostAcceptAngebot(ViewAngebot model)
+        {
+            if (model.AngebotId <= 0) {
+                return BadRequest();
+            }
+
+            var angebot = db.Angebot.FirstOrDefault(x => x.AngebotId == model.AngebotId);
+
+            if (angebot == null) {
+                return NotFound();
+            }
+
+            angebot.Status = 1; // 0 = Offen, 1 = Akzeptiert, 2 = Abgelehnt
+
+            db.Entry(angebot).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return Conflict();
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+
+            var viewAngebot = db.ViewAngebot.FirstOrDefault(x => x.AngebotId == model.AngebotId);
+
+            return Ok(viewAngebot);
+        }
+
+        // POST: api/angebot/accept
+        [HttpPost()]
+        [Route("decline")]
+        [ResponseType(typeof(ViewAngebot))]
+        public IHttpActionResult PostDeclineAngebot(ViewAngebot model)
+        {
+            if (model.AngebotId <= 0)
+            {
+                return BadRequest();
+            }
+
+            var angebot = db.Angebot.FirstOrDefault(x => x.AngebotId == model.AngebotId);
+
+            if (angebot == null)
+            {
+                return NotFound();
+            }
+
+            angebot.Status = 2; // 0 = Offen, 1 = Akzeptiert, 2 = Abgelehnt
+
+            db.Entry(angebot).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return Conflict();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            var viewAngebot = db.ViewAngebot.FirstOrDefault(x => x.AngebotId == model.AngebotId);
+
+            return Ok(viewAngebot);
+        }
+
         // GET: api/Angebot/5
         [ResponseType(typeof(Angebot))]
         public IHttpActionResult GetAngebot(int id)

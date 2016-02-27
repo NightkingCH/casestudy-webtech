@@ -23,7 +23,7 @@ export class NachfrageDetailComponent {
     private data: Array<ViewAngebot> = [];
 
     private repository: NachfrageRepository = new NachfrageRepository();
-    private teilRepository: AngebotRepository = new AngebotRepository();
+    private angebotRepository: AngebotRepository = new AngebotRepository();
 
     // inject router to navigate to home after logout;
     constructor(private router: Router, private params: RouteParams, private title: Title) {
@@ -45,7 +45,7 @@ export class NachfrageDetailComponent {
         this.repository.get(this.detailId).then((data: ViewNachfrage) => {
             this.model = data;
         }).then(() => {
-            return this.teilRepository.getByNachfrage(this.detailId).then((data: Array<ViewAngebot>) => {
+            return this.angebotRepository.getByNachfrage(this.detailId).then((data: Array<ViewAngebot>) => {
                 this.data = data;
             });
         }).then(() => {
@@ -58,9 +58,34 @@ export class NachfrageDetailComponent {
     }
 
     public onAcceptAngebot(event: MouseEvent, entity: ViewAngebot): void {
+        //TODO only accept own offers!
+        var offersToDecline = Enumerable.from(this.data).where((x: ViewAngebot) => x.angebotId != entity.angebotId);
+
+        this.acceptAngebot(entity).then(() => {
+            // only decline offers if the first has been accepted!
+            var promiselist: Array<Promise<ViewAngebot>> = [];
+
+            offersToDecline.forEach((x: ViewAngebot) => {
+                promiselist.push(this.declineAngebot(x));
+            });
+
+            return Promise.all(promiselist);
+        }).then(() => {
+            return this.angebotRepository.getByNachfrage(this.detailId).then((data: Array<ViewAngebot>) => {
+                this.data = data;
+            });
+        });
     }
 
-    public onDeclineAngebot(): void {
-        alert("Nicht implementiert :)");
+    public onDeclineAngebot(event: MouseEvent, entity: ViewAngebot): void {
+        this.declineAngebot(entity);
+    }
+
+    private acceptAngebot(entity: ViewAngebot): Promise<ViewAngebot> {
+        return this.angebotRepository.acceptAngebot(entity);
+    }
+
+    private declineAngebot(entity: ViewAngebot): Promise<ViewAngebot> {
+        return this.angebotRepository.declineAngebot(entity);
     }
 }

@@ -50,4 +50,52 @@ export class AngebotRepository extends Repository {
 
         return queryPromise;
     }
+
+    public acceptAngebot(model: ViewAngebot): Promise<ViewAngebot> {
+
+        var callConfiguration: RequestInit = {
+            method: "post",
+            headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(model)
+        };
+
+        var callUri = this.serviceConfig + "/accept";
+
+        var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
+            .then(this.parseText)
+            .then(this.parseJson)
+            .then((data: ViewAngebot) => {
+                return data;
+            });
+
+        return queryPromise;
+    }
+
+    public declineAngebot(model: ViewAngebot): Promise<ViewAngebot> {
+
+        var callConfiguration: RequestInit = {
+            method: "post",
+            headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(model)
+        };
+
+        var callUri = this.serviceConfig + "/decline";
+
+        var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
+            .then(this.parseText)
+            .then(this.parseJson)
+            .then((data: ViewAngebot) => {
+                return data;
+            });
+
+        return queryPromise;
+    }
 }
