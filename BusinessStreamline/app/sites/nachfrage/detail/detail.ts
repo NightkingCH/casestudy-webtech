@@ -7,8 +7,8 @@ declare var $: JQueryStatic;
 
 import { PIPES } from '../../../pipes/pipes';
 
-import { AngebotRepository, NachfrageRepository } from '../../../repository/repository';
-import { ViewNachfrage, ViewAngebot } from '../../../models/models';
+import { AngebotRepository, NachfrageRepository, BestellungRepository } from '../../../repository/repository';
+import { ViewNachfrage, ViewAngebot, Bestellung } from '../../../models/models';
 
 @Component({
     selector: '[data-site-detail-nachfrage]',
@@ -24,8 +24,8 @@ export class NachfrageDetailComponent {
 
     private repository: NachfrageRepository = new NachfrageRepository();
     private angebotRepository: AngebotRepository = new AngebotRepository();
+    private bestellRepository: BestellungRepository = new BestellungRepository();
 
-    // inject router to navigate to home after logout;
     constructor(private router: Router, private params: RouteParams, private title: Title) {
         this.detailId = parseInt(params.params["id"]);
 
@@ -42,11 +42,7 @@ export class NachfrageDetailComponent {
             return;
         }
 
-        this.repository.get(this.detailId).then((data: ViewNachfrage) => {
-            this.model = data;
-        }).then(() => {
-            return this.fetchAngebot();
-        }).then(() => {
+        this.fetchDetail().then(() => {
             this.setUpUI();
         });
     }
@@ -59,17 +55,32 @@ export class NachfrageDetailComponent {
         //TODO only accept own offers!
         var offersToDecline = Enumerable.from(this.data).where((x: ViewAngebot) => x.angebotId != entity.angebotId);
 
-        this.acceptAngebot(entity).then(() => {
-            // only decline offers if the first has been accepted!
-            var promiselist: Array<Promise<ViewAngebot>> = [];
+        // create new order based on the selected offer.
+        var bestellung: Bestellung = new Bestellung();
+        bestellung.angebotId = entity.angebotId;
+        bestellung.nachfrageId = this.detailId;
+        bestellung.erstelltAm = moment().toDate();
 
-            offersToDecline.forEach((x: ViewAngebot) => {
-                promiselist.push(this.declineAngebot(x));
+        // create order
+        // then set offer to accepted
+        // then decline the other offers.
+
+        this.bestellRepository.post(bestellung).then(() => {
+            return this.acceptAngebot(entity).then(() => {
+                // only decline offers if the first has been accepted!
+                var promiselist: Array<Promise<ViewAngebot>> = [];
+
+                // create a declien task for each offer => multiple requests
+                offersToDecline.forEach((x: ViewAngebot) => {
+                    promiselist.push(this.declineAngebot(x));
+                });
+
+                // wait until all offers are declined => then reload view.
+                return Promise.all(promiselist);
+
+            }).then(() => {
+                return this.fetchDetail();
             });
-
-            return Promise.all(promiselist);
-        }).then(() => {
-            return this.fetchAngebot();
         });
     }
 
@@ -85,6 +96,20 @@ export class NachfrageDetailComponent {
 
     private declineAngebot(entity: ViewAngebot): Promise<ViewAngebot> {
         return this.angebotRepository.declineAngebot(entity);
+    }
+
+    private fetchDetail(): Promise<any> {
+        return this.fetchNachfrage().then(() => {
+            return this.fetchAngebot();
+        });
+    }
+
+    private fetchNachfrage(): Promise<ViewNachfrage> {
+        return this.repository.get(this.detailId).then((data: ViewNachfrage) => {
+            this.model = data;
+
+            return data;
+        });
     }
 
     private fetchAngebot(): Promise<Array<ViewAngebot>> {

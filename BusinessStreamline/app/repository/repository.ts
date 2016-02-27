@@ -5,3 +5,4 @@ export * from './typRepository';
 export * from './teilRepository';
 export * from './nachfrageRepository';
 export * from './angebotRepository';
+export * from './bestellungRepository';

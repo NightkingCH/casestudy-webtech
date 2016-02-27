@@ -3,7 +3,7 @@
         <div class="col-xs-offset-2 col-xs-9">
             <form class="form">
                 <fieldset>
-                    <legend>Angebot zur Nachfrage erfassen - <a href="#/nachfrage/{{ data?.nachfrageId }}">{{ data?.nachfrageId }}</a></legend>
+                    <legend>Angebot zur Nachfrage - <a href="#/nachfrage/{{ data?.nachfrageId }}">{{ data?.nachfrageId }}</a></legend>
                 </fieldset>
                 <div class="row">
                     <div class="col-md-6">
@@ -50,10 +50,18 @@
                     <legend>Angebot abgeben</legend>
                 </fieldset>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Preis pro Stück</label>
                             <input class="form-control" [(ngModel)]="model.preisProTeil" ngControl="preisProTeil" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Aktuell bestes Angebot</label>
+                            <div class="input-group">
+                                <span class="form-control-static">{{ data?.besterPreis }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

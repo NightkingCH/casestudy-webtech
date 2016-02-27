@@ -33,6 +33,9 @@
                     <div class="col-md-6">
                         <label>Erledigt</label>
                         <div class="input-group">
+                            <a *ngIf="model?.bestellungId" href="#/bestellung/{{ model?.bestellungId }}">
+                                <span class="form-control-static">Bestellung {{ model?.bestellungId }}</span>
+                            </a>
                             <i *ngIf="model?.istOffen" class="glyphicon glyphicon-minus form-control-static state-sign open"></i>
                             <i *ngIf="!model?.istOffen" class="glyphicon glyphicon-ok form-control-static state-sign closed"></i>
                         </div>

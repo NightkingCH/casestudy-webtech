@@ -25,5 +25,6 @@ namespace BusinessStreamline.Data
         public string TeilName { get; set; }
         public int FirmaId { get; set; }
         public int LoginId { get; set; }
+        public Nullable<int> BestellungId { get; set; }
     }
 }

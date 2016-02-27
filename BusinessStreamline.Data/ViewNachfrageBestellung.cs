@@ -12,16 +12,9 @@ namespace BusinessStreamline.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ViewTeil
+    public partial class ViewNachfrageBestellung
     {
-        public int TeilId { get; set; }
-        public string TeilName { get; set; }
-        public Nullable<int> Anzahl { get; set; }
-        public int TypId { get; set; }
-        public string TypName { get; set; }
-        public int ProduktId { get; set; }
-        public string ProduktName { get; set; }
-        public Nullable<bool> HatOffeneNachfrage { get; set; }
-        public Nullable<int> OffeneNachfrageId { get; set; }
+        public int NachfrageId { get; set; }
+        public int BestellungId { get; set; }
     }
 }

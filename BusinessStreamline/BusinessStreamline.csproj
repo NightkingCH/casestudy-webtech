@@ -182,6 +182,7 @@
     <TypeScriptCompile Include="app\models\models.ts" />
     <TypeScriptCompile Include="app\pipes\momentDate.ts" />
     <TypeScriptCompile Include="app\pipes\pipes.ts" />
+    <TypeScriptCompile Include="app\repository\bestellungRepository.ts" />
     <TypeScriptCompile Include="app\repository\baseRepository.ts" />
     <TypeScriptCompile Include="app\repository\loginRepository.ts" />
     <TypeScriptCompile Include="app\repository\nachfrageRepository.ts" />

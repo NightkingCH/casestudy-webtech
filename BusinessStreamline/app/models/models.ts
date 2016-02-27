@@ -24,7 +24,7 @@ export class Bestellung {
     angebot: Angebot;
     nachfrage: Nachfrage;
     bestellungId: number;
-    erstelltAm: string;
+    erstelltAm: Date;
     nachfrageId: number;
     angebotId: number;
 }
@@ -132,6 +132,7 @@ export class ViewNachfrage {
     public produktName: string;
     public produktId: number;
     public teilName: string;
+    public bestellungId: number;
 }
 
 export class ViewAngebot {

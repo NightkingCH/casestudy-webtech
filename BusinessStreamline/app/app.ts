@@ -22,7 +22,7 @@ import { NachfrageAddComponent } from './sites/nachfrage/add/add';
 import { NachfrageDetailComponent } from './sites/nachfrage/detail/detail';
 import { NachfrageListComponent } from './sites/nachfrage/list/list';
 
-´/* Angebot */
+/* Angebot */
 import { AngebotAddComponent } from './sites/angebot/add/add';
 
 /* About */

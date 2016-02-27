@@ -17,7 +17,6 @@ export class NachfrageAddComponent {
 
     private detailId: number;
 
-    // inject router to navigate to home after logout;
     constructor(private router: Router, private params: RouteParams, private title: Title) {
         this.title.setTitle("Nachfrage | Hinzufügen - BLS");
     }

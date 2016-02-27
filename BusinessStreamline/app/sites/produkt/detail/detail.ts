@@ -22,7 +22,6 @@ export class ProduktDetailComponent {
     private repository: ProduktRepository = new ProduktRepository();
     private teilRepository: TeilRepository = new TeilRepository();
 
-    // inject router to navigate to home after logout;
     constructor(private router: Router, private params: RouteParams, private title: Title) {
         this.detailId = parseInt(params.params["id"]);
 

@@ -10,6 +10,7 @@ SELECT
 			THEN CAST(1 AS BIT)
 			ELSE CAST(0 AS BIT)
 		END AS IstOffen
+	, (SELECT TOP 1 vnb.BestellungId FROM dbo.ViewNachfrageBestellung vnb WHERE vnb.NachfrageId = n.NachfrageId) AS BestellungId
 	, p.ProduktId
 	, p.Name AS ProduktName
 	, t.Name AS TeilName

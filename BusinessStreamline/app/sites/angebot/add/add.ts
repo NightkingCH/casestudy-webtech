@@ -27,7 +27,6 @@ export class AngebotAddComponent {
     private repository: NachfrageRepository = new NachfrageRepository();
     private angebotRepository: AngebotRepository = new AngebotRepository();
 
-    // inject router to navigate to home after logout;
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
         this.detailId = parseInt(params.params["id"]);
 
