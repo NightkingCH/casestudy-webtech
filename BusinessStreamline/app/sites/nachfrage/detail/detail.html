@@ -88,13 +88,13 @@
                         <span *ngIf="angebot?.status == 1" class="label label-success label-as-badge center-block">Akzeptiert</span>
                         <span *ngIf="angebot?.status == 2" class="label label-primary label-as-badge center-block">Abgelehnt</span>
                     </td>
-                    <td *ngIf="angebot?.status == 0">
+                    <td *ngIf="angebot?.status == 0 && model?.istOffen">
                         <button (click)="onAcceptAngebot($event, angebot)" type="button" class="btn btn-success center-block" data-toggle="tooltip" data-placement="top" title="Annehmen"><i class="glyphicon glyphicon-thumbs-up"></i></button>
                     </td>
-                    <td *ngIf="angebot?.status == 0">
+                    <td *ngIf="angebot?.status == 0 && model?.istOffen">
                         <button (click)="onDeclineAngebot($event, angebot)" type="button" class="btn btn-warning center-block" data-toggle="tooltip" data-placement="top" title="Ablehnen"><i class="glyphicon glyphicon-thumbs-down"></i></button>
                     </td>
-                    <td *ngIf="angebot?.status != 0" colspan="2" class="text-center">
+                    <td *ngIf="angebot?.status != 0 || !model?.istOffen" colspan="2" class="text-center">
                         <span>-</span>
                     </td>
                     <td>
