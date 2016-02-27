@@ -22,6 +22,9 @@ import { NachfrageAddComponent } from './sites/nachfrage/add/add';
 import { NachfrageDetailComponent } from './sites/nachfrage/detail/detail';
 import { NachfrageListComponent } from './sites/nachfrage/list/list';
 
+´/* Angebot */
+import { AngebotAddComponent } from './sites/angebot/add/add';
+
 /* About */
 import { AboutComponent } from './sites/about/about';
 
@@ -53,7 +56,7 @@ import { LoginComponent } from './sites/login/login';
         { path: "/about", name: "About", component: AboutComponent },
         { path: "/kontakt", name: "Kontakt", component: KontaktComponent },
         { path: "/login", name: "Login", component: LoginComponent },
-        { path: "/angebot/add/:id", name: "AddAngebot", component: NachfrageAddComponent }
+        { path: "/angebot/add/:id", name: "AddAngebot", component: AngebotAddComponent }
 ])
 export class AppComponent {
 

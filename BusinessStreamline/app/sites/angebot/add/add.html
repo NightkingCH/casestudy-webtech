@@ -1,0 +1,86 @@
+﻿<section>
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-9">
+            <form class="form">
+                <fieldset>
+                    <legend>Angebot zur Nachfrage erfassen - <a href="#/nachfrage/{{ data?.nachfrageId }}">{{ data?.nachfrageId }}</a></legend>
+                </fieldset>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Nachfrage</label>
+                        <div class="input-group">
+                            <a href="#/nachfrage/{{ data?.nachfrageId }}">
+                                <h3 class="detail-label form-control-static">{{ data?.nachfrageId }}</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Produkt</label>
+                        <div class="input-group">
+                            <a href="#/produkt/{{ data?.produktId }}">
+                                <h3 class="detail-label form-control-static">{{ data?.produktName }}</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Teil</label>
+                        <div class="input-group">
+                            <a href="#/produkt/{{ data?.produktId }}">
+                                <h3 class="detail-label form-control-static">{{ data?.teilName }}</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Geforderte Stückzahl</label>
+                        <div class="input-group">
+                            <span class="form-control-static">{{ data?.anzahl }}</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-9">
+            <form class="form" (ngSubmit)="onAddAngebot($event)">
+                <fieldset>
+                    <legend>Angebot abgeben</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Preis pro Stück</label>
+                            <input class="form-control" [(ngModel)]="model.preisProTeil" ngControl="preisProTeil" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Gesamtpreis</label>
+                            <div class="input-group">
+                                <span class="form-control-static">{{ model?.preisProTeil * data?.anzahl }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group pull-right">
+                            <div class="input-group">
+                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Angebot abgeben">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Erstellen</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -115,6 +115,7 @@
   <ItemGroup>
     <Content Include="app\components\navigation\navigation.html" />
     <Content Include="app\sites\about\about.html" />
+    <Content Include="app\sites\angebot\add\add.html" />
     <Content Include="app\sites\home\home.html" />
     <Content Include="app\sites\kontakt\kontakt.html" />
     <Content Include="app\sites\login\login.html" />
@@ -193,6 +194,7 @@
     <TypeScriptCompile Include="app\services\services.ts" />
     <TypeScriptCompile Include="app\services\userService.ts" />
     <TypeScriptCompile Include="app\sites\about\about.ts" />
+    <TypeScriptCompile Include="app\sites\angebot\add\add.ts" />
     <TypeScriptCompile Include="app\sites\home\home.ts" />
     <TypeScriptCompile Include="app\sites\kontakt\kontakt.ts" />
     <TypeScriptCompile Include="app\sites\login\login.ts" />

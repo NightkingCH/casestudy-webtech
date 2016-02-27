@@ -34,7 +34,7 @@ export class Angebot {
     bestellung: Bestellung[];
     nachfrage: Nachfrage;
     angebotId: number;
-    erstelltAm: string;
+    erstelltAm: Date;
     status: number;
     preisProTeil: number;
     anbieterId: number;

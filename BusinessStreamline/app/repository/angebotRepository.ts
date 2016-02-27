@@ -51,6 +51,30 @@ export class AngebotRepository extends Repository {
         return queryPromise;
     }
 
+    public post(model: Angebot): Promise<Angebot> {
+
+        var callConfiguration: RequestInit = {
+            method: "post",
+            headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(model)
+        };
+
+        var callUri = this.serviceConfig;
+
+        var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
+            .then(this.parseText)
+            .then(this.parseJson)
+            .then((data: Angebot) => {
+                return data;
+            });
+
+        return queryPromise;
+    }
+
     public acceptAngebot(model: ViewAngebot): Promise<ViewAngebot> {
 
         var callConfiguration: RequestInit = {
