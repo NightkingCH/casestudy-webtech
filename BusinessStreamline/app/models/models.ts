@@ -57,7 +57,7 @@ export class Teil {
     typ: Typ;
     teilId: number;
     produktId: number;
-    typId: number;
+    typId: number = 0;
     anzahl: number;
     name: string;
 }

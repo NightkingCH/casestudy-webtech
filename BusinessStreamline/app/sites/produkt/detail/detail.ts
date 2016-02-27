@@ -53,8 +53,4 @@ export class ProduktDetailComponent {
     private setUpUI(): void {
         $('[data-toggle="tooltip"]').tooltip();
     }
-
-    public onDeleteTeil(): void {
-        
-    }
 }

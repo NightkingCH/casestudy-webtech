@@ -16,6 +16,9 @@ import { ProduktAddComponent } from './sites/produkt/add/add';
 import { ProduktDetailComponent } from './sites/produkt/detail/detail';
 import { ProduktListComponent } from './sites/produkt/list/list';
 
+/* Teil */
+import { TeilAddComponent } from './sites/teil/add/add';
+
 /* Nachfrage */
 import { NachfrageAddComponent } from './sites/nachfrage/add/add';
 import { NachfrageDetailComponent } from './sites/nachfrage/detail/detail';
@@ -54,7 +57,8 @@ import { LoginComponent } from './sites/login/login';
         { path: "/about", name: "About", component: AboutComponent },
         { path: "/kontakt", name: "Kontakt", component: KontaktComponent },
         { path: "/login", name: "Login", component: LoginComponent },
-        { path: "/angebot/add/:id", name: "AddAngebot", component: AngebotAddComponent }
+        { path: "/angebot/add/:id", name: "AddAngebot", component: AngebotAddComponent },
+        { path: "/teil/add/:id", name: "AddTeil", component: TeilAddComponent }
 ])
 export class AppComponent {
 
