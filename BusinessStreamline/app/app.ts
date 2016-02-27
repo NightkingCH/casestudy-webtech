@@ -10,7 +10,6 @@ import { Produkt, Login } from './models/models';
 import { NavigationComponent } from './components/navigation/navigation';
 
 import { HomeComponent } from './sites/home/home';
-import { SucheComponent } from './sites/suche/suche';
 
 /* Produkt */
 import { ProduktAddComponent } from './sites/produkt/add/add';
@@ -46,7 +45,6 @@ import { LoginComponent } from './sites/login/login';
 })
 @RouteConfig([
         { path: "/home", name: "Home", component: HomeComponent, useAsDefault: true },
-        { path: "/suche", name: "Suche", component: SucheComponent },
         { path: "/produkte", name: "Produkte", component: ProduktListComponent },
         { path: "/produkt/:id", name: "ProduktDetail", component: ProduktDetailComponent },
         { path: "/produkt/add", name: "ProduktAdd", component: ProduktAddComponent },
