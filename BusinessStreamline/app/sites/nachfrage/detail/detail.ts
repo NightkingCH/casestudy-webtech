@@ -45,9 +45,7 @@ export class NachfrageDetailComponent {
         this.repository.get(this.detailId).then((data: ViewNachfrage) => {
             this.model = data;
         }).then(() => {
-            return this.angebotRepository.getByNachfrage(this.detailId).then((data: Array<ViewAngebot>) => {
-                this.data = data;
-            });
+            return this.fetchAngebot();
         }).then(() => {
             this.setUpUI();
         });
@@ -71,14 +69,14 @@ export class NachfrageDetailComponent {
 
             return Promise.all(promiselist);
         }).then(() => {
-            return this.angebotRepository.getByNachfrage(this.detailId).then((data: Array<ViewAngebot>) => {
-                this.data = data;
-            });
+            return this.fetchAngebot();
         });
     }
 
     public onDeclineAngebot(event: MouseEvent, entity: ViewAngebot): void {
-        this.declineAngebot(entity);
+        this.declineAngebot(entity).then(() => {
+            return this.fetchAngebot();
+        });
     }
 
     private acceptAngebot(entity: ViewAngebot): Promise<ViewAngebot> {
@@ -87,5 +85,13 @@ export class NachfrageDetailComponent {
 
     private declineAngebot(entity: ViewAngebot): Promise<ViewAngebot> {
         return this.angebotRepository.declineAngebot(entity);
+    }
+
+    private fetchAngebot(): Promise<Array<ViewAngebot>> {
+        return this.angebotRepository.getByNachfrage(this.detailId).then((data: Array<ViewAngebot>) => {
+            this.data = data;
+
+            return data;
+        });
     }
 }
