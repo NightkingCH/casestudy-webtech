@@ -1,2 +1,68 @@
 ﻿<section>
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-9">
+            <form class="form">
+                <fieldset>
+                    <legend>Nachfrage  erstellen</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            <label>Produkt</label>
+                            <div class="input-group">
+                                <a href="#/produkt/{{ data?.produktId }}">
+                                    <h3 class="detail-label form-control-static">{{ data?.produktName }}</h3>
+                                </a>
+                            </div>
+                        </div>
+                        <label>Teil</label>
+                        <div class="input-group">
+                            <a href="#/produkt/{{ data?.produktId }}">
+                                <h3 class="detail-label form-control-static">{{ data?.teilName }}</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Anzahl</label>
+                        <div class="input-group">
+                            <span class="form-control-static">{{ data?.anzahl }}</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-9">
+            <form class="form" (ngSubmit)="onAdd($event)">
+                <fieldset>
+                    <legend>Benötigte Anzahl</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Zu produzierende Stückzahl</label>
+                            <input class="form-control" [(ngModel)]="model.anzahl" ngControl="anzahl" [value]="data?.anzahl" />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group pull-right">
+                            <div class="input-group">
+                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nachfrage eröffnen">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Erstellen</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </section>

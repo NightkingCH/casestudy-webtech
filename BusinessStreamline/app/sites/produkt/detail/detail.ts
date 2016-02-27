@@ -15,7 +15,7 @@ import { Produkt, ViewTeil } from '../../../models/models';
 })
 export class ProduktDetailComponent {
 
-    private detailId: number;
+    private produktId: number;
     private model: Produkt;
     private data: Array<ViewTeil> = [];
 
@@ -23,26 +23,26 @@ export class ProduktDetailComponent {
     private teilRepository: TeilRepository = new TeilRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title) {
-        this.detailId = parseInt(params.params["id"]);
+        this.produktId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
-        if (isNaN(this.detailId)) {
+        if (isNaN(this.produktId)) {
             router.navigateByUrl("/home");
         }
         
-        this.title.setTitle("Produkt " + this.detailId.toString() + " - BLS");
+        this.title.setTitle("Produkt " + this.produktId.toString() + " - BLS");
     }
 
     public ngOnInit(): void {
-        if (isNaN(this.detailId)) {
+        if (isNaN(this.produktId)) {
             return;
         }
 
-        this.repository.get(this.detailId).then((data: Produkt) => {
+        this.repository.get(this.produktId).then((data: Produkt) => {
             this.model = data;
             this.title.setTitle("Produkt | " + this.model.name + " - BLS");
         }).then(() => {
-            return this.teilRepository.getByProdukt(this.detailId).then((data: Array<ViewTeil>) => {
+            return this.teilRepository.getByProdukt(this.produktId).then((data: Array<ViewTeil>) => {
                 this.data = data;
             });
         }).then(() => {
@@ -54,13 +54,7 @@ export class ProduktDetailComponent {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    public onAddNachfrage(event: MouseEvent, entity: ViewTeil): void {
-        if (entity.hatOffeneNachfrage) {
-            return;
-        }
-    }
-
     public onDeleteTeil(): void {
-        alert("Nicht implementiert :)");
+        
     }
 }

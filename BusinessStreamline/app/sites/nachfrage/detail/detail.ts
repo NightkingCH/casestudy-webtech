@@ -18,7 +18,7 @@ import { ViewNachfrage, ViewAngebot, Bestellung } from '../../../models/models';
 })
 export class NachfrageDetailComponent {
 
-    private detailId: number;
+    private nachfrageId: number;
     private model: ViewNachfrage;
     private data: Array<ViewAngebot> = [];
 
@@ -27,18 +27,18 @@ export class NachfrageDetailComponent {
     private bestellRepository: BestellungRepository = new BestellungRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title) {
-        this.detailId = parseInt(params.params["id"]);
+        this.nachfrageId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
-        if (isNaN(this.detailId)) {
+        if (isNaN(this.nachfrageId)) {
             router.navigateByUrl("/home");
         }
 
-        this.title.setTitle("Nachfrage " + this.detailId.toString() + " - BLS");
+        this.title.setTitle("Nachfrage " + this.nachfrageId.toString() + " - BLS");
     }
 
     public ngOnInit(): void {
-        if (isNaN(this.detailId)) {
+        if (isNaN(this.nachfrageId)) {
             return;
         }
 
@@ -58,7 +58,7 @@ export class NachfrageDetailComponent {
         // create new order based on the selected offer.
         var bestellung: Bestellung = new Bestellung();
         bestellung.angebotId = entity.angebotId;
-        bestellung.nachfrageId = this.detailId;
+        bestellung.nachfrageId = this.nachfrageId;
         bestellung.erstelltAm = moment().toDate();
 
         // create order
@@ -105,7 +105,7 @@ export class NachfrageDetailComponent {
     }
 
     private fetchNachfrage(): Promise<ViewNachfrage> {
-        return this.repository.get(this.detailId).then((data: ViewNachfrage) => {
+        return this.repository.get(this.nachfrageId).then((data: ViewNachfrage) => {
             this.model = data;
 
             return data;
@@ -113,7 +113,7 @@ export class NachfrageDetailComponent {
     }
 
     private fetchAngebot(): Promise<Array<ViewAngebot>> {
-        return this.angebotRepository.getByNachfrage(this.detailId).then((data: Array<ViewAngebot>) => {
+        return this.angebotRepository.getByNachfrage(this.nachfrageId).then((data: Array<ViewAngebot>) => {
             this.data = data;
 
             return data;

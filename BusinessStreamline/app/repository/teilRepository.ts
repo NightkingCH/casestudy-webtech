@@ -9,7 +9,7 @@ export class TeilRepository extends Repository {
         super(EndpointConfiguration.WEB_API_HOST + EndpointConfiguration.WEB_API_TEIL);
     }
 
-    public get(id: number): Promise<Teil> {
+    public get(id: number): Promise<ViewTeil> {
         var callConfiguration: RequestInit = {
             method: "get",
             headers: {
@@ -23,7 +23,7 @@ export class TeilRepository extends Repository {
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseText)
             .then(this.parseJson)
-            .then((data: Teil) => {
+            .then((data: ViewTeil) => {
                 return data;
             });
 

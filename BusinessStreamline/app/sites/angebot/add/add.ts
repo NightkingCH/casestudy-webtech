@@ -20,7 +20,7 @@ import { ViewNachfrage, Angebot } from '../../../models/models';
 })
 export class AngebotAddComponent {
 
-    private detailId: number;
+    private nachfrageId: number;
     private model: Angebot = new Angebot();
     private data: ViewNachfrage;
 
@@ -28,10 +28,10 @@ export class AngebotAddComponent {
     private angebotRepository: AngebotRepository = new AngebotRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
-        this.detailId = parseInt(params.params["id"]);
+        this.nachfrageId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
-        if (isNaN(this.detailId)) {
+        if (isNaN(this.nachfrageId)) {
             router.navigateByUrl("/home");
         }
 
@@ -39,32 +39,32 @@ export class AngebotAddComponent {
     }
 
     public ngOnInit(): void {
-        if (isNaN(this.detailId)) {
+        if (isNaN(this.nachfrageId)) {
             return;
         }
 
         this.fetchAngebot();
     }
 
-    public onAddAngebot(event: MouseEvent): void {
+    public onAdd(event: MouseEvent): void {
 
         // TODO: add when user service is available.
         //if (this.userService.isFirma()) {
         //    return; // companies can't create an offer.
         //}
 
-        this.model.nachfrageId = this.detailId;
+        this.model.nachfrageId = this.nachfrageId;
         this.model.anbieterId = 1; // TODO: Add proper user! => this.userService.anbieter.anbieterId;
         this.model.erstelltAm = moment().toDate();
         this.model.status = 0; // 0 = Offen, 1 = Akzeptiert, 2 = Geschlossen
 
         this.angebotRepository.post(this.model).then(() => {
-            this.router.navigateByUrl("/nachfrage/" + this.detailId);
+            this.router.navigateByUrl("/nachfrage/" + this.nachfrageId);
         });
     }
 
     private fetchAngebot(): void {
-        this.repository.get(this.detailId).then((data: ViewNachfrage) => {
+        this.repository.get(this.nachfrageId).then((data: ViewNachfrage) => {
             this.data = data;
         });
     }

@@ -33,11 +33,13 @@ namespace BusinessStreamline.Controllers.WebAPI
                 .Where(x => x.ProduktId == produkt);
         }
 
-        // GET: api/Teil/5
-        [ResponseType(typeof(Teil))]
+        // GET: api/teil/5
+        [ResponseType(typeof(ViewTeil))]
         public IHttpActionResult GetTeil(int id)
         {
-            Teil teil = db.Teil.Find(id);
+            ViewTeil teil = db.ViewTeil
+                .FirstOrDefault(x => x.TeilId == id);
+
             if (teil == null)
             {
                 return NotFound();

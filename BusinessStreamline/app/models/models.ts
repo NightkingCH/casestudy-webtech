@@ -47,7 +47,7 @@ export class Nachfrage {
     teil: Teil;
     nachfrageId: number;
     anzahl: number;
-    erstelltAm: string;
+    erstelltAm: Date;
     teilId: number;
 }
 
