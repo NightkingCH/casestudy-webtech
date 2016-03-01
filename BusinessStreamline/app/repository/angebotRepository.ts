@@ -75,7 +75,7 @@ export class AngebotRepository extends Repository {
         return queryPromise;
     }
 
-    public acceptAngebot(model: ViewAngebot): Promise<ViewAngebot> {
+    public acceptAngebot(firmaId: number, model: ViewAngebot): Promise<ViewAngebot> {
 
         var callConfiguration: RequestInit = {
             method: "post",
@@ -86,7 +86,7 @@ export class AngebotRepository extends Repository {
             body: JSON.stringify(model)
         };
 
-        var callUri = this.serviceConfig + "/accept";
+        var callUri = this.serviceConfig + "/accept" + "/" + firmaId;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseResponse)
@@ -99,7 +99,7 @@ export class AngebotRepository extends Repository {
         return queryPromise;
     }
 
-    public declineAngebot(model: ViewAngebot): Promise<ViewAngebot> {
+    public declineAngebot(firmaId: number, model: ViewAngebot): Promise<ViewAngebot> {
 
         var callConfiguration: RequestInit = {
             method: "post",
@@ -110,7 +110,7 @@ export class AngebotRepository extends Repository {
             body: JSON.stringify(model)
         };
 
-        var callUri = this.serviceConfig + "/decline";
+        var callUri = this.serviceConfig + "/decline" + "/" + firmaId;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseResponse)

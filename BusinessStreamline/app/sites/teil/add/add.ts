@@ -30,14 +30,23 @@ export class TeilAddComponent {
     private produktRepository: ProduktRepository = new ProduktRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+        this.title.setTitle("Teil | Hinzufügen - BLS");
+
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
+
         this.produktId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.produktId)) {
             this.router.navigateByUrl("/home");
-        }
 
-        this.title.setTitle("Teil | Hinzufügen - BLS");
+            return;
+        }
     }
 
     public ngOnInit(): void {
@@ -97,7 +106,7 @@ export class TeilAddComponent {
         this.model.produktId = this.produktId;
 
         this.repository.post(this.userService.firma.firmaId, this.model).then(() => {
-            this.router.navigateByUrl("/produkt/" + this.produktId);
+            return this.router.navigateByUrl("/produkt/" + this.produktId);
         });
     }
 }

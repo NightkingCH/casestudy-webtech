@@ -31,7 +31,9 @@ export class ProduktDetailComponent {
 
         // redirect trolls to home!
         if (isNaN(this.produktId)) {
-            router.navigateByUrl("/home");
+            this.router.navigateByUrl("/home");
+
+            return;
         }
 
         this.title.setTitle("Produkt " + this.produktId.toString() + " - BLS");

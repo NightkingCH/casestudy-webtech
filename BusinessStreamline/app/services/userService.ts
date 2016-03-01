@@ -11,12 +11,12 @@ export class UserService {
     }
 
     public user: Login = {
-        loginId: 559,
+        loginId: 207,
         name: "Derek82",
         password: "",
         firma: [{
             firmaId: 5,
-            loginId: 559,
+            loginId: 207,
             produkt: null,
             login: null
         }],
@@ -44,7 +44,7 @@ export class UserService {
     }
 
     public isFirma(): boolean {
-        if (!this.user) {
+        if (!this.isLoggedIn()) {
             return false;
         }
 
@@ -60,7 +60,7 @@ export class UserService {
     }
 
     public isAnbieter(): boolean {
-        if (!this.user) {
+        if (!this.isLoggedIn()) {
             return false;
         }
 

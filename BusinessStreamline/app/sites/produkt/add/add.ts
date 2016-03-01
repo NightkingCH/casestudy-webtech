@@ -26,9 +26,13 @@ export class ProduktAddComponent {
 
     constructor(private router: Router,  private title: Title, private userService: UserService) {
         this.title.setTitle("Produkt | Hinzufügen - BLS");
-    }
 
-    public ngOnInit(): void {
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
     }
 
     public onAdd(event: MouseEvent): void {
@@ -40,7 +44,7 @@ export class ProduktAddComponent {
         this.model.firmaId = this.userService.firma.firmaId;
 
         this.repository.post(this.model).then((entity: Produkt) => {
-            this.router.navigateByUrl("/produkt/" + entity.produktId);
+            return this.router.navigateByUrl("/produkt/" + entity.produktId);
         });
     }
 }

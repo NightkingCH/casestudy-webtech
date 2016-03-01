@@ -1,5 +1,6 @@
 ﻿import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
+import { Router } from 'angular2/router';
 import { Title } from 'angular2/platform/browser';
 
 import { UserService } from '../../../services/services';
@@ -16,8 +17,22 @@ export class ProduktListComponent {
     private produktRepository: ProduktRepository = new ProduktRepository();
     private data: Array<Produkt> = [];
 
-    constructor(private userService: UserService, private title: Title) {
+    constructor(private router: Router, private userService: UserService, private title: Title) {
         this.title.setTitle("Produkteliste - BLS");
+
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
+
+        // suppliers don't own any products!
+        if (this.userService.isAnbieter()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
     }
 
     public ngOnInit(): void {
@@ -25,8 +40,7 @@ export class ProduktListComponent {
     }
 
     private fetchData(): Promise<void> {
-        //TODO change to user service!
-        return this.produktRepository.getByFirma(5, 559).then((data: Array<Produkt>) => {
+        return this.produktRepository.getByFirma(this.userService.firma.firmaId, this.userService.user.loginId).then((data: Array<Produkt>) => {
             this.data = data;
         });
     }

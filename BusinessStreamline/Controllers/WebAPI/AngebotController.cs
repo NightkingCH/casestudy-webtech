@@ -35,10 +35,17 @@ namespace BusinessStreamline.Controllers.WebAPI
 
         // POST: api/angebot/accept
         [HttpPost()]
-        [Route("accept")]
+        [Route("accept/{id:int}")]
         [ResponseType(typeof(ViewAngebot))]
-        public IHttpActionResult PostAcceptAngebot(ViewAngebot model)
+        public IHttpActionResult PostAcceptAngebot(int id, ViewAngebot model)
         {
+            var relatedRequest = db.Nachfrage.FirstOrDefault(x => x.Teil.Produkt.FirmaId == id && x.NachfrageId == model.NachfrageId);
+
+            if (relatedRequest == null)
+            {
+                return BadRequest("The provided company and offer don't match!");
+            }
+
             if (model.AngebotId <= 0) {
                 return BadRequest();
             }
@@ -72,10 +79,17 @@ namespace BusinessStreamline.Controllers.WebAPI
 
         // POST: api/angebot/accept
         [HttpPost()]
-        [Route("decline")]
+        [Route("decline/{id:int}")]
         [ResponseType(typeof(ViewAngebot))]
-        public IHttpActionResult PostDeclineAngebot(ViewAngebot model)
+        public IHttpActionResult PostDeclineAngebot(int id, ViewAngebot model)
         {
+            var relatedRequest = db.Nachfrage.FirstOrDefault(x => x.Teil.Produkt.FirmaId == id && x.NachfrageId == model.NachfrageId);
+
+            if (relatedRequest == null)
+            {
+                return BadRequest("The provided company and offer don't match!");
+            }
+
             if (model.AngebotId <= 0)
             {
                 return BadRequest();

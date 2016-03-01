@@ -28,11 +28,23 @@ export class NachfrageAddComponent {
     private nachfrageRepository: NachfrageRepository = new NachfrageRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+        }
+
+        // redirect suppliers. only companies can create a request.
+        if (this.userService.isAnbieter()) {
+            this.router.navigateByUrl("/nachfrage/" + this.data.offeneNachfrageId);
+
+            return;
+        }
+
         this.teilId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.teilId)) {
-            router.navigateByUrl("/home");
+            this.router.navigateByUrl("/home");
         }
 
         this.title.setTitle("Nachfrage | Hinzufügen - BLS");
@@ -43,17 +55,7 @@ export class NachfrageAddComponent {
             return;
         }
 
-        this.fetchTeil().then(() => {
-            // redirect suppliers. only companies can create a request.
-            if (this.userService.isFirma()) {
-                return;
-            }
-
-            // redirect trolls
-            if (this.data.hatOffeneNachfrage) {
-               return this.router.navigateByUrl("/nachfrage/" + this.data.offeneNachfrageId);
-            }
-        });
+        this.fetchTeil();
     }
 
     public onAdd(event: MouseEvent): void {

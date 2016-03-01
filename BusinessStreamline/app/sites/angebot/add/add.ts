@@ -28,14 +28,30 @@ export class AngebotAddComponent {
     private angebotRepository: AngebotRepository = new AngebotRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+        this.title.setTitle("Angebot | Hinzufügen - BLS");
+
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
+
         this.nachfrageId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.nachfrageId)) {
-            router.navigateByUrl("/home");
+            this.router.navigateByUrl("/home");
+
+            return;
         }
 
-        this.title.setTitle("Angebot | Hinzufügen - BLS");
+        // companies can't add an offer.
+        if (this.userService.isFirma()) {
+            this.router.navigateByUrl("/nachfrage" + this.nachfrageId);
+
+            return;
+        }
     }
 
     public ngOnInit(): void {
@@ -43,13 +59,7 @@ export class AngebotAddComponent {
             return;
         }
 
-        this.fetchAngebot().then(() => {
-            if (this.userService.isAnbieter()) {
-                return;
-            }
-
-            return this.router.navigateByUrl("/nachfrage/" + this.nachfrageId);
-        });
+        this.fetchAngebot();
     }
 
     public onAdd(event: MouseEvent): void {
