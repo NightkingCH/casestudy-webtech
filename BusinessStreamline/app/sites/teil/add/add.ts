@@ -34,7 +34,7 @@ export class TeilAddComponent {
 
         // redirect trolls to home!
         if (isNaN(this.produktId)) {
-            router.navigateByUrl("/home");
+            this.router.navigateByUrl("/home");
         }
 
         this.title.setTitle("Teil | Hinzufügen - BLS");
@@ -46,7 +46,18 @@ export class TeilAddComponent {
         }
 
         this.fetchTyp().then(() => {
-            return this.fetchProdukt();
+            return this.fetchProdukt().then(() => {
+
+                // redirect suppliers to home => they can't add a new part!
+                if (this.userService.isAnbieter()) {
+                    return this.router.navigateByUrl("/home");
+                }
+
+                // redirect the company if they don't own the product
+                if (this.data.firmaId != this.userService.firma.firmaId) {
+                    return this.router.navigateByUrl("/produkt/" + this.produktId);
+                }
+            });
         });
     }
 
@@ -85,7 +96,7 @@ export class TeilAddComponent {
 
         this.model.produktId = this.produktId;
 
-        this.repository.post(this.model).then(() => {
+        this.repository.post(this.userService.firma.firmaId, this.model).then(() => {
             this.router.navigateByUrl("/produkt/" + this.produktId);
         });
     }

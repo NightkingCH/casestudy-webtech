@@ -30,7 +30,7 @@ export class TeilRepository extends Repository {
         return queryPromise;
     }
 
-    public post(model: Teil): Promise<Teil> {
+    public post(firmaId: number, model: Teil): Promise<Teil> {
 
         var callConfiguration: RequestInit = {
             method: "post",
@@ -41,7 +41,7 @@ export class TeilRepository extends Repository {
             body: JSON.stringify(model)
         };
 
-        var callUri = this.serviceConfig;
+        var callUri = this.serviceConfig + "/" + firmaId;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseResponse)

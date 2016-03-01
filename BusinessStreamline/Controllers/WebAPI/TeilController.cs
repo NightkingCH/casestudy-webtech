@@ -85,11 +85,18 @@ namespace BusinessStreamline.Controllers.WebAPI
 
         // POST: api/Teil
         [ResponseType(typeof(Teil))]
-        public IHttpActionResult PostTeil(Teil teil)
+        public IHttpActionResult PostTeil(int id, Teil teil)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            var relatedProduct = db.Produkt.FirstOrDefault(x => x.FirmaId == id && x.ProduktId == teil.ProduktId);
+
+            if (relatedProduct == null)
+            {
+                return BadRequest("The provided company doesn't own the product!");
             }
 
             db.Teil.Add(teil);

@@ -10,7 +10,18 @@ export class UserService {
     constructor( @Inject(Router) private router: Router) {
     }
 
-    public user: Login;
+    public user: Login = {
+        loginId: 559,
+        name: "Derek82",
+        password: "",
+        firma: [{
+            firmaId: 5,
+            loginId: 559,
+            produkt: null,
+            login: null
+        }],
+        anbieter: []
+    };
 
     get firma(): Firma {
         if (!this.isFirma()) {

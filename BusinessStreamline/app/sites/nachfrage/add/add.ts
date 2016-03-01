@@ -44,6 +44,11 @@ export class NachfrageAddComponent {
         }
 
         this.fetchTeil().then(() => {
+            // redirect suppliers. only companies can create a request.
+            if (this.userService.isFirma()) {
+                return;
+            }
+
             // redirect trolls
             if (this.data.hatOffeneNachfrage) {
                return this.router.navigateByUrl("/nachfrage/" + this.data.offeneNachfrageId);
@@ -52,11 +57,9 @@ export class NachfrageAddComponent {
     }
 
     public onAdd(event: MouseEvent): void {
-
-        // TODO: add when user service is available.
-        //if (this.userService.isAnbieter()) {
-        //    return; // suppliers can't create a request.
-        //}
+        if (this.userService.isAnbieter()) {
+            return; // suppliers can't create a request.
+        }
 
         if (this.model.anzahl <= 0) {
             return;
@@ -65,13 +68,14 @@ export class NachfrageAddComponent {
         this.model.teilId = this.teilId;
         this.model.erstelltAm = moment().toDate();
 
-        this.nachfrageRepository.post(this.model).then((entity: Nachfrage) => {
+        this.nachfrageRepository.post(this.userService.firma.firmaId, this.model).then((entity: Nachfrage) => {
             this.router.navigateByUrl("/nachfrage/" + entity.nachfrageId);
         });
     }
 
     private fetchTeil(): Promise<ViewTeil> {
         return this.repository.get(this.teilId).then((data: ViewTeil) => {
+            this.model.anzahl = data.anzahl;
             this.data = data;
 
             return data;

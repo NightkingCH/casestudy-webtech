@@ -43,15 +43,20 @@ export class AngebotAddComponent {
             return;
         }
 
-        this.fetchAngebot();
+        this.fetchAngebot().then(() => {
+            if (this.userService.isAnbieter()) {
+                return;
+            }
+
+            return this.router.navigateByUrl("/nachfrage/" + this.nachfrageId);
+        });
     }
 
     public onAdd(event: MouseEvent): void {
 
-        // TODO: add when user service is available.
-        //if (this.userService.isFirma()) {
-        //    return; // companies can't create an offer.
-        //}
+        if (this.userService.isFirma()) {
+            return; // companies can't create an offer.
+        }
 
         if (this.model.preisProTeil <= 0) {
             return;
@@ -71,8 +76,8 @@ export class AngebotAddComponent {
         });
     }
 
-    private fetchAngebot(): void {
-        this.repository.get(this.nachfrageId).then((data: ViewNachfrage) => {
+    private fetchAngebot(): Promise<void> {
+        return this.repository.get(this.nachfrageId).then((data: ViewNachfrage) => {
             this.data = data;
         });
     }
