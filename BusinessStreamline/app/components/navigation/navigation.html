@@ -19,8 +19,8 @@
                 <li><a href="#/kontakt">Kontakt</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li *ngIf="userService.isLoggedIn() == false"><a href="#/login">Login</a></li>
-                <li *ngIf="userService.isLoggedIn() == true"><span class="navbar-login">{{ userService?.user?.name }}</span></li>
+                <li *ngIf="userService.isLoggedIn() == false"><span class="navbar-login"><a href="#/login">Login</a></span></li>
+                <li *ngIf="userService.isLoggedIn() == true"><span class="navbar-login"><a href="#/logout">{{ userService?.user?.name }}</a></span></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

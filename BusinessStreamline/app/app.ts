@@ -35,6 +35,7 @@ import { KontaktComponent } from './sites/kontakt/kontakt';
 
 /* Login */
 import { LoginComponent } from './sites/login/login';
+import { LogoutComponent } from './sites/logout/logout';
 
 @Component({
     selector: '[data-app]',
@@ -57,6 +58,7 @@ import { LoginComponent } from './sites/login/login';
         { path: "/about", name: "About", component: AboutComponent },
         { path: "/kontakt", name: "Kontakt", component: KontaktComponent },
         { path: "/login", name: "Login", component: LoginComponent },
+        { path: "/logout", name: "Logout", component: LogoutComponent },
         { path: "/angebot/add/:id", name: "AddAngebot", component: AngebotAddComponent },
         { path: "/teil/add/:id", name: "AddTeil", component: TeilAddComponent }
 ])
