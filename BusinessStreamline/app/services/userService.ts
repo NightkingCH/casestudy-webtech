@@ -44,6 +44,10 @@ export class UserService {
     }
 
     public isFirma(): boolean {
+        if (!this.user) {
+            return false;
+        }
+
         if (!this.user.firma) {
             return false;
         }
@@ -56,6 +60,10 @@ export class UserService {
     }
 
     public isAnbieter(): boolean {
+        if (!this.user) {
+            return false;
+        }
+
         if (!this.user.anbieter) {
             return false;
         }
