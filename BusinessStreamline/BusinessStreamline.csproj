@@ -128,7 +128,6 @@
     <Content Include="app\sites\produkt\list\list.html" />
     <Content Include="app\sites\teil\add\add.html" />
     <Content Include="content\css\site.css" />
-    <Content Include="content\css\theme.css" />
     <Content Include="Global.asax" />
     <Content Include="lib\cycle.js" />
     <Content Include="Web.config">
@@ -170,7 +169,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="app\sites\bestellung\" />
+    <Folder Include="App_Data\Bestellungen\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

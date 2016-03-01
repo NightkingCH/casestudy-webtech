@@ -10,21 +10,21 @@ export class UserService {
     constructor( @Inject(Router) private router: Router) {
     }
 
-    public user: Login;
+    //public user: Login;
 
     // company
-    //public user: Login = {
-    //    loginId: 1001,
-    //    name: "Derek82",
-    //    password: "",
-    //    firma: [{
-    //        firmaId: 1001,
-    //        loginId: 1001,
-    //        produkt: null,
-    //        login: null
-    //    }],
-    //    anbieter: []
-    //};
+    public user: Login = {
+        loginId: 1001,
+        name: "Derek82",
+        password: "",
+        firma: [{
+            firmaId: 1001,
+            loginId: 1001,
+            produkt: null,
+            login: null
+        }],
+        anbieter: []
+    };
     
     // supplier
     //public user: Login = {

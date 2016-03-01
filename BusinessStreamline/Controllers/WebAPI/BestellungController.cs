@@ -10,9 +10,13 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BusinessStreamline.Data;
 using System.Web;
+using System.Xml.Linq;
+using System.IO;
+using System.Net.Http.Headers;
 
 namespace BusinessStreamline.Controllers.WebAPI
 {
+    [RoutePrefix("api/bestellung")]
     public class BestellungController : ApiController
     {
         private BusinessStreamlineEntities db = new BusinessStreamlineEntities();
@@ -90,9 +94,77 @@ namespace BusinessStreamline.Controllers.WebAPI
             db.Bestellung.Add(bestellung);
             db.SaveChanges();
 
-            string fullSavePath = HttpContext.Current.Server.MapPath("~/App_Data/Bestellungen/.csv");
-
             return CreatedAtRoute("DefaultApi", new { id = bestellung.BestellungId }, bestellung);
+        }
+
+        // GET: api/Bestellung/xml/create/1001/1001
+        [HttpGet()]
+        [Route("xml/create/{firmaId:int}/{bestellungId:int}")]
+        [ResponseType(typeof(Bestellung))]
+        public IHttpActionResult CreateXmlBestellung(int firmaId, int bestellungId)
+        {
+            Bestellung bestellung = db.Bestellung.FirstOrDefault(x => x.BestellungId == bestellungId && x.Nachfrage.Teil.Produkt.FirmaId == firmaId);
+
+            if (bestellung == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                this.createXml(bestellung);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            
+            return Ok();
+        }
+
+        private void createXml(Bestellung bestellung) {
+            string fullSavePath = HttpContext.Current.Server.MapPath(string.Format(@"~/App_Data/Bestellungen/{0}.xml", bestellung.BestellungId.ToString()));
+
+            // http://www.dotnet-tricks.com/Tutorial/linq/bTa2310512-Create-xml-from-database-using-LINQ.html
+            XElement orderXml = new XElement("Bestellung", new List<Bestellung>() { bestellung }.Select(
+                x => new XElement("Details",
+                                    new XAttribute("BestellungId", x.BestellungId),
+                                    new XAttribute("AngebotId", x.AngebotId)
+            )));
+
+            orderXml.Save(fullSavePath);
+        }
+
+        // GET api/Bestellung/xml/get/1001/1001
+        [HttpGet()]
+        [Route("xml/get/{firmaId:int}/{bestellungId:int}")]
+        [ResponseType(typeof(IHttpActionResult))]
+        public IHttpActionResult GetXmlBestellung(int firmaId, int bestellungId)
+        {
+            Bestellung bestellung = db.Bestellung.FirstOrDefault(x => x.BestellungId == bestellungId && x.Nachfrage.Teil.Produkt.FirmaId == firmaId);
+
+            if (bestellung == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+
+                var xmlPath = HttpContext.Current.Server.MapPath(string.Format(@"~/App_Data/Bestellungen/{0}.xml", bestellung.BestellungId.ToString()));
+                var xmlResponse = Request.CreateResponse(HttpStatusCode.OK);
+
+                xmlResponse.Content = new StreamContent(new FileStream(xmlPath, FileMode.Open, FileAccess.Read));
+                xmlResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+                xmlResponse.Content.Headers.ContentDisposition.FileName = string.Format(@"{0}.xml", bestellung.BestellungId.ToString());
+                xmlResponse.Content.Headers.ContentType = new MediaTypeHeaderValue("text/xml");
+
+                return ResponseMessage(xmlResponse);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // DELETE: api/Bestellung/5

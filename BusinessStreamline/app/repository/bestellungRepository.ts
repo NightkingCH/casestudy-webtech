@@ -60,7 +60,7 @@ export class BestellungRepository extends Repository {
             }
         };
 
-        var callUri = this.serviceConfig + "/angebit/" + nachfrage;
+        var callUri = this.serviceConfig + "/angebot/" + nachfrage;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseText)
