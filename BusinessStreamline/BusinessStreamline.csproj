@@ -127,7 +127,6 @@
     <Content Include="app\sites\produkt\detail\detail.html" />
     <Content Include="app\sites\produkt\list\list.html" />
     <Content Include="app\sites\teil\add\add.html" />
-    <Content Include="content\css\ie10-viewport-bug-workaround.css" />
     <Content Include="content\css\site.css" />
     <Content Include="content\css\theme.css" />
     <Content Include="Global.asax" />
