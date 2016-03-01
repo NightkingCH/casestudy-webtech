@@ -69,6 +69,8 @@ export class NachfrageDetailComponent {
     }
 
     public onAcceptAngebot(event: MouseEvent, entity: ViewAngebot): void {
+
+        // TODO FIX WRONG FIRMA ID!
         // suppliers can't accept an offer
         if (this.userService.isAnbieter()) {
             return;

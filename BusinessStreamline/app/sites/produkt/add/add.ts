@@ -33,6 +33,13 @@ export class ProduktAddComponent {
 
             return;
         }
+
+        // suppliers can't add a product
+        if (this.userService.isAnbieter()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
     }
 
     public onAdd(event: MouseEvent): void {
