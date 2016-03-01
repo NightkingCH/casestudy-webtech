@@ -28,14 +28,30 @@ export class AngebotAddComponent {
     private angebotRepository: AngebotRepository = new AngebotRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+        this.title.setTitle("Angebot | Hinzufügen - BLS");
+
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
+
         this.nachfrageId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.nachfrageId)) {
-            router.navigateByUrl("/home");
+            this.router.navigateByUrl("/home");
+
+            return;
         }
 
-        this.title.setTitle("Angebot | Hinzufügen - BLS");
+        // companies can't add an offer.
+        if (this.userService.isFirma()) {
+            this.router.navigateByUrl("/nachfrage" + this.nachfrageId);
+
+            return;
+        }
     }
 
     public ngOnInit(): void {
@@ -48,10 +64,9 @@ export class AngebotAddComponent {
 
     public onAdd(event: MouseEvent): void {
 
-        // TODO: add when user service is available.
-        //if (this.userService.isFirma()) {
-        //    return; // companies can't create an offer.
-        //}
+        if (this.userService.isFirma()) {
+            return; // companies can't create an offer.
+        }
 
         if (this.model.preisProTeil <= 0) {
             return;
@@ -71,8 +86,8 @@ export class AngebotAddComponent {
         });
     }
 
-    private fetchAngebot(): void {
-        this.repository.get(this.nachfrageId).then((data: ViewNachfrage) => {
+    private fetchAngebot(): Promise<void> {
+        return this.repository.get(this.nachfrageId).then((data: ViewNachfrage) => {
             this.data = data;
         });
     }

@@ -30,14 +30,23 @@ export class TeilAddComponent {
     private produktRepository: ProduktRepository = new ProduktRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+        this.title.setTitle("Teil | Hinzufügen - BLS");
+
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
+
         this.produktId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.produktId)) {
-            router.navigateByUrl("/home");
-        }
+            this.router.navigateByUrl("/home");
 
-        this.title.setTitle("Teil | Hinzufügen - BLS");
+            return;
+        }
     }
 
     public ngOnInit(): void {
@@ -46,7 +55,18 @@ export class TeilAddComponent {
         }
 
         this.fetchTyp().then(() => {
-            return this.fetchProdukt();
+            return this.fetchProdukt().then(() => {
+
+                // redirect suppliers to home => they can't add a new part!
+                if (this.userService.isAnbieter()) {
+                    return this.router.navigateByUrl("/home");
+                }
+
+                // redirect the company if they don't own the product
+                if (this.data.firmaId != this.userService.firma.firmaId) {
+                    return this.router.navigateByUrl("/produkt/" + this.produktId);
+                }
+            });
         });
     }
 
@@ -85,8 +105,8 @@ export class TeilAddComponent {
 
         this.model.produktId = this.produktId;
 
-        this.repository.post(this.model).then(() => {
-            this.router.navigateByUrl("/produkt/" + this.produktId);
+        this.repository.post(this.userService.firma.firmaId, this.model).then(() => {
+            return this.router.navigateByUrl("/produkt/" + this.produktId);
         });
     }
 }

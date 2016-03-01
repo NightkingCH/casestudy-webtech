@@ -9,7 +9,7 @@
         </div>
     </div>
     <hr />
-    <div class="row">
+    <div class="row" *ngIf="data != null && data?.length > 0">
         <div class="col-md-offset-1 col-md-10">
             <table class="table table-bordered">
                 <tr>
@@ -36,6 +36,26 @@
                     </td>
                 </tr>
             </table>
+        </div>
+    </div>
+    <div class="row" *ngIf="data == null || data?.length <= 0">
+        <div class="col-md-offset-1 col-md-10">
+            <div class="alert alert-info" role="alert">
+                <span>Keine Produkte vorhanden.</span>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <form class="form">
+                <div class="input-group pull-right">
+                    <a href="#/produkt/add" class="btn btn-primary" title="Neues Produkt erfassen">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Produkt erfassen</span>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 </section>

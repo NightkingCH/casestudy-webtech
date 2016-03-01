@@ -83,13 +83,19 @@ namespace BusinessStreamline.Controllers.WebAPI
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Nachfrage
+        // POST: api/Nachfrage/4
         [ResponseType(typeof(Nachfrage))]
-        public IHttpActionResult PostNachfrage(Nachfrage nachfrage)
+        public IHttpActionResult PostNachfrage(int id, Nachfrage nachfrage)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            var relatedPart = db.Teil.FirstOrDefault(x => x.Produkt.FirmaId == id && x.TeilId == nachfrage.TeilId);
+
+            if (relatedPart == null) {
+                return BadRequest("The provided company doesn't own the part!");
             }
 
             db.Nachfrage.Add(nachfrage);

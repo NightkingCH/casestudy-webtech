@@ -8,6 +8,8 @@ declare var $: JQueryStatic;
 import { ProduktRepository, TeilRepository } from '../../../repository/repository';
 import { Produkt, ViewTeil } from '../../../models/models';
 
+import { UserService } from '../../../services/services';
+
 @Component({
     selector: '[data-site-detail-produkt]',
     templateUrl: 'app/sites/produkt/detail/detail.html',
@@ -19,17 +21,21 @@ export class ProduktDetailComponent {
     private model: Produkt;
     private data: Array<ViewTeil> = [];
 
+    private isOwner: boolean = false;
+
     private repository: ProduktRepository = new ProduktRepository();
     private teilRepository: TeilRepository = new TeilRepository();
 
-    constructor(private router: Router, private params: RouteParams, private title: Title) {
+    constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
         this.produktId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.produktId)) {
-            router.navigateByUrl("/home");
+            this.router.navigateByUrl("/home");
+
+            return;
         }
-        
+
         this.title.setTitle("Produkt " + this.produktId.toString() + " - BLS");
     }
 
@@ -41,6 +47,13 @@ export class ProduktDetailComponent {
         this.repository.get(this.produktId).then((data: Produkt) => {
             this.model = data;
             this.title.setTitle("Produkt | " + this.model.name + " - BLS");
+
+            if (!this.userService.isFirma()) {
+                return;
+            }
+
+            this.isOwner = this.model.firmaId == this.userService.firma.firmaId;
+
         }).then(() => {
             return this.teilRepository.getByProdukt(this.produktId).then((data: Array<ViewTeil>) => {
                 this.data = data;

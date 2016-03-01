@@ -70,13 +70,20 @@ namespace BusinessStreamline.Controllers.WebAPI
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Bestellung
+        // POST: api/Bestellung/5
         [ResponseType(typeof(Bestellung))]
-        public IHttpActionResult PostBestellung(Bestellung bestellung)
+        public IHttpActionResult PostBestellung(int id, Bestellung bestellung)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            var relatedRequest = db.Nachfrage.FirstOrDefault(x => x.Teil.Produkt.FirmaId == id && x.NachfrageId == bestellung.NachfrageId);
+
+            if (relatedRequest == null)
+            {
+                return BadRequest("The provided company doesn't own this request!");
             }
 
             db.Bestellung.Add(bestellung);

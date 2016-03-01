@@ -10,7 +10,33 @@ export class UserService {
     constructor( @Inject(Router) private router: Router) {
     }
 
-    public user: Login;
+    // company
+    public user: Login = {
+        loginId: 207,
+        name: "Derek82",
+        password: "",
+        firma: [{
+            firmaId: 5,
+            loginId: 207,
+            produkt: null,
+            login: null
+        }],
+        anbieter: []
+    };
+    
+    // supplier
+    //public user: Login = {
+    //    loginId: 907,
+    //    name: "Erin418",
+    //    password: "",
+    //    anbieter: [{
+    //        anbieterId: 7,
+    //        loginId: 907,
+    //        angebot: [],
+    //        login: null
+    //    }],
+    //    firma: []
+    //};
 
     get firma(): Firma {
         if (!this.isFirma()) {
@@ -33,6 +59,10 @@ export class UserService {
     }
 
     public isFirma(): boolean {
+        if (!this.isLoggedIn()) {
+            return false;
+        }
+
         if (!this.user.firma) {
             return false;
         }
@@ -45,6 +75,10 @@ export class UserService {
     }
 
     public isAnbieter(): boolean {
+        if (!this.isLoggedIn()) {
+            return false;
+        }
+
         if (!this.user.anbieter) {
             return false;
         }

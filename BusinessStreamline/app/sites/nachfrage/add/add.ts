@@ -28,11 +28,23 @@ export class NachfrageAddComponent {
     private nachfrageRepository: NachfrageRepository = new NachfrageRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+        }
+
+        // redirect suppliers. only companies can create a request.
+        if (this.userService.isAnbieter()) {
+            this.router.navigateByUrl("/nachfrage/" + this.data.offeneNachfrageId);
+
+            return;
+        }
+
         this.teilId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.teilId)) {
-            router.navigateByUrl("/home");
+            this.router.navigateByUrl("/home");
         }
 
         this.title.setTitle("Nachfrage | Hinzufügen - BLS");
@@ -43,20 +55,13 @@ export class NachfrageAddComponent {
             return;
         }
 
-        this.fetchTeil().then(() => {
-            // redirect trolls
-            if (this.data.hatOffeneNachfrage) {
-               return this.router.navigateByUrl("/nachfrage/" + this.data.offeneNachfrageId);
-            }
-        });
+        this.fetchTeil();
     }
 
     public onAdd(event: MouseEvent): void {
-
-        // TODO: add when user service is available.
-        //if (this.userService.isAnbieter()) {
-        //    return; // suppliers can't create a request.
-        //}
+        if (this.userService.isAnbieter()) {
+            return; // suppliers can't create a request.
+        }
 
         if (this.model.anzahl <= 0) {
             return;
@@ -65,13 +70,14 @@ export class NachfrageAddComponent {
         this.model.teilId = this.teilId;
         this.model.erstelltAm = moment().toDate();
 
-        this.nachfrageRepository.post(this.model).then((entity: Nachfrage) => {
+        this.nachfrageRepository.post(this.userService.firma.firmaId, this.model).then((entity: Nachfrage) => {
             this.router.navigateByUrl("/nachfrage/" + entity.nachfrageId);
         });
     }
 
     private fetchTeil(): Promise<ViewTeil> {
         return this.repository.get(this.teilId).then((data: ViewTeil) => {
+            this.model.anzahl = data.anzahl;
             this.data = data;
 
             return data;

@@ -26,22 +26,32 @@ export class ProduktAddComponent {
 
     constructor(private router: Router,  private title: Title, private userService: UserService) {
         this.title.setTitle("Produkt | Hinzufügen - BLS");
-    }
 
-    public ngOnInit(): void {
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
+
+        // suppliers can't add a product
+        if (this.userService.isAnbieter()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
     }
 
     public onAdd(event: MouseEvent): void {
 
-        // TODO: add when user service is available.
-        //if (this.userService.isFirma()) {
-        //    return; // companies can't create an offer.
-        //}
+        if (this.userService.isAnbieter()) {
+            return; // suppliers can't create a product.
+        }
 
-        this.model.firmaId = 4; // TODO: Add proper user! => this.userService.firma.firmaId;
+        this.model.firmaId = this.userService.firma.firmaId;
 
         this.repository.post(this.model).then((entity: Produkt) => {
-            this.router.navigateByUrl("/produkt/" + entity.produktId);
+            return this.router.navigateByUrl("/produkt/" + entity.produktId);
         });
     }
 }

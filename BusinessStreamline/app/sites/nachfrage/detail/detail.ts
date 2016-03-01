@@ -10,6 +10,8 @@ import { PIPES } from '../../../pipes/pipes';
 import { AngebotRepository, NachfrageRepository, BestellungRepository } from '../../../repository/repository';
 import { ViewNachfrage, ViewAngebot, Bestellung } from '../../../models/models';
 
+import { UserService } from '../../../services/services';
+
 @Component({
     selector: '[data-site-detail-nachfrage]',
     templateUrl: 'app/sites/nachfrage/detail/detail.html',
@@ -21,18 +23,31 @@ export class NachfrageDetailComponent {
     private nachfrageId: number;
     private model: ViewNachfrage;
     private data: Array<ViewAngebot> = [];
+    private canCreateOffer: boolean = false;
+    private canChangeState: boolean = false;
 
     private repository: NachfrageRepository = new NachfrageRepository();
     private angebotRepository: AngebotRepository = new AngebotRepository();
     private bestellRepository: BestellungRepository = new BestellungRepository();
 
-    constructor(private router: Router, private params: RouteParams, private title: Title) {
+    constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+        // not logged in users can't do anything!
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
+
         this.nachfrageId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.nachfrageId)) {
-            router.navigateByUrl("/home");
+            this.router.navigateByUrl("/home");
+
+            return;
         }
+
+        this.canCreateOffer = this.userService.isAnbieter();;
 
         this.title.setTitle("Nachfrage " + this.nachfrageId.toString() + " - BLS");
     }
@@ -43,6 +58,8 @@ export class NachfrageDetailComponent {
         }
 
         this.fetchDetail().then(() => {
+            this.canChangeState = this.userService.isFirma() && this.userService.firma.firmaId == this.model.firmaId;
+
             this.setUpUI();
         });
     }
@@ -52,6 +69,17 @@ export class NachfrageDetailComponent {
     }
 
     public onAcceptAngebot(event: MouseEvent, entity: ViewAngebot): void {
+
+        // TODO FIX WRONG FIRMA ID!
+        // suppliers can't accept an offer
+        if (this.userService.isAnbieter()) {
+            return;
+        }
+
+        if (!this.canChangeState) {
+            return;
+        }
+
         //TODO only accept own offers!
         var offersToDecline = Enumerable.from(this.data).where((x: ViewAngebot) => x.angebotId != entity.angebotId);
 
@@ -65,7 +93,7 @@ export class NachfrageDetailComponent {
         // then set offer to accepted
         // then decline the other offers.
 
-        this.bestellRepository.post(bestellung).then(() => {
+        this.bestellRepository.post(this.userService.firma.firmaId, bestellung).then(() => {
             return this.acceptAngebot(entity).then(() => {
                 // only decline offers if the first has been accepted!
                 var promiselist: Array<Promise<ViewAngebot>> = [];
@@ -85,17 +113,26 @@ export class NachfrageDetailComponent {
     }
 
     public onDeclineAngebot(event: MouseEvent, entity: ViewAngebot): void {
+        // suppliers can't accept an offer
+        if (this.userService.isAnbieter()) {
+            return;
+        }
+
+        if (!this.canChangeState) {
+            return;
+        }
+
         this.declineAngebot(entity).then(() => {
             return this.fetchAngebot();
         });
     }
 
     private acceptAngebot(entity: ViewAngebot): Promise<ViewAngebot> {
-        return this.angebotRepository.acceptAngebot(entity);
+        return this.angebotRepository.acceptAngebot(this.userService.firma.firmaId, entity);
     }
 
     private declineAngebot(entity: ViewAngebot): Promise<ViewAngebot> {
-        return this.angebotRepository.declineAngebot(entity);
+        return this.angebotRepository.declineAngebot(this.userService.firma.firmaId, entity);
     }
 
     private fetchDetail(): Promise<any> {

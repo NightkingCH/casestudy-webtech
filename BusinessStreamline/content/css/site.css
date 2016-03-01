@@ -52,6 +52,10 @@ span.navbar-login {
     line-height: 20px;
 }
 
+span.navbar-login a {
+    color: #FFF;
+}
+
 legend {
     margin-bottom: 14px;
 }

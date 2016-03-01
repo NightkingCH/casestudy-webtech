@@ -72,7 +72,7 @@ export class BestellungRepository extends Repository {
         return queryPromise;
     }
 
-    public post(model: Bestellung): Promise<Bestellung> {
+    public post(firmaId: number, model: Bestellung): Promise<Bestellung> {
 
         var callConfiguration: RequestInit = {
             method: "post",
@@ -83,7 +83,7 @@ export class BestellungRepository extends Repository {
             body: JSON.stringify(model)
         };
 
-        var callUri = this.serviceConfig;
+        var callUri = this.serviceConfig + "/" + firmaId;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseResponse)
