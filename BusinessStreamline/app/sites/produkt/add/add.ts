@@ -33,12 +33,11 @@ export class ProduktAddComponent {
 
     public onAdd(event: MouseEvent): void {
 
-        // TODO: add when user service is available.
-        //if (this.userService.isFirma()) {
-        //    return; // companies can't create an offer.
-        //}
+        if (this.userService.isAnbieter()) {
+            return; // suppliers can't create a product.
+        }
 
-        this.model.firmaId = 4; // TODO: Add proper user! => this.userService.firma.firmaId;
+        this.model.firmaId = this.userService.firma.firmaId;
 
         this.repository.post(this.model).then((entity: Produkt) => {
             this.router.navigateByUrl("/produkt/" + entity.produktId);

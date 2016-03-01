@@ -26,7 +26,7 @@ export class ProduktListComponent {
 
     private fetchData(): Promise<void> {
         //TODO change to user service!
-        return this.produktRepository.getByFirma(4, 559).then((data: Array<Produkt>) => {
+        return this.produktRepository.getByFirma(5, 559).then((data: Array<Produkt>) => {
             this.data = data;
         });
     }

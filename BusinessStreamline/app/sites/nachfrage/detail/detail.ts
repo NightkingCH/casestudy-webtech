@@ -10,6 +10,8 @@ import { PIPES } from '../../../pipes/pipes';
 import { AngebotRepository, NachfrageRepository, BestellungRepository } from '../../../repository/repository';
 import { ViewNachfrage, ViewAngebot, Bestellung } from '../../../models/models';
 
+import { UserService } from '../../../services/services';
+
 @Component({
     selector: '[data-site-detail-nachfrage]',
     templateUrl: 'app/sites/nachfrage/detail/detail.html',
@@ -21,18 +23,21 @@ export class NachfrageDetailComponent {
     private nachfrageId: number;
     private model: ViewNachfrage;
     private data: Array<ViewAngebot> = [];
+    private canCreateOffer: boolean = false;
 
     private repository: NachfrageRepository = new NachfrageRepository();
     private angebotRepository: AngebotRepository = new AngebotRepository();
     private bestellRepository: BestellungRepository = new BestellungRepository();
 
-    constructor(private router: Router, private params: RouteParams, private title: Title) {
+    constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
         this.nachfrageId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
         if (isNaN(this.nachfrageId)) {
             router.navigateByUrl("/home");
         }
+
+        this.canCreateOffer = this.userService.isAnbieter();
 
         this.title.setTitle("Nachfrage " + this.nachfrageId.toString() + " - BLS");
     }
