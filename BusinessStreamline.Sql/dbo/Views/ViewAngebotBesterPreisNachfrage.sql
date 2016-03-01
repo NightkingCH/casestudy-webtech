@@ -14,3 +14,4 @@ FROM (
 	) AS src
 INNER JOIN dbo.Angebot a ON a.NachfrageId = src.NachfrageId
 WHERE a.PreisProTeil = src.BesterPreis
+		AND a.[Status] IN (0, 1) -- 0 = Offen, 1 = Akzeptiert, 2 = Abgelehnt

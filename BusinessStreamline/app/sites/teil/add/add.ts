@@ -99,6 +99,10 @@ export class TeilAddComponent {
             return;
         }
 
+        if (isNaN(this.model.anzahl)) {
+            return;
+        }
+
         if (this.model.anzahl <= 0) {
             return;
         }

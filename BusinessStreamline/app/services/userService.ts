@@ -10,28 +10,30 @@ export class UserService {
     constructor( @Inject(Router) private router: Router) {
     }
 
+    public user: Login;
+
     // company
-    public user: Login = {
-        loginId: 207,
-        name: "Derek82",
-        password: "",
-        firma: [{
-            firmaId: 5,
-            loginId: 207,
-            produkt: null,
-            login: null
-        }],
-        anbieter: []
-    };
+    //public user: Login = {
+    //    loginId: 1001,
+    //    name: "Derek82",
+    //    password: "",
+    //    firma: [{
+    //        firmaId: 1001,
+    //        loginId: 1001,
+    //        produkt: null,
+    //        login: null
+    //    }],
+    //    anbieter: []
+    //};
     
     // supplier
     //public user: Login = {
-    //    loginId: 907,
+    //    loginId: 1004,
     //    name: "Erin418",
     //    password: "",
     //    anbieter: [{
-    //        anbieterId: 7,
-    //        loginId: 907,
+    //        anbieterId: 1004,
+    //        loginId: 1004,
     //        angebot: [],
     //        login: null
     //    }],
@@ -96,8 +98,6 @@ export class UserService {
 
     public logout(): void {
         this.user = null;
-
-        //TODO: redirect user to home;
     }
 
 
