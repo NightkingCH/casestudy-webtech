@@ -5,7 +5,7 @@
                 <fieldset>
                     <legend>Suche</legend>
                     <div class="input-group">
-                        <input [(ngModel)]="model.search" ngControl="search" type="text" class="form-control" id="txtSrc" placeholder="Suchen...">
+                        <input type="text" [(ngModel)]="model.search" ngControl="search" class="form-control" id="txtSrc" placeholder="Suchen...">
                         <span class="input-group-btn">
                             <select class="btn" [(ngModel)]="model.typ" ngControl="typ">
                                 <option *ngFor="#typ of typList" [value]="typ.typId">{{ typ.name }}</option>
