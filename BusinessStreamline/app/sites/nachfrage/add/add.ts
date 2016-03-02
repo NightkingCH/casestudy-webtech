@@ -45,6 +45,7 @@ export class NachfrageAddComponent {
             return;
         }
 
+        // read the part id to link the request to the corresponding product and part.
         this.teilId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
@@ -55,30 +56,35 @@ export class NachfrageAddComponent {
         this.title.setTitle("Nachfrage | Hinzufügen - BLS");
     }
 
+    /**
+     * Angular2 life cycle event.
+     */
     public ngOnInit(): void {
-        if (isNaN(this.teilId)) {
-            return;
-        }
-
         this.fetchTeil();
     }
 
+    /**
+     * Click-Event when the request should be created.
+     * @param event button click event.
+     */
     public onAdd(event: MouseEvent): void {
         if (this.userService.isAnbieter()) {
             return; // suppliers can't create a request.
         }
 
         if (isNaN(this.model.anzahl)) {
-            return;
+            return; // provided amount isn't a number
         }
 
         if (this.model.anzahl <= 0) {
-            return;
+            return; // a product consists of more than 0 parts.
         }
 
+        // prepare the entity
         this.model.teilId = this.teilId;
         this.model.erstelltAm = moment().toDate();
 
+        // save the request.
         this.nachfrageRepository.post(this.userService.firma.firmaId, this.model).then((entity: Nachfrage) => {
             this.router.navigateByUrl("/nachfrage/" + entity.nachfrageId);
         });

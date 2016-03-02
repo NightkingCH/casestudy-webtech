@@ -30,6 +30,9 @@ export class HomeComponent {
         this.title.setTitle("Home - BLS");
     }
 
+    /**
+     * Angular2 life cycle event.
+     */
     public ngOnInit(): void {
         this.fetchTyp().then(() => {
             // trigger search AFTER the types are loaded!
@@ -39,10 +42,16 @@ export class HomeComponent {
         this.setUpState();
     }
 
+    /**
+     * Catches the form submit and triggers an ajax search.
+     */
     public onSubmit(): void {
         Promise.all([this.countNachfrage(), this.fetchNachfrage()]);;        
     }
 
+    /**
+     * Load lookup list.
+     */
     private fetchTyp(): Promise<void> {
         return this.typRepository.getAll().then((data: Array<Typ>) => {
 
@@ -56,18 +65,27 @@ export class HomeComponent {
         });
     }
 
+    /**
+     * Get requests based on the search arguments.
+     */
     private fetchNachfrage(): Promise<void> {
         return this.sucheRepository.get(this.model).then((data: Array<ViewSucheNachfrage>) => {
             this.data = data;
         });
     }
 
+    /**
+     * Get the total amount of the found requests.
+     */
     private countNachfrage(): Promise<void> {
         return this.sucheRepository.count(this.model).then((data: number) => {
             this.count = data;
         });
     }
 
+    /**
+     * Create dropdown list to filter the request state.
+     */
     private setUpState(): void {
         var bothState = new NachfrageStatus();
 

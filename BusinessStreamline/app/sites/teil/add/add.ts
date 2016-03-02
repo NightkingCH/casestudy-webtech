@@ -44,6 +44,14 @@ export class TeilAddComponent {
             return;
         }
 
+        // redirect suppliers to home => they can't add a new part!
+        if (this.userService.isAnbieter()) {
+            this.router.navigateByUrl("/home");
+
+            return;
+        }
+
+        // read the product id to link the part to the corresponding product.
         this.produktId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
@@ -55,18 +63,10 @@ export class TeilAddComponent {
     }
 
     public ngOnInit(): void {
-        if (isNaN(this.produktId)) {
-            return;
-        }
-
+        // load lookup list.
         this.fetchTyp().then(() => {
+            // load product details
             return this.fetchProdukt().then(() => {
-
-                // redirect suppliers to home => they can't add a new part!
-                if (this.userService.isAnbieter()) {
-                    return this.router.navigateByUrl("/home");
-                }
-
                 // redirect the company if they don't own the product
                 if (this.data.firmaId != this.userService.firma.firmaId) {
                     return this.router.navigateByUrl("/produkt/" + this.produktId);
@@ -97,23 +97,25 @@ export class TeilAddComponent {
     public onAdd(event: MouseEvent): void {
 
         if (this.model.name == "") {
-            return;
+            return; // part requires a name
         }
 
         if (this.model.typId <= 0) {
-            return;
+            return; // part requires a type
         }
 
         if (isNaN(this.model.anzahl)) {
-            return;
+            return; // part amount from which of the product consists is not a number
         }
 
         if (this.model.anzahl <= 0) {
-            return;
+            return; // part amount from which of the product consists must be higher than 0
         }
 
+        // link the part to the product
         this.model.produktId = this.produktId;
 
+        // save the part
         this.repository.post(this.userService.firma.firmaId, this.model).then(() => {
             return this.router.navigateByUrl("/produkt/" + this.produktId);
         });

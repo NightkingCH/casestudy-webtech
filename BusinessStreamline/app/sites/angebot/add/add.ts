@@ -42,6 +42,7 @@ export class AngebotAddComponent {
             return;
         }
 
+        // read the request id to link the offer to the corresponding request.
         this.nachfrageId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
@@ -59,6 +60,10 @@ export class AngebotAddComponent {
         }
     }
 
+    /**
+     * @description
+     * Angular2 life cycle event.
+     */
     public ngOnInit(): void {
         if (isNaN(this.nachfrageId)) {
             return;
@@ -67,6 +72,10 @@ export class AngebotAddComponent {
         this.fetchAngebot();
     }
 
+    /**
+     * Click-Event when the offer should be created.
+     * @param event button click event.
+     */
     public onAdd(event: MouseEvent): void {
 
         if (this.userService.isFirma()) {
@@ -74,18 +83,20 @@ export class AngebotAddComponent {
         }
 
         if (this.model.preisProTeil <= 0) {
-            return;
+            return; // bid must be higher than 0
         }
 
         if (isNaN(this.model.preisProTeil)) {
-            return;
+            return; // bid is not a number => maybe something like "afsadfwe83432,32"
         }
 
+        // create the entity to send to the web service
         this.model.nachfrageId = this.nachfrageId;
         this.model.anbieterId = this.userService.anbieter.anbieterId;
         this.model.erstelltAm = moment().toDate();
         this.model.status = 0; // 0 = Offen, 1 = Akzeptiert, 2 = Geschlossen
 
+        // send the model to the web service
         this.angebotRepository.post(this.model).then(() => {
             this.router.navigateByUrl("/nachfrage/" + this.nachfrageId);
         });
