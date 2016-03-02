@@ -12,6 +12,11 @@ import { UserService } from '../../../services/services';
 import { TeilRepository, ProduktRepository, TypRepository } from '../../../repository/repository';
 import { Teil, Produkt, Typ } from '../../../models/models';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Teil hinzufügen"-Seite dar.
+ */
 @Component({
     selector: '[data-site-add-teil]',
     templateUrl: 'app/sites/teil/add/add.html',

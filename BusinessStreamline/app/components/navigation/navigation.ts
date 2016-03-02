@@ -3,6 +3,9 @@ import { COMMON_DIRECTIVES } from 'angular2/common';
 
 import { UserService } from '../../services/services';
 
+/**
+ * @description Header + Navigationsbar
+ */
 @Component({
     selector: '[data-bsl-navigation]',
     templateUrl: 'app/components/navigation/navigation.html',

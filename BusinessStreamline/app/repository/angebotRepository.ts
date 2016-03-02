@@ -3,6 +3,9 @@ import { Repository } from './baseRepository';
 
 import { Angebot, ViewAngebot } from '../models/models';
 
+/**
+ * @description Verwaltet den Zugriff auf den Webservice.
+ */
 export class AngebotRepository extends Repository {
 
     constructor() {

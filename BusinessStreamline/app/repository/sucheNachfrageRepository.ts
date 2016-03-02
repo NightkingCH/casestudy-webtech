@@ -1,11 +1,11 @@
 ﻿import { EndpointConfiguration } from '../configuration/endpoints';
 import { Repository } from './baseRepository';
-import { Utilities } from '../utils/utilities';
 
 import { NachfrageSearch, ViewSucheNachfrage } from '../models/models';
 
-
-
+/**
+ * @description Verwaltet den Zugriff auf den Webservice.
+ */
 export class SucheNachfrageRepository extends Repository {
 
     constructor() {

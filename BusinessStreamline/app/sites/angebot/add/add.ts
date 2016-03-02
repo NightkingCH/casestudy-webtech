@@ -12,6 +12,11 @@ import { UserService } from '../../../services/services';
 import { AngebotRepository, NachfrageRepository } from '../../../repository/repository';
 import { ViewNachfrage, Angebot } from '../../../models/models';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Angebot hinzufügen"-Seite dar.
+ */
 @Component({
     selector: '[data-site-add-angebot]',
     templateUrl: 'app/sites/angebot/add/add.html',

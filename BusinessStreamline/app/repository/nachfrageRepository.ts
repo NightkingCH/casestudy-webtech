@@ -3,6 +3,9 @@ import { Repository } from './baseRepository';
 
 import { ViewNachfrage, Nachfrage } from '../models/models';
 
+/**
+ * @description Verwaltet den Zugriff auf den Webservice.
+ */
 export class NachfrageRepository extends Repository {
 
     constructor() {

@@ -5,6 +5,11 @@ import { Title } from 'angular2/platform/browser';
 import { SucheNachfrageRepository, TypRepository } from '../../repository/repository';
 import { ViewSucheNachfrage, NachfrageSearch, Typ, NachfrageStatus } from '../../models/models';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Haupt"-Seite dar.
+ */
 @Component({
     selector: '[data-site-home]',
     templateUrl: 'app/sites/home/home.html',

@@ -12,6 +12,11 @@ import { ViewNachfrage, ViewAngebot, Bestellung } from '../../../models/models';
 
 import { UserService } from '../../../services/services';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Nachrage Detailansicht"-Seite dar.
+ */
 @Component({
     selector: '[data-site-detail-nachfrage]',
     templateUrl: 'app/sites/nachfrage/detail/detail.html',

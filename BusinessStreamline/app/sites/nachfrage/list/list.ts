@@ -10,6 +10,11 @@ import { PIPES } from '../../../pipes/pipes';
 import { NachfrageRepository } from '../../../repository/repository';
 import { ViewNachfrage } from '../../../models/models';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Nachfrage Übersicht"-Seite dar.
+ */
 @Component({
     selector: '[data-site-list-nachfrage]',
     templateUrl: 'app/sites/nachfrage/list/list.html',

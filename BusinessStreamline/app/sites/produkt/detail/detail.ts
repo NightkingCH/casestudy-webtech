@@ -10,6 +10,11 @@ import { Produkt, ViewTeil } from '../../../models/models';
 
 import { UserService } from '../../../services/services';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Produktdetail"-Seite dar.
+ */
 @Component({
     selector: '[data-site-detail-produkt]',
     templateUrl: 'app/sites/produkt/detail/detail.html',

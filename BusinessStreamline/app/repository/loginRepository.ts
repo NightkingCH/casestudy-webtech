@@ -2,6 +2,9 @@
 import { Repository } from './baseRepository';
 import { Login } from '../models/models';
 
+/**
+ * @description Verwaltet den Zugriff auf den Webservice.
+ */
 export class LoginRepository extends Repository {
 
     constructor() {

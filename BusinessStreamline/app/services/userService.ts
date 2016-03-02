@@ -4,10 +4,13 @@ import { Router } from 'angular2/router';
 import { LoginRepository } from '../repository/repository';
 import { Login, Firma, Anbieter } from '../models/models';
 
+/**
+ * @description Verwaltet den Benutzer nachdem dieser geladen wurde.
+ *              Stellt allen das geladene Login zur Verfügung.
+ */
 export class UserService {
 
-    // inject router to navigate to home after logout;
-    constructor( @Inject(Router) private router: Router) {
+    constructor() {
     }
 
     //public user: Login;

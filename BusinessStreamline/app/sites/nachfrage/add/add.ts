@@ -12,6 +12,11 @@ import { UserService } from '../../../services/services';
 import { TeilRepository, NachfrageRepository } from '../../../repository/repository';
 import { ViewTeil, Nachfrage } from '../../../models/models';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Nachfrage hinzufügen"-Seite dar.
+ */
 @Component({
     selector: '[data-site-add-nachfrage]',
     templateUrl: 'app/sites/nachfrage/add/add.html',

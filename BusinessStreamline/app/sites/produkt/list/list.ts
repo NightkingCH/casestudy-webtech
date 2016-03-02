@@ -7,6 +7,11 @@ import { UserService } from '../../../services/services';
 import { ProduktRepository } from '../../../repository/repository';
 import { Produkt } from '../../../models/models';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Produktliste"-Seite dar.
+ */
 @Component({
     selector: '[data-site-list-produkt]',
     templateUrl: 'app/sites/produkt/list/list.html',

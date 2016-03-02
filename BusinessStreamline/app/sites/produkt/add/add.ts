@@ -12,6 +12,11 @@ import { UserService } from '../../../services/services';
 import { ProduktRepository } from '../../../repository/repository';
 import { Produkt } from '../../../models/models';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Produkt hinzufügen"-Seite dar.
+ */
 @Component({
     selector: '[data-site-add-produkt]',
     templateUrl: 'app/sites/produkt/add/add.html',
