@@ -130,6 +130,7 @@
     <Content Include="content\css\site.css" />
     <Content Include="Global.asax" />
     <Content Include="lib\cycle.js" />
+    <Content Include="lib\shims_for_ie.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

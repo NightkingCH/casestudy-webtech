@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label>Typ</label>
                             <span class="input-group">
-                                <select class="btn" [(ngModel)]="model.typId" ngControl="typId">
+                                <select class="btn" [ngModel]="model.typId" ngControl="typId" (change)="onTypChange($event)">
                                     <option *ngFor="#typ of typList" [value]="typ.typId">{{ typ.name }}</option>
                                 </select>
                             </span>

@@ -46,7 +46,43 @@ export class HomeComponent {
      * Catches the form submit and triggers an ajax search.
      */
     public onSubmit(): void {
-        Promise.all([this.countNachfrage(), this.fetchNachfrage()]);;        
+        Promise.all([this.countNachfrage(), this.fetchNachfrage()]);;
+    }
+
+    /**
+     * Temporary IE-fix.
+     */
+    public onTypChange(event: Event): void {
+
+        if (!event) {
+            return;
+        }
+
+        var selectElement = (<HTMLSelectElement>event.target);
+
+        if (isNaN(parseInt(selectElement.value))) {
+            return;
+        }
+
+        this.model.typ = parseInt(selectElement.value);
+    }
+
+    /**
+     * Temporary IE-fix.
+     */
+    public onStateChange(event: Event): void {
+
+        if (!event) {
+            return;
+        }
+
+        var selectElement = (<HTMLSelectElement>event.target);
+
+        if (isNaN(parseInt(selectElement.value))) {
+            return;
+        }
+
+        this.model.state = parseInt(selectElement.value);
     }
 
     /**
@@ -97,6 +133,6 @@ export class HomeComponent {
         closeState.status = 1;
         closeState.name = "Geschlossen";
 
-        this.statusList = [bothState, openState, closeState];        
+        this.statusList = [bothState, openState, closeState];
     }
 }

@@ -18,33 +18,36 @@
 <body>
     <div data-app=""></div>
     <!-- IE required polyfills, in this exact order -->
-    <script src="~/node_modules/angular2/ts/src/testing/shims_for_IE.js"></script>
     <script src="~/node_modules/es6-shim/es6-shim.min.js"></script>
     <script src="~/node_modules/systemjs/dist/system-polyfills.js"></script>
+    <script src="~/lib/shims_for_ie.js"></script>
 
-    <script src="~/lib/cycle.js"></script>
-    <script src="~/node_modules/jquery/dist/jquery.js"></script>
-    <script src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="~/node_modules/moment/min/moment-with-locales.min.js"></script>
-    <script src="~/node_modules/linq/linq.min.js"></script>
+    <script defer src="~/lib/cycle.js"></script>
+    <script defer src="~/node_modules/jquery/dist/jquery.js"></script>
+    <script defer src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script defer src="~/node_modules/moment/min/moment-with-locales.min.js"></script>
+    <script defer src="~/node_modules/linq/linq.min.js"></script>
 
-    <script src="~/node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="~/node_modules/systemjs/dist/system.js"></script>
-    <script src="~/node_modules/typescript/lib/typescript.js"></script>
-    <script src="~/node_modules/rxjs/bundles/Rx.js"></script>
+    <script defer src="~/node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script defer src="~/node_modules/systemjs/dist/system.js"></script>
+    <script defer src="~/node_modules/typescript/lib/typescript.js"></script>
+    <script defer src="~/node_modules/whatwg-fetch/fetch.js"></script>
+    <script defer src="~/node_modules/rxjs/bundles/Rx.js"></script>
 
-    <script src="~/node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script src="~/node_modules/angular2/bundles/router.dev.js"></script>
-    <script src="~/node_modules/angular2/bundles/http.js"></script>
+    <script defer src="~/node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script defer src="~/node_modules/angular2/bundles/router.dev.js"></script>
+    <script defer src="~/node_modules/angular2/bundles/http.js" onload="boot()"></script>
 
     <script>
-      System.config({
-        transpiler: 'typescript',
-        typescriptOptions: { emitDecoratorMetadata: true },
-        packages: {'app': {defaultExtension: 'ts'}}
-      });
-      System.import('app/bootstrap')
-            .then(null, console.error.bind(console));
+        function boot() {
+            System.config({
+                transpiler: 'typescript',
+                typescriptOptions: { emitDecoratorMetadata: true },
+                packages: { 'app': { defaultExtension: 'ts' } }
+            });
+            System.import('app/bootstrap')
+                  .then(null, console.error.bind(console));
+        }
     </script>
 </body>
 </html>

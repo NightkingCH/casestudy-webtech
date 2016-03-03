@@ -94,6 +94,24 @@ export class TeilAddComponent {
         });
     }
 
+    /**
+     * Temporary IE-fix.
+     */
+    public onTypChange(event: Event): void {
+
+        if (!event) {
+            return;
+        }
+
+        var selectElement = (<HTMLSelectElement>event.target);
+
+        if (isNaN(parseInt(selectElement.value))) {
+            return;
+        }
+
+        this.model.typId = parseInt(selectElement.value);
+    }
+
     public onAdd(event: MouseEvent): void {
 
         if (this.model.name == "") {
