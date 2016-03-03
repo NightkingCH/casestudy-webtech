@@ -71,6 +71,13 @@ export class ProduktDetailComponent {
         });
     }
 
+    /**
+     * https://github.com/angular/angular/issues/7088
+     */
+    private trackByForParts(index: number, object: ViewTeil): number {
+        return object.teilId;
+    }
+
     private setUpUI(): void {
         $('[data-toggle="tooltip"]').tooltip();
     }

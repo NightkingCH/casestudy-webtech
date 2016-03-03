@@ -53,4 +53,11 @@ export class NachfrageListComponent {
             this.data = data;
         });
     }
+
+    /**
+     * https://github.com/angular/angular/issues/7088
+     */
+    private trackByForRequests(index: number, object: ViewNachfrage): number {
+        return object.nachfrageId;
+    }
 }

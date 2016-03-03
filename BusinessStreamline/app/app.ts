@@ -64,16 +64,16 @@ import { LogoutComponent } from './sites/logout/logout';
 ])
 export class AppComponent {
 
-    public ngOnInit(): void {
+    //public ngOnInit(): void {
 
-        var model = new Login();
+    //    var model = new Login();
 
-        model.name = "alice";
-        model.password = "alice";
+    //    model.name = "alice";
+    //    model.password = "alice";
 
-        new LoginRepository().login(model).then((data: Login) => {
-            console.log(data);
-        });
-    }
+    //    new LoginRepository().login(model).then((data: Login) => {
+    //        console.log(data);
+    //    });
+    //}
 
 }

@@ -68,6 +68,13 @@ export class HomeComponent {
     }
 
     /**
+     * https://github.com/angular/angular/issues/7088
+     */
+    private trackByForSearch(index: number, object: ViewSucheNachfrage): number {
+        return object.nachfrageId;
+    }
+
+    /**
      * Temporary IE-fix.
      */
     public onStateChange(event: Event): void {

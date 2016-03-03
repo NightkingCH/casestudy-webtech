@@ -49,4 +49,11 @@ export class ProduktListComponent {
             this.data = data;
         });
     }
+
+    /**
+     * https://github.com/angular/angular/issues/7088
+     */
+    private trackByForProducts(index: number, object: Produkt): number {
+        return object.produktId;
+    }
 }

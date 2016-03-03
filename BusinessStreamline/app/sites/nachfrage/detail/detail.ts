@@ -77,6 +77,13 @@ export class NachfrageDetailComponent {
     }
 
     /**
+     * https://github.com/angular/angular/issues/7088
+     */
+    private trackByForOffers(index: number, object: ViewAngebot): number {
+        return object.angebotId;
+    }
+
+    /**
      * Accepts and offer and declines all other offers.
      * Creates an order!
      * @param event button click event.

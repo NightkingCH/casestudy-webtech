@@ -76,7 +76,7 @@
                         Bestes
                     </th>
                 </tr>
-                <tr *ngFor="#angebot of data" [class.warning]="angebot.istBestesAngebot && angebot?.status == 0" [class.success]="angebot?.status == 1">
+                <tr *ngFor="#angebot of data" [class.warning]="angebot.istBestesAngebot && angebot?.status == 0; trackBy: trackByForOffers" [class.success]="angebot?.status == 1">
                     <td>
                         <span>{{ angebot?.angebotId }}</span>
                     </td>
