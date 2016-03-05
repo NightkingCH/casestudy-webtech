@@ -80,6 +80,7 @@
     <Build Include="dbo\Views\ViewNachfrage.sql" />
     <Build Include="dbo\Views\ViewAngebot.sql" />
     <Build Include="dbo\Views\ViewNachfrageBestellung.sql" />
+    <Build Include="dbo\Views\ViewAngebotAnbieter.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BusinessStreamline.bak" />

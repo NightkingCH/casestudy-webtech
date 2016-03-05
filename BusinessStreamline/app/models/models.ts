@@ -150,3 +150,14 @@ export class NachfrageStatus {
     public status: number = -1;
     public name: string = "Status Auswählen";
 }
+
+export class ViewAngebotAnbieter {
+    public angebotId: number;
+    public anbieterId: number;
+    public erstelltAm: Date;
+    public preisProTeil: number;
+    public status: number;
+    public nachfrageId: number;
+    public produktName: string;
+    public teilName: string;
+}

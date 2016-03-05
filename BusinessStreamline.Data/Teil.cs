@@ -23,7 +23,7 @@ namespace BusinessStreamline.Data
         public int TeilId { get; set; }
         public int ProduktId { get; set; }
         public int TypId { get; set; }
-        public Nullable<int> Anzahl { get; set; }
+        public int Anzahl { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

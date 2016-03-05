@@ -77,7 +77,7 @@ export class AngebotAddComponent {
         }
 
         this.model.nachfrageId = this.nachfrageId;
-        this.model.anbieterId = 1; // TODO: Add proper user! => this.userService.anbieter.anbieterId;
+        this.model.anbieterId = this.userService.anbieter.anbieterId;
         this.model.erstelltAm = moment().toDate();
         this.model.status = 0; // 0 = Offen, 1 = Akzeptiert, 2 = Geschlossen
 

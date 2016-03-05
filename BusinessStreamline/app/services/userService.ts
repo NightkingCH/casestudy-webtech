@@ -11,32 +11,32 @@ export class UserService {
     }
 
     // company
-    public user: Login = {
-        loginId: 207,
-        name: "Derek82",
-        password: "",
-        firma: [{
-            firmaId: 5,
-            loginId: 207,
-            produkt: null,
-            login: null
-        }],
-        anbieter: []
-    };
-    
-    // supplier
     //public user: Login = {
-    //    loginId: 907,
-    //    name: "Erin418",
+    //    loginId: 207,
+    //    name: "Derek82",
     //    password: "",
-    //    anbieter: [{
-    //        anbieterId: 7,
-    //        loginId: 907,
-    //        angebot: [],
+    //    firma: [{
+    //        firmaId: 5,
+    //        loginId: 207,
+    //        produkt: null,
     //        login: null
     //    }],
-    //    firma: []
+    //    anbieter: []
     //};
+    
+    // supplier
+    public user: Login = {
+        loginId: 907,
+        name: "Erin418",
+        password: "",
+        anbieter: [{
+            anbieterId: 7,
+            loginId: 907,
+            angebot: [],
+            login: null
+        }],
+        firma: []
+    };
 
     get firma(): Firma {
         if (!this.isFirma()) {

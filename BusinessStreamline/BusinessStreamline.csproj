@@ -116,6 +116,7 @@
     <Content Include="app\components\navigation\navigation.html" />
     <Content Include="app\sites\about\about.html" />
     <Content Include="app\sites\angebot\add\add.html" />
+    <Content Include="app\sites\angebot\list\list.html" />
     <Content Include="app\sites\home\home.html" />
     <Content Include="app\sites\kontakt\kontakt.html" />
     <Content Include="app\sites\logout\logout.html" />
@@ -171,6 +172,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\sites\bestellung\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
@@ -197,6 +199,7 @@
     <TypeScriptCompile Include="app\services\userService.ts" />
     <TypeScriptCompile Include="app\sites\about\about.ts" />
     <TypeScriptCompile Include="app\sites\angebot\add\add.ts" />
+    <TypeScriptCompile Include="app\sites\angebot\list\list.ts" />
     <TypeScriptCompile Include="app\sites\home\home.ts" />
     <TypeScriptCompile Include="app\sites\kontakt\kontakt.ts" />
     <TypeScriptCompile Include="app\sites\logout\logout.ts" />

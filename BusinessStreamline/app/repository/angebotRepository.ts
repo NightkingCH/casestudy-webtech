@@ -1,7 +1,7 @@
 ﻿import { EndpointConfiguration } from '../configuration/endpoints';
 import { Repository } from './baseRepository';
 
-import { Angebot, ViewAngebot } from '../models/models';
+import { Angebot, ViewAngebot, ViewAngebotAnbieter } from '../models/models';
 
 export class AngebotRepository extends Repository {
 
@@ -46,6 +46,27 @@ export class AngebotRepository extends Repository {
             .then(this.parseJson)
             .then((data: Array<ViewAngebot>) => {
                 return (<ExtendedJSON> JSON).restore(data);
+            });
+
+        return queryPromise;
+    }
+
+    public getByAnbieter(anbieter: number): Promise<Array<ViewAngebotAnbieter>> {
+        var callConfiguration: RequestInit = {
+            method: "get",
+            headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json"
+            }
+        };
+
+        var callUri = this.serviceConfig + "/anbieter/" + anbieter;
+
+        var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseText)
+            .then(this.parseJson)
+            .then((data: Array<ViewAngebotAnbieter>) => {
+                return (<ExtendedJSON>JSON).restore(data);
             });
 
         return queryPromise;

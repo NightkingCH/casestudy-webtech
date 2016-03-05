@@ -26,6 +26,7 @@ import { NachfrageListComponent } from './sites/nachfrage/list/list';
 
 /* Angebot */
 import { AngebotAddComponent } from './sites/angebot/add/add';
+import { AngebotListComponent } from './sites/angebot/list/list';
 
 /* About */
 import { AboutComponent } from './sites/about/about';
@@ -60,6 +61,7 @@ import { LogoutComponent } from './sites/logout/logout';
         { path: "/login", name: "Login", component: LoginComponent },
         { path: "/logout", name: "Logout", component: LogoutComponent },
         { path: "/angebot/add/:id", name: "AddAngebot", component: AngebotAddComponent },
+        { path: "/angebot/list", name: "ListAngebot", component: AngebotListComponent },
         { path: "/teil/add/:id", name: "AddTeil", component: TeilAddComponent }
 ])
 export class AppComponent {

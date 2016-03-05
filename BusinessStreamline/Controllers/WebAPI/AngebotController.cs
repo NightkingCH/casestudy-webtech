@@ -23,7 +23,7 @@ namespace BusinessStreamline.Controllers.WebAPI
             return db.Angebot;
         }
 
-        // GET: api/angebot/produkt/1
+        // GET: api/angebot/nachfrage/1
         [HttpGet()]
         [Route("nachfrage/{nachfrage:int}")]
         [ResponseType(typeof(IQueryable<ViewAngebot>))]
@@ -31,6 +31,16 @@ namespace BusinessStreamline.Controllers.WebAPI
         {
             return db.ViewAngebot
                 .Where(x => x.NachfrageId == nachfrage);
+        }
+
+        // GET: api/angebot/anbieter/1
+        [HttpGet()]
+        [Route("anbieter/{anbieter:int}")]
+        [ResponseType(typeof(IQueryable<ViewAngebotAnbieter>))]
+        public IQueryable<ViewAngebotAnbieter> GetAngebotByAnbieter(int anbieter)
+        {
+            return db.ViewAngebotAnbieter
+                .Where(x => x.AnbieterId == anbieter);
         }
 
         // POST: api/angebot/accept
