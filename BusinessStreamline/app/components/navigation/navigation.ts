@@ -13,6 +13,11 @@ import { UserService } from '../../services/services';
 })
 export class NavigationComponent {
 
+    private isFirma: boolean;
+    private isAnbieter: boolean;
+
     constructor(private userService: UserService) {
+        this.isFirma = this.userService.isFirma();
+        this.isAnbieter = this.userService.isAnbieter();
     }
 }

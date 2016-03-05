@@ -5,16 +5,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#/angebot/list">Angebote</a></li>
+                <li *ngIf="isAnbieter"><a href="#/angebot/list">Angebote</a></li>
                 <li><a href="#/bestellungen">Bestellungen</a></li>
-                <li class="dropdown">
+                <li *ngIf="isFirma" class="dropdown">
                     <a href="#/produkte" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produkte <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#/produkte">Produkte</a></li>
                         <li><a href="#/produkt/add">Produkt erfassen</a></li>
                     </ul>
                 </li>
-                <li><a href="#/nachfrage">Nachfragen</a></li>
+                <li *ngIf="isFirma"><a href="#/nachfrage">Nachfragen</a></li>
                 <li><a href="#/about">About</a></li>
                 <li><a href="#/kontakt">Kontakt</a></li>
             </ul>
