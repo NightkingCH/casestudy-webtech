@@ -113,7 +113,10 @@ export class NachfrageDetailComponent {
         // create order
         // then set offer to accepted
         // then decline the other offers.
-        this.bestellRepository.post(this.userService.firma.firmaId, bestellung).then(() => {
+        this.bestellRepository.post(this.userService.firma.firmaId, bestellung).then((data: Bestellung) => {
+
+            bestellung = data;
+
             return this.acceptAngebot(entity).then(() => {
                 // only decline offers if the first has been accepted!
                 var promiselist: Array<Promise<ViewAngebot>> = [];
@@ -125,7 +128,8 @@ export class NachfrageDetailComponent {
 
                 // wait until all offers are declined => then reload view.
                 return Promise.all(promiselist);
-
+            }).then(() => {
+                return this.bestellRepository.createXml(this.userService.firma.firmaId, bestellung.bestellungId);
             }).then(() => {
                 return this.fetchDetail();
             });

@@ -47,7 +47,7 @@ namespace BusinessStreamline.Controllers.WebAPI
         public IQueryable<ViewBestellung> GetOverviewByFirma(int firma)
         {
             return db.ViewBestellung
-                .Where(x => x.FirmaLoginId == firma);
+                .Where(x => x.FirmaId == firma);
         }
 
         // GET: api/bestellung/overview/anbieter/1
@@ -57,7 +57,7 @@ namespace BusinessStreamline.Controllers.WebAPI
         public IQueryable<ViewBestellung> GetOverviewByAnbieter(int anbieter)
         {
             return db.ViewBestellung
-                .Where(x => x.AnbieterLoginId == anbieter);
+                .Where(x => x.AnbieterId == anbieter);
         }
 
         // PUT: api/Bestellung/5

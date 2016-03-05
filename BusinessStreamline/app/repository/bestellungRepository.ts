@@ -140,4 +140,25 @@ export class BestellungRepository extends Repository {
 
         return queryPromise;
     }
+
+    public createXml(firma: number, bestellung: number) {        
+        var callConfiguration: RequestInit = {
+            method: "get",
+            headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json"
+            }
+        };
+
+        var callUri = this.serviceConfig + "/xml/create/" + firma + "/" + bestellung;
+
+        var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseText)
+            .then(this.parseJson)
+            .then((data: Array<Bestellung>) => {
+                return (<ExtendedJSON>JSON).restore(data);
+            });
+
+        return queryPromise;
+    }
 }

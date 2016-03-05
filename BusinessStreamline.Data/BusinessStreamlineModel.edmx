@@ -161,6 +161,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewBestellung' does not ha
             <PropertyRef Name="NachfrageId" />
             <PropertyRef Name="FirmaId" />
             <PropertyRef Name="BestellungId" />
+            <PropertyRef Name="AnbieterId" />
           </Key>
           <Property Name="AngebotId" Type="int" Nullable="false" />
           <Property Name="FirmaLoginId" Type="int" Nullable="false" />
@@ -175,6 +176,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewBestellung' does not ha
           <Property Name="NachfrageId" Type="int" Nullable="false" />
           <Property Name="FirmaId" Type="int" Nullable="false" />
           <Property Name="BestellungId" Type="int" Nullable="false" />
+          <Property Name="AnbieterId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BusinessStreamline.dbo.ViewNachfrage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -450,7 +452,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewBestellung].[BestellDatum] AS [BestellDatum], 
     [ViewBestellung].[NachfrageId] AS [NachfrageId], 
     [ViewBestellung].[FirmaId] AS [FirmaId], 
-    [ViewBestellung].[BestellungId] AS [BestellungId]
+    [ViewBestellung].[BestellungId] AS [BestellungId], 
+    [ViewBestellung].[AnbieterId] AS [AnbieterId]
     FROM [dbo].[ViewBestellung] AS [ViewBestellung]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewNachfrage" EntityType="Self.ViewNachfrage" store:Type="Views" store:Schema="dbo">
@@ -976,6 +979,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
             <PropertyRef Name="NachfrageId" />
             <PropertyRef Name="FirmaId" />
             <PropertyRef Name="BestellungId" />
+            <PropertyRef Name="AnbieterId" />
           </Key>
           <Property Name="AngebotId" Type="Int32" Nullable="false" />
           <Property Name="PreisProTeil" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
@@ -990,6 +994,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
           <Property Name="FirmaId" Type="Int32" Nullable="false" />
           <Property Name="BestellungId" Type="Int32" Nullable="false" />
+          <Property Name="AnbieterId" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1196,6 +1201,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="ViewBestellung">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewBestellung">
               <MappingFragment StoreEntitySet="ViewBestellung">
+                <ScalarProperty Name="AnbieterId" ColumnName="AnbieterId" />
                 <ScalarProperty Name="BestellungId" ColumnName="BestellungId" />
                 <ScalarProperty Name="FirmaId" ColumnName="FirmaId" />
                 <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />

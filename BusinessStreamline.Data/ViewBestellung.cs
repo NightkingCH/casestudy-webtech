@@ -27,5 +27,6 @@ namespace BusinessStreamline.Data
         public int NachfrageId { get; set; }
         public int FirmaId { get; set; }
         public int BestellungId { get; set; }
+        public int AnbieterId { get; set; }
     }
 }
