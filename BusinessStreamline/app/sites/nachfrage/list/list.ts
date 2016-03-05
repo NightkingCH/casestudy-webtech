@@ -10,6 +10,11 @@ import { PIPES } from '../../../pipes/pipes';
 import { NachfrageRepository } from '../../../repository/repository';
 import { ViewNachfrage } from '../../../models/models';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Nachfrage Übersicht"-Seite dar.
+ */
 @Component({
     selector: '[data-site-list-nachfrage]',
     templateUrl: 'app/sites/nachfrage/list/list.html',
@@ -47,5 +52,12 @@ export class NachfrageListComponent {
         return this.nachfrageRepository.getByFirma(this.userService.firma.firmaId, this.userService.user.loginId).then((data: Array<ViewNachfrage>) => {
             this.data = data;
         });
+    }
+
+    /**
+     * https://github.com/angular/angular/issues/7088
+     */
+    private trackByForRequests(index: number, object: ViewNachfrage): number {
+        return object.nachfrageId;
     }
 }

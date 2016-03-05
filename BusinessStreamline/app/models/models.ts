@@ -1,4 +1,10 @@
-﻿export class Login {
+﻿/***
+ *
+ * Enthält alle Entitäten sowie Views.
+ *
+ ***/
+
+export class Login {
     anbieter: Anbieter[];
     firma: Firma[];
     loginId: number;

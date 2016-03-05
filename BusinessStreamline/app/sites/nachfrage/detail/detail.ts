@@ -12,6 +12,11 @@ import { ViewNachfrage, ViewAngebot, Bestellung } from '../../../models/models';
 
 import { UserService } from '../../../services/services';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Nachrage Detailansicht"-Seite dar.
+ */
 @Component({
     selector: '[data-site-detail-nachfrage]',
     templateUrl: 'app/sites/nachfrage/detail/detail.html',
@@ -38,6 +43,7 @@ export class NachfrageDetailComponent {
             return;
         }
 
+        // read the id to load the corresponding detail data.
         this.nachfrageId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
@@ -47,17 +53,19 @@ export class NachfrageDetailComponent {
             return;
         }
 
-        this.canCreateOffer = this.userService.isAnbieter();;
+        // UI trigger for buttons.
+        this.canCreateOffer = this.userService.isAnbieter();
 
         this.title.setTitle("Nachfrage " + this.nachfrageId.toString() + " - BLS");
     }
 
+    /**
+     * @description
+     * Angular2 life cycle event.
+     */
     public ngOnInit(): void {
-        if (isNaN(this.nachfrageId)) {
-            return;
-        }
-
         this.fetchDetail().then(() => {
+            // only a company and the owner of a request can change the state of an offer.
             this.canChangeState = this.userService.isFirma() && this.userService.firma.firmaId == this.model.firmaId;
 
             this.setUpUI();
@@ -68,19 +76,32 @@ export class NachfrageDetailComponent {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
+    /**
+     * https://github.com/angular/angular/issues/7088
+     */
+    private trackByForOffers(index: number, object: ViewAngebot): number {
+        return object.angebotId;
+    }
+
+    /**
+     * Accepts and offer and declines all other offers.
+     * Creates an order!
+     * @param event button click event.
+     * @param entity offer which was accepted.
+     */
     public onAcceptAngebot(event: MouseEvent, entity: ViewAngebot): void {
 
-        // TODO FIX WRONG FIRMA ID!
         // suppliers can't accept an offer
         if (this.userService.isAnbieter()) {
             return;
         }
 
+        // not the owner or a company
         if (!this.canChangeState) {
             return;
         }
 
-        //TODO only accept own offers!
+        // filter all offers to decline those who aren't accepted.
         var offersToDecline = Enumerable.from(this.data).where((x: ViewAngebot) => x.angebotId != entity.angebotId);
 
         // create new order based on the selected offer.
@@ -92,7 +113,6 @@ export class NachfrageDetailComponent {
         // create order
         // then set offer to accepted
         // then decline the other offers.
-
         this.bestellRepository.post(this.userService.firma.firmaId, bestellung).then(() => {
             return this.acceptAngebot(entity).then(() => {
                 // only decline offers if the first has been accepted!
@@ -112,12 +132,18 @@ export class NachfrageDetailComponent {
         });
     }
 
+    /**
+     * Decline a single offer.
+     * @param event button click event.
+     * @param entity offer to decline.
+     */
     public onDeclineAngebot(event: MouseEvent, entity: ViewAngebot): void {
         // suppliers can't accept an offer
         if (this.userService.isAnbieter()) {
             return;
         }
 
+        // not a company nor the owner.
         if (!this.canChangeState) {
             return;
         }
@@ -127,10 +153,18 @@ export class NachfrageDetailComponent {
         });
     }
 
+    /**
+     * Sends the accept offer request.
+     * @param entity
+     */
     private acceptAngebot(entity: ViewAngebot): Promise<ViewAngebot> {
         return this.angebotRepository.acceptAngebot(this.userService.firma.firmaId, entity);
     }
 
+    /**
+     * Sends the decline offer request.
+     * @param entity
+     */
     private declineAngebot(entity: ViewAngebot): Promise<ViewAngebot> {
         return this.angebotRepository.declineAngebot(this.userService.firma.firmaId, entity);
     }

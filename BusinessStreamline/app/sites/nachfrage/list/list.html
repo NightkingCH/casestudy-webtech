@@ -40,7 +40,7 @@
                     <th>
                     </th>
                 </tr>
-                <tr *ngFor="#nachfrage of data">
+                <tr *ngFor="#nachfrage of data; trackBy: trackByForRequests">
                     <td>
                         <a href="#/nachfrage/{{nachfrage?.nachfrageId}}">
                             {{nachfrage?.nachfrageId}}

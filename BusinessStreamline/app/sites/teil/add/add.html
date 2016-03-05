@@ -9,7 +9,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Name</label>
-                            <input class="form-control" [(ngModel)]="model.name" ngControl="name" />
+                            <input type="text" class="form-control" [(ngModel)]="model.name" ngControl="name" required="required" />
                         </div>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label>Typ</label>
                             <span class="input-group">
-                                <select class="btn" [(ngModel)]="model.typId" ngControl="typId">
+                                <select class="btn" [ngModel]="model.typId" ngControl="typId" (change)="onTypChange($event)">
                                     <option *ngFor="#typ of typList" [value]="typ.typId">{{ typ.name }}</option>
                                 </select>
                             </span>
@@ -27,7 +27,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Anzahl</label>
-                            <input class="form-control" [(ngModel)]="model.anzahl" ngControl="anzahl" />
+                            <input type="text" class="form-control" [(ngModel)]="model.anzahl" ngControl="anzahl" required="required" />
                         </div>
                     </div>
                 </div>

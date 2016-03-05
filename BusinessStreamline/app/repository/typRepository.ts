@@ -3,6 +3,9 @@ import { Repository } from './baseRepository';
 
 import { Typ } from '../models/models';
 
+/**
+ * @description Verwaltet den Zugriff auf den Webservice.
+ */
 export class TypRepository extends Repository {
 
     constructor() {

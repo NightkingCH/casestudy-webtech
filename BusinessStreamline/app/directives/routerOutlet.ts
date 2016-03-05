@@ -2,13 +2,7 @@
 import { Router, RouterOutlet } from 'angular2/router';
 
 /**
- * A router outlet is a placeholder that Angular dynamically fills based on the application's route.
- *
- * ## Use
- *
- * ```
- * <router-outlet></router-outlet>
- * ```
+ * @description Überschreibt den Angular2-Router, da dieser nicht W3-Valid ist.
  */
 @Directive({ selector: '[data-router-outlet]' })
 export class ExtendedRouterOutlet extends RouterOutlet {

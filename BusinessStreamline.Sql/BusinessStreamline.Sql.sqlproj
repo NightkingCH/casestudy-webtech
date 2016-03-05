@@ -84,6 +84,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BusinessStreamline.bak" />
-    <None Include="BusinessStreamline.TER.publish.xml" />
   </ItemGroup>
 </Project>

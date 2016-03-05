@@ -10,6 +10,11 @@ import { Produkt, ViewTeil } from '../../../models/models';
 
 import { UserService } from '../../../services/services';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Produktdetail"-Seite dar.
+ */
 @Component({
     selector: '[data-site-detail-produkt]',
     templateUrl: 'app/sites/produkt/detail/detail.html',
@@ -27,6 +32,7 @@ export class ProduktDetailComponent {
     private teilRepository: TeilRepository = new TeilRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+        // read the id to load the corresponding detail data.
         this.produktId = parseInt(params.params["id"]);
 
         // redirect trolls to home!
@@ -39,19 +45,21 @@ export class ProduktDetailComponent {
         this.title.setTitle("Produkt " + this.produktId.toString() + " - BLS");
     }
 
+    /**
+     * @description
+     * Angular2 life cycle event.
+     */
     public ngOnInit(): void {
-        if (isNaN(this.produktId)) {
-            return;
-        }
-
+        // get product detail information
         this.repository.get(this.produktId).then((data: Produkt) => {
             this.model = data;
-            this.title.setTitle("Produkt | " + this.model.name + " - BLS");
+            this.title.setTitle("Produkt | " + this.model.name + " - BLS"); // update title with product name.
 
             if (!this.userService.isFirma()) {
                 return;
             }
 
+            // ui trigger.
             this.isOwner = this.model.firmaId == this.userService.firma.firmaId;
 
         }).then(() => {
@@ -61,6 +69,13 @@ export class ProduktDetailComponent {
         }).then(() => {
             this.setUpUI();
         });
+    }
+
+    /**
+     * https://github.com/angular/angular/issues/7088
+     */
+    private trackByForParts(index: number, object: ViewTeil): number {
+        return object.teilId;
     }
 
     private setUpUI(): void {

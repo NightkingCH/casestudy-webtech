@@ -5,6 +5,11 @@ import { Router } from 'angular2/router';
 
 import { UserService } from '../../services/services';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Logout"-Seite dar.
+ */
 @Component({
     selector: '[data-site-logout]',
     templateUrl: 'app/sites/logout/logout.html',

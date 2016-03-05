@@ -37,7 +37,7 @@
                         Aktionen
                     </th>
                 </tr>
-                <tr *ngFor="#teil of data">
+                <tr *ngFor="#teil of data; trackBy: trackByForParts">
                     <td>{{ teil?.teilName }}</td>
                     <td>{{ teil?.typName }}</td>
                     <td>{{ teil?.anzahl }}</td>

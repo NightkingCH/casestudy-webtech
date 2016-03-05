@@ -3,6 +3,9 @@ import { Repository } from './baseRepository';
 
 import { Teil, ViewTeil } from '../models/models';
 
+/**
+ * @description Verwaltet den Zugriff auf den Webservice.
+ */
 export class TeilRepository extends Repository {
 
     constructor() {

@@ -7,6 +7,11 @@ import { UserService } from '../../../services/services';
 import { ProduktRepository } from '../../../repository/repository';
 import { Produkt } from '../../../models/models';
 
+/**
+ * @description
+ * Angular2-Komponente. Erweckt das HTML-Template zum Leben.
+ * Stellt die "Produktliste"-Seite dar.
+ */
 @Component({
     selector: '[data-site-list-produkt]',
     templateUrl: 'app/sites/produkt/list/list.html',
@@ -43,5 +48,12 @@ export class ProduktListComponent {
         return this.produktRepository.getByFirma(this.userService.firma.firmaId, this.userService.user.loginId).then((data: Array<Produkt>) => {
             this.data = data;
         });
+    }
+
+    /**
+     * https://github.com/angular/angular/issues/7088
+     */
+    private trackByForProducts(index: number, object: Produkt): number {
+        return object.produktId;
     }
 }
