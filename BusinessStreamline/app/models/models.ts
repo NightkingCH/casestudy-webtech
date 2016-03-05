@@ -167,3 +167,18 @@ export class ViewAngebotAnbieter {
     public produktName: string;
     public teilName: string;
 }
+
+export class ViewBestellung {
+    public angebotId: number;
+    public preisProTeil: number;
+    public teilName: string;
+    public produktId: number;
+    public produktName: string;
+    public anbieterName: string;
+    public firmaName: number;
+    public bestellDatum: Date;
+    public firmaLoginId: number;
+    public anbieterLoginId: number;
+    public firmaId: number;
+    public bestellungId: number;
+}

@@ -145,6 +145,38 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewAnzahlAngeboteNachfrage
           <Property Name="AnzahlAngebote" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'BusinessStreamline.dbo.ViewBestellung' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewBestellung">
+          <Key>
+            <PropertyRef Name="AngebotId" />
+            <PropertyRef Name="FirmaLoginId" />
+            <PropertyRef Name="AnbieterLoginId" />
+            <PropertyRef Name="PreisProTeil" />
+            <PropertyRef Name="TeilName" />
+            <PropertyRef Name="ProduktId" />
+            <PropertyRef Name="ProduktName" />
+            <PropertyRef Name="AnbieterName" />
+            <PropertyRef Name="FirmaName" />
+            <PropertyRef Name="BestellDatum" />
+            <PropertyRef Name="NachfrageId" />
+            <PropertyRef Name="FirmaId" />
+            <PropertyRef Name="BestellungId" />
+          </Key>
+          <Property Name="AngebotId" Type="int" Nullable="false" />
+          <Property Name="FirmaLoginId" Type="int" Nullable="false" />
+          <Property Name="AnbieterLoginId" Type="int" Nullable="false" />
+          <Property Name="PreisProTeil" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TeilName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ProduktId" Type="int" Nullable="false" />
+          <Property Name="ProduktName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="AnbieterName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="FirmaName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="BestellDatum" Type="datetime" Nullable="false" />
+          <Property Name="NachfrageId" Type="int" Nullable="false" />
+          <Property Name="FirmaId" Type="int" Nullable="false" />
+          <Property Name="BestellungId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'BusinessStreamline.dbo.ViewNachfrage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewNachfrage">
           <Key>
@@ -404,6 +436,23 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewAnzahlAngeboteNachfrage].[AnzahlAngebote] AS [AnzahlAngebote]
     FROM [dbo].[ViewAnzahlAngeboteNachfrage] AS [ViewAnzahlAngeboteNachfrage]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="ViewBestellung" EntityType="Self.ViewBestellung" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewBestellung].[AngebotId] AS [AngebotId], 
+    [ViewBestellung].[FirmaLoginId] AS [FirmaLoginId], 
+    [ViewBestellung].[AnbieterLoginId] AS [AnbieterLoginId], 
+    [ViewBestellung].[PreisProTeil] AS [PreisProTeil], 
+    [ViewBestellung].[TeilName] AS [TeilName], 
+    [ViewBestellung].[ProduktId] AS [ProduktId], 
+    [ViewBestellung].[ProduktName] AS [ProduktName], 
+    [ViewBestellung].[AnbieterName] AS [AnbieterName], 
+    [ViewBestellung].[FirmaName] AS [FirmaName], 
+    [ViewBestellung].[BestellDatum] AS [BestellDatum], 
+    [ViewBestellung].[NachfrageId] AS [NachfrageId], 
+    [ViewBestellung].[FirmaId] AS [FirmaId], 
+    [ViewBestellung].[BestellungId] AS [BestellungId]
+    FROM [dbo].[ViewBestellung] AS [ViewBestellung]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ViewNachfrage" EntityType="Self.ViewNachfrage" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewNachfrage].[NachfrageId] AS [NachfrageId], 
@@ -563,6 +612,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySet Name="ViewNachfrage" EntityType="BusinessStreamlineModel.ViewNachfrage" />
           <EntitySet Name="ViewNachfrageBestellung" EntityType="BusinessStreamlineModel.ViewNachfrageBestellung" />
           <EntitySet Name="ViewAngebotAnbieter" EntityType="BusinessStreamlineModel.ViewAngebotAnbieter" />
+          <EntitySet Name="ViewBestellung" EntityType="BusinessStreamlineModel.ViewBestellung" />
           </EntityContainer>
         <EntityType Name="Anbieter">
           <Key>
@@ -911,6 +961,36 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="ProduktName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="TeilName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ViewBestellung">
+          <Key>
+            <PropertyRef Name="AngebotId" />
+            <PropertyRef Name="PreisProTeil" />
+            <PropertyRef Name="TeilName" />
+            <PropertyRef Name="ProduktId" />
+            <PropertyRef Name="ProduktName" />
+            <PropertyRef Name="AnbieterName" />
+            <PropertyRef Name="FirmaName" />
+            <PropertyRef Name="BestellDatum" />
+            <PropertyRef Name="FirmaLoginId" />
+            <PropertyRef Name="AnbieterLoginId" />
+            <PropertyRef Name="NachfrageId" />
+            <PropertyRef Name="FirmaId" />
+            <PropertyRef Name="BestellungId" />
+          </Key>
+          <Property Name="AngebotId" Type="Int32" Nullable="false" />
+          <Property Name="PreisProTeil" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TeilName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ProduktId" Type="Int32" Nullable="false" />
+          <Property Name="ProduktName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="AnbieterName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="FirmaName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="BestellDatum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FirmaLoginId" Type="Int32" Nullable="false" />
+          <Property Name="AnbieterLoginId" Type="Int32" Nullable="false" />
+          <Property Name="NachfrageId" Type="Int32" Nullable="false" />
+          <Property Name="FirmaId" Type="Int32" Nullable="false" />
+          <Property Name="BestellungId" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1109,6 +1189,25 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
                 <ScalarProperty Name="PreisProTeil" ColumnName="PreisProTeil" />
                 <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
                 <ScalarProperty Name="AnbieterId" ColumnName="AnbieterId" />
+                <ScalarProperty Name="AngebotId" ColumnName="AngebotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewBestellung">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewBestellung">
+              <MappingFragment StoreEntitySet="ViewBestellung">
+                <ScalarProperty Name="BestellungId" ColumnName="BestellungId" />
+                <ScalarProperty Name="FirmaId" ColumnName="FirmaId" />
+                <ScalarProperty Name="NachfrageId" ColumnName="NachfrageId" />
+                <ScalarProperty Name="AnbieterLoginId" ColumnName="AnbieterLoginId" />
+                <ScalarProperty Name="FirmaLoginId" ColumnName="FirmaLoginId" />
+                <ScalarProperty Name="BestellDatum" ColumnName="BestellDatum" />
+                <ScalarProperty Name="FirmaName" ColumnName="FirmaName" />
+                <ScalarProperty Name="AnbieterName" ColumnName="AnbieterName" />
+                <ScalarProperty Name="ProduktName" ColumnName="ProduktName" />
+                <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
+                <ScalarProperty Name="TeilName" ColumnName="TeilName" />
+                <ScalarProperty Name="PreisProTeil" ColumnName="PreisProTeil" />
                 <ScalarProperty Name="AngebotId" ColumnName="AngebotId" />
               </MappingFragment>
             </EntityTypeMapping>

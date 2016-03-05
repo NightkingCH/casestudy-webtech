@@ -38,6 +38,9 @@ import { KontaktComponent } from './sites/kontakt/kontakt';
 import { LoginComponent } from './sites/login/login';
 import { LogoutComponent } from './sites/logout/logout';
 
+/* Bestellung */
+import { BestellungListComponent } from './sites/bestellung/list/list';
+
 @Component({
     selector: '[data-app]',
     template: `
@@ -62,7 +65,8 @@ import { LogoutComponent } from './sites/logout/logout';
         { path: "/logout", name: "Logout", component: LogoutComponent },
         { path: "/angebot/add/:id", name: "AddAngebot", component: AngebotAddComponent },
         { path: "/angebot/list", name: "ListAngebot", component: AngebotListComponent },
-        { path: "/teil/add/:id", name: "AddTeil", component: TeilAddComponent }
+        { path: "/teil/add/:id", name: "AddTeil", component: TeilAddComponent },
+        { path: "/bestellungen", name: "Bestellung", component: BestellungListComponent }
 ])
 export class AppComponent {
 

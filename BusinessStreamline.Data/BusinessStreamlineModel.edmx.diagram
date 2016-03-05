@@ -35,6 +35,7 @@
         <EntityTypeShape EntityType="BusinessStreamlineModel.ViewNachfrage" Width="1.5" PointX="5.375" PointY="4.75" />
         <EntityTypeShape EntityType="BusinessStreamlineModel.ViewNachfrageBestellung" Width="1.5" PointX="7.375" PointY="4.75" />
         <EntityTypeShape EntityType="BusinessStreamlineModel.ViewAngebotAnbieter" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.ViewBestellung" Width="1.5" PointX="0.75" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

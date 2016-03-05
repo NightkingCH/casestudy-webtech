@@ -40,6 +40,26 @@ namespace BusinessStreamline.Controllers.WebAPI
             return Ok(bestellung);
         }
 
+        // GET: api/bestellung/overview/firma/1
+        [HttpGet()]
+        [Route("overview/firma/{firma:int}")]
+        [ResponseType(typeof(IQueryable<ViewBestellung>))]
+        public IQueryable<ViewBestellung> GetOverviewByFirma(int firma)
+        {
+            return db.ViewBestellung
+                .Where(x => x.FirmaLoginId == firma);
+        }
+
+        // GET: api/bestellung/overview/anbieter/1
+        [HttpGet()]
+        [Route("overview/anbieter/{anbieter:int}")]
+        [ResponseType(typeof(IQueryable<ViewBestellung>))]
+        public IQueryable<ViewBestellung> GetOverviewByAnbieter(int anbieter)
+        {
+            return db.ViewBestellung
+                .Where(x => x.AnbieterLoginId == anbieter);
+        }
+
         // PUT: api/Bestellung/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBestellung(int id, Bestellung bestellung)
@@ -135,7 +155,7 @@ namespace BusinessStreamline.Controllers.WebAPI
             orderXml.Save(fullSavePath);
         }
 
-        // GET api/Bestellung/xml/get/1001/1001
+        // GET api/bestellung/xml/get/1001/1001
         [HttpGet()]
         [Route("xml/get/{firmaId:int}/{bestellungId:int}")]
         [ResponseType(typeof(IHttpActionResult))]

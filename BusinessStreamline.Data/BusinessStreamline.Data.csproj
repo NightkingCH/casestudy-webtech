@@ -106,6 +106,9 @@
     <Compile Include="ViewAnzahlAngeboteNachfrage.cs">
       <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewBestellung.cs">
+      <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewNachfrage.cs">
       <DependentUpon>BusinessStreamlineModel.tt</DependentUpon>
     </Compile>
