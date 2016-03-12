@@ -1,5 +1,5 @@
 ﻿import { Component } from 'angular2/core';
-import { COMMON_DIRECTIVES } from 'angular2/common';
+import { COMMON_DIRECTIVES, ControlGroup, FormBuilder } from 'angular2/common';
 import { Router, RouteParams } from 'angular2/router';
 import { Title } from 'angular2/platform/browser';
 
