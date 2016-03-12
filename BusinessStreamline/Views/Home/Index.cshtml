@@ -12,6 +12,7 @@
     <link rel="icon" href="../../favicon.ico">
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/node_modules/toastr/build/toastr.css" rel="stylesheet" />
     <link href="~/content/css/site.css" rel="stylesheet" />
 </head>
 <body>
@@ -26,6 +27,7 @@
     <script defer src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script defer src="~/node_modules/moment/min/moment-with-locales.min.js"></script>
     <script defer src="~/node_modules/linq/linq.min.js"></script>
+    <script defer src="~/node_modules/toastr/build/toastr.min.js"></script>
 
     <script defer src="~/node_modules/angular2/bundles/angular2-polyfills.js"></script>
     <script defer src="~/node_modules/systemjs/dist/system.js"></script>
@@ -39,6 +41,24 @@
 
     <script>
         function boot() {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-bottom-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
             System.config({
                 transpiler: 'typescript',
                 typescriptOptions: { emitDecoratorMetadata: true },
