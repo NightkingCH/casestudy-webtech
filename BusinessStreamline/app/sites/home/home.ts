@@ -4,6 +4,7 @@ import { Title } from 'angular2/platform/browser';
 
 import { SucheNachfrageRepository, TypRepository } from '../../repository/repository';
 import { ViewSucheNachfrage, NachfrageSearch, Typ, NachfrageStatus } from '../../models/models';
+import { UserService } from '../../services/services';
 
 /**
  * @description
@@ -23,11 +24,14 @@ export class HomeComponent {
     private count: number = 0;
     private typList: Array<Typ> = [];
     private statusList: Array<NachfrageStatus> = [];
+    private isLoggedIn: boolean = false;
 
     private model: NachfrageSearch = new NachfrageSearch();
 
-    constructor(private title: Title) {
+    constructor(private title: Title, private userService: UserService) {
         this.title.setTitle("Home - BLS");
+
+        this.isLoggedIn = this.userService.isLoggedIn();
     }
 
     /**

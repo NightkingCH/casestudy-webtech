@@ -10,35 +10,55 @@
     <script>document.write('<base href="' + document.location + '" />');</script>
     <title>BusinessStreamline</title>
     <link rel="icon" href="../../favicon.ico">
-    <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/content/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/content/css/toastr.css" rel="stylesheet" />
     <link href="~/content/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <div data-app=""></div>
     <!-- IE required polyfills, in this exact order -->
-    <script src="~/node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="~/node_modules/systemjs/dist/system-polyfills.js"></script>
+    <script src="~/lib/es6-shim.min.js"></script>
+    <script src="~/lib/system-polyfills.js"></script>
     <script src="~/lib/shims_for_ie.js"></script>
 
     <script defer src="~/lib/cycle.js"></script>
-    <script defer src="~/node_modules/jquery/dist/jquery.js"></script>
-    <script defer src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script defer src="~/node_modules/moment/min/moment-with-locales.min.js"></script>
-    <script defer src="~/node_modules/linq/linq.min.js"></script>
+    <script defer src="~/lib/jquery.js"></script>
+    <script defer src="~/lib/bootstrap.js"></script>
+    <script defer src="~/lib/moment-with-locales.min.js"></script>
+    <script defer src="~/lib/linq.min.js"></script>
+    <script defer src="~/lib/toastr.min.js"></script>
 
-    <script defer src="~/node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script defer src="~/node_modules/systemjs/dist/system.js"></script>
-    <script defer src="~/node_modules/typescript/lib/typescript.js"></script>
-    <script defer src="~/node_modules/whatwg-fetch/fetch.js"></script>
-    <script defer src="~/node_modules/rxjs/bundles/Rx.js"></script>
+    <script defer src="~/lib/angular2-polyfills.js"></script>
+    <script defer src="~/lib/system.js"></script>
+    <script defer src="~/lib/typescript.js"></script>
+    <script defer src="~/lib/fetch.js"></script>
+    <script defer src="~/lib/Rx.js"></script>
 
-    <script defer src="~/node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script defer src="~/node_modules/angular2/bundles/router.dev.js"></script>
-    <script defer src="~/node_modules/angular2/bundles/http.js" onload="boot()"></script>
+    <script defer src="~/lib/angular2.dev.js"></script>
+    <script defer src="~/lib/router.dev.js"></script>
+    <script defer src="~/lib/http.dev.js" onload="boot()"></script>
 
     <script>
         function boot() {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-bottom-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
             System.config({
                 transpiler: 'typescript',
                 typescriptOptions: { emitDecoratorMetadata: true },
