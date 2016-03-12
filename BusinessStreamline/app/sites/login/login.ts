@@ -1,9 +1,11 @@
 ﻿import { Component } from 'angular2/core';
+import { Router } from 'angular2/router';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { Title } from 'angular2/platform/browser';
+import { UserService } from '../../services/services';
 
-import { SucheNachfrageRepository, TypRepository } from '../../repository/repository';
-import { ViewSucheNachfrage, NachfrageSearch, Typ, NachfrageStatus } from '../../models/models';
+import { SucheNachfrageRepository, TypRepository, LoginRepository } from '../../repository/repository';
+import { ViewSucheNachfrage, NachfrageSearch, Typ, NachfrageStatus, Login } from '../../models/models';
 
 /**
  * @description
@@ -16,6 +18,21 @@ import { ViewSucheNachfrage, NachfrageSearch, Typ, NachfrageStatus } from '../..
     directives: [COMMON_DIRECTIVES]
 })
 export class LoginComponent {
+
+    model = new Login()
+
+    submitted = false;
+
+    constructor(private userService: UserService, private router:Router) { }
+
+    onsubmit() { this.submitted = true; }
+
+    userLogin(): void {
+        new LoginRepository().login(this.model).then((data: Login) => {
+            this.userService.user = data;
+            this.router.navigateByUrl("/home");
+        });
+    }
 
     /*private sucheRepository: SucheNachfrageRepository = new SucheNachfrageRepository();
     private typRepository: TypRepository = new TypRepository();
