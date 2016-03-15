@@ -13910,8 +13910,8 @@ System.register("angular2/src/platform/dom/dom_renderer", ["angular2/src/core/di
   }
   var COMPONENT_REGEX = /%COMP%/g;
   exports.COMPONENT_VARIABLE = '%COMP%';
-  exports.HOST_ATTR = "_nghost-" + exports.COMPONENT_VARIABLE;
-  exports.CONTENT_ATTR = "_ngcontent-" + exports.COMPONENT_VARIABLE;
+  exports.HOST_ATTR = "data-nghost-" + exports.COMPONENT_VARIABLE;
+  exports.CONTENT_ATTR = "data-ngcontent-" + exports.COMPONENT_VARIABLE;
   function _shimContentAttribute(componentShortId) {
     return lang_1.StringWrapper.replaceAll(exports.CONTENT_ATTR, COMPONENT_REGEX, componentShortId);
   }
@@ -21623,8 +21623,8 @@ System.register("angular2/src/compiler/style_compiler", ["angular2/src/compiler/
   var util_1 = require("angular2/src/compiler/util");
   var di_1 = require("angular2/src/core/di");
   var COMPONENT_VARIABLE = '%COMP%';
-  var HOST_ATTR = "_nghost-" + COMPONENT_VARIABLE;
-  var CONTENT_ATTR = "_ngcontent-" + COMPONENT_VARIABLE;
+  var HOST_ATTR = "data-nghost-" + COMPONENT_VARIABLE;
+  var CONTENT_ATTR = "data-ngcontent-" + COMPONENT_VARIABLE;
   var StyleCompiler = (function() {
     function StyleCompiler(_xhr, _urlResolver) {
       this._xhr = _xhr;
