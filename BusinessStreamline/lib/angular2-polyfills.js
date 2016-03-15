@@ -1149,8 +1149,6 @@ THE SOFTWARE.
 	function deprecatedWarning(key, text) {
 	    if (!deprecated.hasOwnProperty(key)) {
 	        deprecated[key] = true;
-	        console.warn("DEPRECATION WARNING: '" + key +
-	            "' is no longer supported and will be removed in next major release. " + text);
 	    }
 	}
 	var Zone = (function () {
