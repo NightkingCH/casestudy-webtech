@@ -48,7 +48,7 @@ export class AngebotAddComponent {
 
         // companies can't add an offer.
         if (this.userService.isFirma()) {
-            this.router.navigateByUrl("/nachfrage" + this.nachfrageId);
+            this.router.navigateByUrl("/nachfrage/" + this.nachfrageId);
 
             return;
         }
@@ -82,6 +82,8 @@ export class AngebotAddComponent {
         this.model.status = 0; // 0 = Offen, 1 = Akzeptiert, 2 = Geschlossen
 
         this.angebotRepository.post(this.model).then(() => {
+            toastr.success("Angebot wurde abgegeben.");
+
             this.router.navigateByUrl("/nachfrage/" + this.nachfrageId);
         });
     }

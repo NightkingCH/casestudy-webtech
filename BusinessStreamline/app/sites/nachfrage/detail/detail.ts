@@ -131,6 +131,8 @@ export class NachfrageDetailComponent {
             }).then(() => {
                 return this.bestellRepository.createXml(this.userService.firma.firmaId, bestellung.bestellungId);
             }).then(() => {
+                toastr.success("Bestellung wurde erstellt.");
+
                 return this.fetchDetail();
             });
         });

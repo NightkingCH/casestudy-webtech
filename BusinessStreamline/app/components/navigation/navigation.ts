@@ -17,6 +17,9 @@ export class NavigationComponent {
     private isAnbieter: boolean;
 
     constructor(private userService: UserService) {
+    }
+    
+    public ngDoCheck(): void {
         this.isFirma = this.userService.isFirma();
         this.isAnbieter = this.userService.isAnbieter();
     }

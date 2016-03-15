@@ -24,7 +24,10 @@ export class HomeComponent {
     private count: number = 0;
     private typList: Array<Typ> = [];
     private statusList: Array<NachfrageStatus> = [];
+
     private isLoggedIn: boolean = false;
+    private isFirma: boolean;
+    private isAnbieter: boolean;
 
     private model: NachfrageSearch = new NachfrageSearch();
 
@@ -44,6 +47,11 @@ export class HomeComponent {
         });
 
         this.setUpState();
+    }
+
+    public ngDoCheck(): void {
+        this.isFirma = this.userService.isFirma();
+        this.isAnbieter = this.userService.isAnbieter();
     }
 
     /**

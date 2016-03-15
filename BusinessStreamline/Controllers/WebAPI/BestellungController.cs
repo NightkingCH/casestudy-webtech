@@ -143,13 +143,23 @@ namespace BusinessStreamline.Controllers.WebAPI
         }
 
         private void createXml(Bestellung bestellung) {
+
+            ViewBestellung vBestellung = db.ViewBestellung.FirstOrDefault(x => x.BestellungId == bestellung.BestellungId);
+
             string fullSavePath = HttpContext.Current.Server.MapPath(string.Format(@"~/App_Data/Bestellungen/{0}.xml", bestellung.BestellungId.ToString()));
 
             // http://www.dotnet-tricks.com/Tutorial/linq/bTa2310512-Create-xml-from-database-using-LINQ.html
-            XElement orderXml = new XElement("Bestellung", new List<Bestellung>() { bestellung }.Select(
+            XElement orderXml = new XElement("Bestellung", new List<ViewBestellung>() { vBestellung }.Select(
                 x => new XElement("Details",
                                     new XAttribute("BestellungId", x.BestellungId),
-                                    new XAttribute("AngebotId", x.AngebotId)
+                                    new XAttribute("AngebotId", x.AngebotId),
+                                    new XAttribute("ProduktId", x.ProduktId),
+                                    new XAttribute("ProduktName", x.ProduktName),
+                                    new XAttribute("TeilName", x.TeilName),
+                                    new XAttribute("FirmaName", x.FirmaName),
+                                    new XAttribute("AnbieterName", x.AnbieterName),
+                                    new XAttribute("PreisProTeil", x.PreisProTeil),
+                                    new XAttribute("BestellDatum", x.BestellDatum)
             )));
 
             orderXml.Save(fullSavePath);
@@ -172,6 +182,12 @@ namespace BusinessStreamline.Controllers.WebAPI
             {
 
                 var xmlPath = HttpContext.Current.Server.MapPath(string.Format(@"~/App_Data/Bestellungen/{0}.xml", bestellung.BestellungId.ToString()));
+                var xmlInfo = new FileInfo(xmlPath);
+
+                if (!xmlInfo.Exists) {
+                    this.createXml(bestellung);
+                }
+
                 var xmlResponse = Request.CreateResponse(HttpStatusCode.OK);
 
                 xmlResponse.Content = new StreamContent(new FileStream(xmlPath, FileMode.Open, FileAccess.Read));

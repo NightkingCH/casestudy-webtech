@@ -86,6 +86,8 @@ export class NachfrageAddComponent {
 
         // save the request.
         this.nachfrageRepository.post(this.userService.firma.firmaId, this.model).then((entity: Nachfrage) => {
+            toastr.success("Nachfrage wurde eröffnet.");
+
             this.router.navigateByUrl("/nachfrage/" + entity.nachfrageId);
         });
     }

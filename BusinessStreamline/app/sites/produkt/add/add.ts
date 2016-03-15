@@ -56,6 +56,8 @@ export class ProduktAddComponent {
         this.model.firmaId = this.userService.firma.firmaId;
 
         this.repository.post(this.model).then((entity: Produkt) => {
+            toastr.success("Produkt wurde erstellt.");
+
             return this.router.navigateByUrl("/produkt/" + entity.produktId);
         });
     }

@@ -67,7 +67,7 @@
                         <span *ngIf="nachfrage?.hatBestellung" class="label label-primary label-as-badge center-block">Geschlossen</span>
                     </td>
                     <td>
-                        <a *ngIf="!nachfrage?.hatBestellung && isLoggedIn" href="#/angebot/add/{{nachfrage?.nachfrageId}}" class="btn btn-default center-block">
+                        <a *ngIf="!nachfrage?.hatBestellung && isAnbieter" href="#/angebot/add/{{nachfrage?.nachfrageId}}" class="btn btn-default center-block">
                             <i class="glyphicon glyphicon-plus"></i>
                         </a>
                     </td>

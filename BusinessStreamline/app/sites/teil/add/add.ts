@@ -135,7 +135,7 @@ export class TeilAddComponent {
 
         // save the part
         this.repository.post(this.userService.firma.firmaId, this.model).then(() => {
-            toastr.success("Erfolgreich hinzugefügt.");
+            toastr.success("Teil wurde hinzugefügt.");
 
             return this.router.navigateByUrl("/produkt/" + this.produktId);
         });
