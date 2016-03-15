@@ -68,7 +68,7 @@ export class TeilAddComponent {
 
     private createModel(): void {
         this.formModel = this.formBuilder.group({
-            name: ["", Validators.compose([Validators.required])],
+            name: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(40)])],
             typId: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])],
             anzahl: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])]
         });

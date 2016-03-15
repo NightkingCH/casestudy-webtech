@@ -9,8 +9,10 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.name" ngControl="name" required="required" />
+                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.name" ngControl="name" required="required" maxlength="40" />
                             <div *ngIf="formModel.hasError('required', 'name')" class="label label-danger label-as-badge">Name ist ein Pflichtfeld!</div>
+                            <div *ngIf="formModel.hasError('minlength', 'name')" class="label label-danger label-as-badge">Name ist zu kurz!</div>
+                            <div *ngIf="formModel.hasError('maxlength', 'name')" class="label label-danger label-as-badge">Name darf nicht länger als 40 Zeichen sein!</div>
                         </div>
                     </div>
                 </div>
@@ -31,7 +33,7 @@
                             <label>Anzahl</label>
                             <input type="text" class="form-control" [ngFormControl]="formModel.controls.anzahl" ngControl="anzahl" required="required" />
                             <div *ngIf="formModel.hasError('required', 'anzahl')" class="label label-danger label-as-badge">Anzahl ist ein Pflichtfeld!</div>
-                            <div *ngIf="formModel.hasError('invalidNotGreaterThan', 'anzahl')" class="label label-danger label-as-badge">Anzahl muss grösser 0 sein!</div>
+                            <div *ngIf="formModel.hasError('greaterthan', 'anzahl')" class="label label-danger label-as-badge">Anzahl muss grösser 0 sein!</div>
                         </div>
                     </div>
                 </div>

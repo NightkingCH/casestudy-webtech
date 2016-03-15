@@ -13,13 +13,13 @@ export class GreaterThanValidator implements Validator {
         var internalValue = parseFloat(c.value);
 
         if (isNaN(internalValue)) {
-            return { invalidNotGreaterThan: true }
+            return { greaterthan: true }
         }
 
         if (internalValue > this.minValue) {
             return null;
         }
 
-        return { invalidNotGreaterThan: true };
+        return { greaterthan: true };
     }
 }

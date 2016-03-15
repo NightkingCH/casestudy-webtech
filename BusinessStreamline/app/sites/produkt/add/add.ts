@@ -53,7 +53,7 @@ export class ProduktAddComponent {
 
     private createModel(): void {
         this.formModel = this.formBuilder.group({
-            name: ["", Validators.compose([Validators.required])]
+            name: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(40)])]
         });
     }
 
