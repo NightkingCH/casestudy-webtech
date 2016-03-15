@@ -9,7 +9,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.name" ngControl="name" required="required" maxlength="40" />
+                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.name" autofocus="autofocus" required="required" maxlength="40" />
                             <div *ngIf="formModel.hasError('required', 'name')" class="label label-danger label-as-badge">Name ist ein Pflichtfeld!</div>
                             <div *ngIf="formModel.hasError('minlength', 'name')" class="label label-danger label-as-badge">Name ist zu kurz!</div>
                             <div *ngIf="formModel.hasError('maxlength', 'name')" class="label label-danger label-as-badge">Name darf nicht länger als 40 Zeichen sein!</div>
@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label>Typ</label>
                             <span class="input-group">
-                                <select class="btn" [ngFormControl]="formModel.controls.typId" ngControl="typId" (change)="onTypChange($event)">
+                                <select class="btn" [ngFormControl]="formModel.controls.typId" (change)="onTypChange($event)">
                                     <option *ngFor="#typ of typList" [value]="typ.typId">{{ typ.name }}</option>
                                 </select>
                             </span>
@@ -31,7 +31,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Anzahl</label>
-                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.anzahl" ngControl="anzahl" required="required" />
+                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.anzahl" required="required" />
                             <div *ngIf="formModel.hasError('required', 'anzahl')" class="label label-danger label-as-badge">Anzahl ist ein Pflichtfeld!</div>
                             <div *ngIf="formModel.hasError('greaterthan', 'anzahl')" class="label label-danger label-as-badge">Anzahl muss grösser 0 sein!</div>
                         </div>

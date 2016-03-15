@@ -9,13 +9,11 @@
                 <label for="inputEmail" class="sr-only">
                     Benutzername
                 </label>
-                <input type="text" id="inputEmail" class="form-control" placeholder="Benutzername" required autofocus [(ngModel)]="model.name"
-            ngControl="name"  #name="ngForm">
+                <input type="text" id="inputEmail" class="form-control" placeholder="Benutzername" required="required" autofocus="autofocus" [(ngModel)]="model.name" #name="ngForm">
                 <label for="inputPassword" class="sr-only">
                     Passwort
                 </label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required  [(ngModel)]="model.password"
-            ngControl="password"  #name="ngForm">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required="required" [(ngModel)]="model.password" #name="ngForm">
                 <button class="btn btn-lg btn-default btn-block" type="submit" (click)="userLogin($event)">
                     Anmelden
                 </button>

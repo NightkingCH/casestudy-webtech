@@ -45,7 +45,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Zu produzierende Stückzahl</label>
-                            <input class="form-control" [ngFormControl]="formModel.controls.anzahl" ngControl="anzahl" />
+                            <input class="form-control" [ngFormControl]="formModel.controls.anzahl" autofocus="autofocus" />
                             <div *ngIf="formModel.hasError('required', 'anzahl')" class="label label-danger label-as-badge">Anzahl ist ein Pflichtfeld!</div>
                             <div *ngIf="formModel.hasError('greaterthan', 'anzahl')" class="label label-danger label-as-badge">Anzahl muss grösser 0 sein!</div>
                         </div>

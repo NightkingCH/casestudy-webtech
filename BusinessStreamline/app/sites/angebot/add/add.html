@@ -53,7 +53,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Preis pro Stück</label>
-                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.preisProTeil" ngControl="preisProTeil" required="required" />
+                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.preisProTeil" required="required" autofocus="autofocus" />
                             <div *ngIf="formModel.hasError('required', 'preisProTeil')" class="label label-danger label-as-badge">Preis ist ein Pflichtfeld!</div>
                             <div *ngIf="formModel.hasError('greaterthan', 'preisProTeil')" class="label label-danger label-as-badge">Preis muss grösser 0.01 sein!</div>
                         </div>
