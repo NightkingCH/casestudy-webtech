@@ -1,7 +1,7 @@
 ﻿<section>
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
-            <form class="form" (ngSubmit)="onAdd($event)">
+            <form class="form" (ngSubmit)="onAdd($event)" [ngFormModel]="formModel">
                 <fieldset>
                     <legend>Produkt erstellen</legend>
                 </fieldset>
@@ -9,7 +9,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" [(ngModel)]="model.name" ngControl="name" required="required" />
+                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.name" ngControl="name" required="required" />
+                            <div *ngIf="formModel.hasError('required', 'name')" class="label label-danger label-as-badge">Name ist ein Pflichtfeld!</div>
                         </div>
                     </div>
                 </div>

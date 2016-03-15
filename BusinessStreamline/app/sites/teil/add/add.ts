@@ -1,11 +1,12 @@
 ﻿import { Component } from 'angular2/core';
-import { COMMON_DIRECTIVES } from 'angular2/common';
+import { COMMON_DIRECTIVES, FormBuilder, ControlGroup, Validators } from 'angular2/common';
 import { Router, RouteParams } from 'angular2/router';
 import { Title } from 'angular2/platform/browser';
 
 declare var $: JQueryStatic;
 
 import { PIPES } from '../../../pipes/pipes';
+import { Validators as AppValidators } from '../../../validation/validation';
 
 import { UserService } from '../../../services/services';
 
@@ -27,6 +28,7 @@ export class TeilAddComponent {
 
     private produktId: number;
     private model: Teil = new Teil();
+    private formModel: ControlGroup;
     private data: Produkt;
     private typList: Array<Typ> = [];
 
@@ -34,7 +36,7 @@ export class TeilAddComponent {
     private typRepository: TypRepository = new TypRepository();
     private produktRepository: ProduktRepository = new ProduktRepository();
 
-    constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+    constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService, private formBuilder: FormBuilder) {
         this.title.setTitle("Teil | Hinzufügen - BLS");
 
         // not logged in users can't do anything!
@@ -60,6 +62,16 @@ export class TeilAddComponent {
 
             return;
         }
+
+        this.createModel();
+    }
+
+    private createModel(): void {
+        this.formModel = this.formBuilder.group({
+            name: ["", Validators.compose([Validators.required])],
+            typId: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])],
+            anzahl: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])]
+        });
     }
 
     public ngOnInit(): void {
@@ -114,24 +126,35 @@ export class TeilAddComponent {
 
     public onAdd(event: MouseEvent): void {
 
-        if (this.model.name == "") {
+        var nameControl = this.formModel.controls["name"];
+        var typControl = this.formModel.controls["typId"];
+        var anzahlControl = this.formModel.controls["anzahl"];
+
+        if (nameControl.value == "") {
             return; // part requires a name
         }
 
-        if (this.model.typId <= 0) {
+        if (isNaN(typControl.value)) {
             return; // part requires a type
         }
 
-        if (isNaN(this.model.anzahl)) {
+        if (parseInt(typControl.value) <= 0) {
+            return; // part requires a type
+        }
+
+        if (isNaN(anzahlControl.value)) {
             return; // part amount from which of the product consists is not a number
         }
 
-        if (this.model.anzahl <= 0) {
+        if (parseInt(anzahlControl.value) <= 0) {
             return; // part amount from which of the product consists must be higher than 0
         }
 
         // link the part to the product
         this.model.produktId = this.produktId;
+        this.model.typId = parseInt(typControl.value);
+        this.model.name = nameControl.value;
+        this.model.anzahl = parseInt(anzahlControl.value);
 
         // save the part
         this.repository.post(this.userService.firma.firmaId, this.model).then(() => {

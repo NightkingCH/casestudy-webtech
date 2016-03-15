@@ -1,7 +1,7 @@
 ﻿<section>
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
-            <form class="form" (ngSubmit)="onAdd($event)">
+            <form class="form" (ngSubmit)="onAdd($event)" [ngFormModel]="formModel">
                 <fieldset>
                     <legend>Teil erstellen</legend>
                 </fieldset>
@@ -9,7 +9,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" [(ngModel)]="model.name" ngControl="name" required="required" />
+                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.name" ngControl="name" required="required" />
+                            <div *ngIf="formModel.hasError('required', 'name')" class="label label-danger label-as-badge">Name ist ein Pflichtfeld!</div>
                         </div>
                     </div>
                 </div>
@@ -18,16 +19,19 @@
                         <div class="form-group">
                             <label>Typ</label>
                             <span class="input-group">
-                                <select class="btn" [ngModel]="model.typId" ngControl="typId" (change)="onTypChange($event)">
+                                <select class="btn" [ngFormControl]="formModel.controls.typId" ngControl="typId" (change)="onTypChange($event)">
                                     <option *ngFor="#typ of typList" [value]="typ.typId">{{ typ.name }}</option>
                                 </select>
                             </span>
+                            <div *ngIf="formModel.hasError('required', 'typId')" class="label label-danger label-as-badge">Typ ist ein Pflichtfeld!</div>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Anzahl</label>
-                            <input type="text" class="form-control" [(ngModel)]="model.anzahl" ngControl="anzahl" required="required" />
+                            <input type="text" class="form-control" [ngFormControl]="formModel.controls.anzahl" ngControl="anzahl" required="required" />
+                            <div *ngIf="formModel.hasError('required', 'anzahl')" class="label label-danger label-as-badge">Anzahl ist ein Pflichtfeld!</div>
+                            <div *ngIf="formModel.hasError('invalidNotGreaterThan', 'anzahl')" class="label label-danger label-as-badge">Anzahl muss grösser 0 sein!</div>
                         </div>
                     </div>
                 </div>

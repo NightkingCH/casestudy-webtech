@@ -1,11 +1,12 @@
 ﻿import { Component } from 'angular2/core';
-import { COMMON_DIRECTIVES } from 'angular2/common';
+import { COMMON_DIRECTIVES, FormBuilder, ControlGroup, Validators } from 'angular2/common';
 import { Router, RouteParams } from 'angular2/router';
 import { Title } from 'angular2/platform/browser';
 
 declare var $: JQueryStatic;
 
 import { PIPES } from '../../../pipes/pipes';
+import { Validators as AppValidators } from '../../../validation/validation';
 
 import { UserService } from '../../../services/services';
 
@@ -26,10 +27,11 @@ import { Produkt } from '../../../models/models';
 export class ProduktAddComponent {
 
     private model: Produkt = new Produkt();
+    private formModel: ControlGroup;
 
     private repository: ProduktRepository = new ProduktRepository();
 
-    constructor(private router: Router,  private title: Title, private userService: UserService) {
+    constructor(private router: Router, private title: Title, private userService: UserService, private formBuilder: FormBuilder) {
         this.title.setTitle("Produkt | Hinzufügen - BLS");
 
         // not logged in users can't do anything!
@@ -45,6 +47,14 @@ export class ProduktAddComponent {
 
             return;
         }
+
+        this.createModel();
+    }
+
+    private createModel(): void {
+        this.formModel = this.formBuilder.group({
+            name: ["", Validators.compose([Validators.required])]
+        });
     }
 
     public onAdd(event: MouseEvent): void {
@@ -53,7 +63,14 @@ export class ProduktAddComponent {
             return; // suppliers can't create a product.
         }
 
+        var nameControl = this.formModel.controls["name"];
+
+        if (nameControl.value == "" || nameControl.value == null) {
+            return;
+        }
+
         this.model.firmaId = this.userService.firma.firmaId;
+        this.model.name = nameControl.value;
 
         this.repository.post(this.model).then((entity: Produkt) => {
             toastr.success("Produkt wurde erstellt.");

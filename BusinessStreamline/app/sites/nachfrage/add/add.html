@@ -37,7 +37,7 @@
     <hr />
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
-            <form class="form" (ngSubmit)="onAdd($event)">
+            <form class="form" (ngSubmit)="onAdd($event)" [ngFormModel]="formModel">
                 <fieldset>
                     <legend>Benötigte Anzahl</legend>
                 </fieldset>
@@ -45,7 +45,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Zu produzierende Stückzahl</label>
-                            <input class="form-control" [(ngModel)]="model.anzahl" ngControl="anzahl" />
+                            <input class="form-control" [ngFormControl]="formModel.controls.anzahl" ngControl="anzahl" />
+                            <div *ngIf="formModel.hasError('required', 'anzahl')" class="label label-danger label-as-badge">Anzahl ist ein Pflichtfeld!</div>
+                            <div *ngIf="formModel.hasError('invalidNotGreaterThan', 'anzahl')" class="label label-danger label-as-badge">Anzahl muss grösser 0 sein!</div>
                         </div>
                     </div>
                 </div>

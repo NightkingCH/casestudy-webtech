@@ -1,11 +1,12 @@
 ﻿import { Component } from 'angular2/core';
-import { COMMON_DIRECTIVES } from 'angular2/common';
+import { COMMON_DIRECTIVES, FormBuilder, ControlGroup, Validators } from 'angular2/common';
 import { Router, RouteParams } from 'angular2/router';
 import { Title } from 'angular2/platform/browser';
 
 declare var $: JQueryStatic;
 
 import { PIPES } from '../../../pipes/pipes';
+import { Validators as AppValidators } from '../../../validation/validation';
 
 import { UserService } from '../../../services/services';
 
@@ -27,12 +28,13 @@ export class NachfrageAddComponent {
 
     private teilId: number;
     private model: Nachfrage = new Nachfrage();
+    private formModel: ControlGroup;
     private data: ViewTeil;
 
     private repository: TeilRepository = new TeilRepository();
     private nachfrageRepository: NachfrageRepository = new NachfrageRepository();
 
-    constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+    constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService, private formBuilder: FormBuilder) {
         // not logged in users can't do anything!
         if (!this.userService.isLoggedIn()) {
             this.router.navigateByUrl("/home");
@@ -54,6 +56,14 @@ export class NachfrageAddComponent {
         }
 
         this.title.setTitle("Nachfrage | Hinzufügen - BLS");
+
+        this.createModel();
+    }
+
+    private createModel(): void {
+        this.formModel = this.formBuilder.group({
+            anzahl: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])]
+        });
     }
 
     /**
@@ -72,17 +82,24 @@ export class NachfrageAddComponent {
             return; // suppliers can't create a request.
         }
 
-        if (isNaN(this.model.anzahl)) {
+        var anzahlControl = this.formModel.controls["anzahl"];
+
+        if (!this.formModel.valid) {
+            return;
+        }
+
+        if (isNaN(anzahlControl.value)) {
             return; // provided amount isn't a number
         }
 
-        if (this.model.anzahl <= 0) {
+        if (parseInt(anzahlControl.value) <= 0) {
             return; // a product consists of more than 0 parts.
         }
 
         // prepare the entity
         this.model.teilId = this.teilId;
         this.model.erstelltAm = moment().toDate();
+        this.model.anzahl = parseInt(anzahlControl.value);
 
         // save the request.
         this.nachfrageRepository.post(this.userService.firma.firmaId, this.model).then((entity: Nachfrage) => {

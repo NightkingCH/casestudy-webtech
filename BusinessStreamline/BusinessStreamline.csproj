@@ -199,7 +199,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\utils\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +238,8 @@
     <TypeScriptCompile Include="app\sites\produkt\list\list.ts" />
     <None Include="tsconfig.json" />
     <TypeScriptCompile Include="app\sites\teil\add\add.ts" />
+    <TypeScriptCompile Include="app\validation\greaterThanValidator.ts" />
+    <TypeScriptCompile Include="app\validation\validation.ts" />
     <TypeScriptCompile Include="typings\browser.d.ts" />
     <TypeScriptCompile Include="typings\browser\ambient\bootstrap\bootstrap.d.ts" />
     <TypeScriptCompile Include="typings\browser\ambient\jquery\jquery.d.ts" />

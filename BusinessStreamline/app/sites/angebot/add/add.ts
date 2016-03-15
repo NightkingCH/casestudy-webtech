@@ -1,11 +1,12 @@
 ﻿import { Component } from 'angular2/core';
-import { COMMON_DIRECTIVES, ControlGroup, FormBuilder } from 'angular2/common';
+import { COMMON_DIRECTIVES, FormBuilder, ControlGroup, Validators } from 'angular2/common';
 import { Router, RouteParams } from 'angular2/router';
 import { Title } from 'angular2/platform/browser';
 
 declare var $: JQueryStatic;
 
 import { PIPES } from '../../../pipes/pipes';
+import { Validators as AppValidators } from '../../../validation/validation';
 
 import { UserService } from '../../../services/services';
 
@@ -22,12 +23,13 @@ export class AngebotAddComponent {
 
     private nachfrageId: number;
     private model: Angebot = new Angebot();
+    private formModel: ControlGroup;
     private data: ViewNachfrage;
 
     private repository: NachfrageRepository = new NachfrageRepository();
     private angebotRepository: AngebotRepository = new AngebotRepository();
 
-    constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService) {
+    constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService, private formBuilder: FormBuilder) {
         this.title.setTitle("Angebot | Hinzufügen - BLS");
 
         // not logged in users can't do anything!
@@ -52,6 +54,14 @@ export class AngebotAddComponent {
 
             return;
         }
+
+        this.createModel();
+    }
+
+    private createModel(): void {
+        this.formModel = this.formBuilder.group({
+            preisProTeil: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])]
+        });
     }
 
     public ngOnInit(): void {
@@ -68,16 +78,23 @@ export class AngebotAddComponent {
             return; // companies can't create an offer.
         }
 
-        if (this.model.preisProTeil <= 0) {
+        var preisProTeilControl = this.formModel.controls["preisProTeil"];
+
+        if (!this.formModel.valid) {
             return;
         }
 
-        if (isNaN(this.model.preisProTeil)) {
-            return;
+        if (isNaN(preisProTeilControl.value)) {
+            return; // provided amount isn't a number
+        }
+
+        if (parseInt(preisProTeilControl.value) <= 0) {
+            return; // a product consists of more than 0 parts.
         }
 
         this.model.nachfrageId = this.nachfrageId;
         this.model.anbieterId = this.userService.anbieter.anbieterId;
+        this.model.preisProTeil = parseFloat(preisProTeilControl.value)
         this.model.erstelltAm = moment().toDate();
         this.model.status = 0; // 0 = Offen, 1 = Akzeptiert, 2 = Geschlossen
 
