@@ -11,56 +11,58 @@
     <hr />
     <div class="row" *ngIf="data != null && data?.length > 0">
         <div class="col-md-offset-1 col-md-10">
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        Angebot
-                    </th>
-                    <th>
-                        Nachfrage
-                    </th>
-                    <th>
-                        Produkt
-                    </th>
-                    <th>
-                        Teil
-                    </th>
-                    <th>
-                        PreisProTeil
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                </tr>
-                <tr *ngFor="#angebot of data">
-                    <td>
-                        {{angebot?.angebotId}}
-                    </td>
-                    <td>
-                        <a href="#/nachfrage/{{angebot?.nachfrageId}}">
-                            {{angebot?.nachfrageId}}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#/produkt/{{angebot?.produktId}}">
-                            {{ angebot?.produktName }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#/produkt/{{angebot?.produktId}}">
-                            {{ angebot?.teilName }}
-                        </a>
-                    </td>
-                    <td>
-                        {{angebot?.preisProTeil}}
-                    </td>
-                    <td class="table-cell-badge">
-                        <span *ngIf="angebot?.status == 0" class="label label-warning label-as-badge center-block">Offen</span>
-                        <span *ngIf="angebot?.status == 1" class="label label-success label-as-badge center-block">Akzeptiert</span>
-                        <span *ngIf="angebot?.status == 2" class="label label-primary label-as-badge center-block">Abgelehnt</span>
-                    </td>
-                </tr>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Angebot
+                        </th>
+                        <th>
+                            Nachfrage
+                        </th>
+                        <th>
+                            Produkt
+                        </th>
+                        <th>
+                            Teil
+                        </th>
+                        <th>
+                            PreisProTeil
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                    <tr *ngFor="#angebot of data">
+                        <td>
+                            {{angebot?.angebotId}}
+                        </td>
+                        <td>
+                            <a href="#/nachfrage/{{angebot?.nachfrageId}}">
+                                {{angebot?.nachfrageId}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/produkt/{{angebot?.produktId}}">
+                                {{ angebot?.produktName }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/produkt/{{angebot?.produktId}}">
+                                {{ angebot?.teilName }}
+                            </a>
+                        </td>
+                        <td>
+                            {{angebot?.preisProTeil}}
+                        </td>
+                        <td class="table-cell-badge">
+                            <span *ngIf="angebot?.status == 0" class="label label-warning label-as-badge center-block">Offen</span>
+                            <span *ngIf="angebot?.status == 1" class="label label-success label-as-badge center-block">Akzeptiert</span>
+                            <span *ngIf="angebot?.status == 2" class="label label-primary label-as-badge center-block">Abgelehnt</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     <div class="row" *ngIf="data == null || data?.length <= 0">

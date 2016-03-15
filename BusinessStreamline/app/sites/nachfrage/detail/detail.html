@@ -52,58 +52,60 @@
                     <legend>Vorhandene Angebote</legend>
                 </fieldset>
             </form>
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        Angebot
-                    </th>
-                    <th>
-                        Erstellt Am
-                    </th>
-                    <th>
-                        Preis pro Teil
-                    </th>
-                    <th>
-                        Gesamtpreis
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th colspan="2">
-                        Aktionen
-                    </th>
-                    <th>
-                        Bestes
-                    </th>
-                </tr>
-                <tr *ngFor="#angebot of data; trackBy: trackByForOffers" [class.warning]="angebot.istBestesAngebot && angebot?.status == 0" [class.success]="angebot?.status == 1">
-                    <td>
-                        <span>{{ angebot?.angebotId }}</span>
-                    </td>
-                    <td>{{ angebot.erstelltAm | momentdate }}</td>
-                    <td>{{ angebot?.preisProTeil | currency:'CHF':false }}</td>
-                    <td>{{ angebot?.preisTotal | currency:'CHF':false  }}</td>
-                    <td class="table-cell-badge">
-                        <span *ngIf="angebot?.status == 0" class="label label-warning label-as-badge center-block">Offen</span>
-                        <span *ngIf="angebot?.status == 1" class="label label-success label-as-badge center-block">Akzeptiert</span>
-                        <span *ngIf="angebot?.status == 2" class="label label-primary label-as-badge center-block">Abgelehnt</span>
-                    </td>
-                    <td *ngIf="angebot?.status == 0 && model?.istOffen">
-                        <button (click)="onAcceptAngebot($event, angebot)" type="button" class="btn btn-success center-block" data-toggle="tooltip" data-placement="top" title="Annehmen"><i class="glyphicon glyphicon-thumbs-up"></i></button>
-                    </td>
-                    <td *ngIf="angebot?.status == 0 && model?.istOffen">
-                        <button (click)="onDeclineAngebot($event, angebot)" type="button" class="btn btn-warning center-block" data-toggle="tooltip" data-placement="top" title="Ablehnen"><i class="glyphicon glyphicon-thumbs-down"></i></button>
-                    </td>
-                    <td *ngIf="angebot?.status != 0 || !model?.istOffen" colspan="2" class="text-center">
-                        <span>-</span>
-                    </td>
-                    <td>
-                        <div class="text-center">
-                            <i *ngIf="angebot.istBestesAngebot" class="glyphicon glyphicon-star-empty star-offer" data-toggle="tooltip" data-placement="top" title="Bestes Angebot"></i>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Angebot
+                        </th>
+                        <th>
+                            Erstellt Am
+                        </th>
+                        <th>
+                            Preis pro Teil
+                        </th>
+                        <th>
+                            Gesamtpreis
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th colspan="2">
+                            Aktionen
+                        </th>
+                        <th>
+                            Bestes
+                        </th>
+                    </tr>
+                    <tr *ngFor="#angebot of data; trackBy: trackByForOffers" [class.warning]="angebot.istBestesAngebot && angebot?.status == 0" [class.success]="angebot?.status == 1">
+                        <td>
+                            <span>{{ angebot?.angebotId }}</span>
+                        </td>
+                        <td>{{ angebot.erstelltAm | momentdate }}</td>
+                        <td>{{ angebot?.preisProTeil | currency:'CHF':false }}</td>
+                        <td>{{ angebot?.preisTotal | currency:'CHF':false  }}</td>
+                        <td class="table-cell-badge">
+                            <span *ngIf="angebot?.status == 0" class="label label-warning label-as-badge center-block">Offen</span>
+                            <span *ngIf="angebot?.status == 1" class="label label-success label-as-badge center-block">Akzeptiert</span>
+                            <span *ngIf="angebot?.status == 2" class="label label-primary label-as-badge center-block">Abgelehnt</span>
+                        </td>
+                        <td *ngIf="angebot?.status == 0 && model?.istOffen">
+                            <button (click)="onAcceptAngebot($event, angebot)" type="button" class="btn btn-success center-block" data-toggle="tooltip" data-placement="top" title="Annehmen"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+                        </td>
+                        <td *ngIf="angebot?.status == 0 && model?.istOffen">
+                            <button (click)="onDeclineAngebot($event, angebot)" type="button" class="btn btn-warning center-block" data-toggle="tooltip" data-placement="top" title="Ablehnen"><i class="glyphicon glyphicon-thumbs-down"></i></button>
+                        </td>
+                        <td *ngIf="angebot?.status != 0 || !model?.istOffen" colspan="2" class="text-center">
+                            <span>-</span>
+                        </td>
+                        <td>
+                            <div class="text-center">
+                                <i *ngIf="angebot.istBestesAngebot" class="glyphicon glyphicon-star-empty star-offer" data-toggle="tooltip" data-placement="top" title="Bestes Angebot"></i>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <hr />
             <form class="form">
                 <div class="input-group pull-right">

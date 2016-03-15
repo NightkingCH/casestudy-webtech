@@ -19,41 +19,43 @@
                     <legend>Vorhandene Teile</legend>
                 </fieldset>
             </form>
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        Teil
-                    </th>
-                    <th>
-                        Typ
-                    </th>
-                    <th>
-                        Menge
-                    </th>
-                    <th>
-                        Nachfrage
-                    </th>
-                    <th>
-                        Aktionen
-                    </th>
-                </tr>
-                <tr *ngFor="#teil of data; trackBy: trackByForParts">
-                    <td>{{ teil?.teilName }}</td>
-                    <td>{{ teil?.typName }}</td>
-                    <td>{{ teil?.anzahl }}</td>
-                    <td class="table-cell-badge">
-                        <span *ngIf="teil.hatOffeneNachfrage" class="label label-info label-as-badge center-block">
-                            <a href="#/nachfrage/{{ teil?.offeneNachfrageId }}">Offene Nachfrage</a>
-                        </span>
-                    </td>
-                    <td>
-                        <div class="btn-group" role="group">
-                            <a *ngIf="!teil.hatOffeneNachfrage && isOwner" href="#/nachfrage/add/{{teil.teilId}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nachfrage erfassen"><i class="glyphicon glyphicon-plus"></i></a>
-                            <button *ngIf="teil.hatOffeneNachfrage || !isOwner" disabled="disabled" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nachfrage bereits vorhanden"><i class="glyphicon glyphicon-plus"></i></button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Teil
+                        </th>
+                        <th>
+                            Typ
+                        </th>
+                        <th>
+                            Menge
+                        </th>
+                        <th>
+                            Nachfrage
+                        </th>
+                        <th>
+                            Aktionen
+                        </th>
+                    </tr>
+                    <tr *ngFor="#teil of data; trackBy: trackByForParts">
+                        <td>{{ teil?.teilName }}</td>
+                        <td>{{ teil?.typName }}</td>
+                        <td>{{ teil?.anzahl }}</td>
+                        <td class="table-cell-badge">
+                            <span *ngIf="teil.hatOffeneNachfrage" class="label label-info label-as-badge center-block">
+                                <a href="#/nachfrage/{{ teil?.offeneNachfrageId }}">Offene Nachfrage</a>
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a *ngIf="!teil.hatOffeneNachfrage && isOwner" href="#/nachfrage/add/{{teil.teilId}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nachfrage erfassen"><i class="glyphicon glyphicon-plus"></i></a>
+                                <button *ngIf="teil.hatOffeneNachfrage || !isOwner" disabled="disabled" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nachfrage bereits vorhanden"><i class="glyphicon glyphicon-plus"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <hr />
             <form class="form" *ngIf="isOwner">
                 <div class="input-group pull-right">

@@ -11,79 +11,81 @@
     <hr />
     <div class="row" *ngIf="data != null && data?.length > 0">
         <div class="col-md-offset-1 col-md-10">
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        Bestellung
-                    </th>
-                    <th>
-                        Angebot
-                    </th>
-                    <th>
-                        Nachfrage
-                    </th>
-                    <th>
-                        Produkt
-                    </th>
-                    <th>
-                        Teil
-                    </th>
-                    <th>
-                        PreisProTeil
-                    </th>
-                    <th>
-                        Anbieter
-                    </th>
-                    <th>
-                        Firma
-                    </th>
-                    <th>
-                        Bestelldatum
-                    </th>
-                    <th>
-                    </th>
-                </tr>
-                <tr *ngFor="#bestellung of data">
-                    <td>
-                        {{bestellung?.bestellungId}}
-                    </td>
-                    <td>
-                        {{bestellung?.angebotId}}
-                    </td>
-                    <td>
-                        <a href="#/nachfrage/{{bestellung?.nachfrageId}}">
-                            {{bestellung?.nachfrageId}}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#/produkt/{{bestellung?.produktId}}">
-                            {{bestellung?.produktName}}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#/produkt/{{bestellung?.produktId}}">
-                            {{bestellung?.teilName}}
-                        </a>
-                    </td>
-                    <td>
-                        {{bestellung?.preisProTeil}}
-                    </td>
-                    <td>
-                        {{bestellung?.anbieterName}}
-                    </td>
-                    <td>
-                        {{bestellung?.firmaName}}
-                    </td>
-                    <td>
-                        {{bestellung?.bestellDatum | momentdate}}
-                    </td>
-                    <td>
-                        <a href="api/bestellung/xml/get/{{bestellung?.firmaId}}/{{bestellung?.bestellungId}}" target="_blank" class="color-green">
-                            <i class="glyphicon glyphicon-arrow-down"></i>
-                        </a>
-                    </td>
-                </tr>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Bestellung
+                        </th>
+                        <th>
+                            Angebot
+                        </th>
+                        <th>
+                            Nachfrage
+                        </th>
+                        <th>
+                            Produkt
+                        </th>
+                        <th>
+                            Teil
+                        </th>
+                        <th>
+                            PreisProTeil
+                        </th>
+                        <th>
+                            Anbieter
+                        </th>
+                        <th>
+                            Firma
+                        </th>
+                        <th>
+                            Bestelldatum
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    <tr *ngFor="#bestellung of data">
+                        <td>
+                            {{bestellung?.bestellungId}}
+                        </td>
+                        <td>
+                            {{bestellung?.angebotId}}
+                        </td>
+                        <td>
+                            <a href="#/nachfrage/{{bestellung?.nachfrageId}}">
+                                {{bestellung?.nachfrageId}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/produkt/{{bestellung?.produktId}}">
+                                {{bestellung?.produktName}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/produkt/{{bestellung?.produktId}}">
+                                {{bestellung?.teilName}}
+                            </a>
+                        </td>
+                        <td>
+                            {{bestellung?.preisProTeil}}
+                        </td>
+                        <td>
+                            {{bestellung?.anbieterName}}
+                        </td>
+                        <td>
+                            {{bestellung?.firmaName}}
+                        </td>
+                        <td>
+                            {{bestellung?.bestellDatum | momentdate}}
+                        </td>
+                        <td>
+                            <a href="api/bestellung/xml/get/{{bestellung?.firmaId}}/{{bestellung?.bestellungId}}" target="_blank" class="color-green">
+                                <i class="glyphicon glyphicon-arrow-down"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     <div class="row" *ngIf="data == null || data?.length <= 0">

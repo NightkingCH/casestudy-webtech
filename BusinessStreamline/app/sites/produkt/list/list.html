@@ -11,31 +11,33 @@
     <hr />
     <div class="row" *ngIf="data != null && data?.length > 0">
         <div class="col-md-offset-1 col-md-10">
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        Produkt
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                    </th>
-                </tr>
-                <tr *ngFor="#produkt of data; trackBy: trackByForProducts">
-                    <td>
-                        <a href="#/produkt/{{produkt?.produktId}}">
-                            {{produkt?.produktId}}
-                        </a>
-                    </td>
-                    <td>{{produkt?.name}}</td>
-                    <td>
-                        <a href="#/produkt/{{produkt?.produktId}}" class="btn btn-info pull-right">
-                            <i class="glyphicon glyphicon-arrow-right"></i>
-                        </a>
-                    </td>
-                </tr>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Produkt
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    <tr *ngFor="#produkt of data; trackBy: trackByForProducts">
+                        <td>
+                            <a href="#/produkt/{{produkt?.produktId}}">
+                                {{produkt?.produktId}}
+                            </a>
+                        </td>
+                        <td>{{produkt?.name}}</td>
+                        <td>
+                            <a href="#/produkt/{{produkt?.produktId}}" class="btn btn-info pull-right">
+                                <i class="glyphicon glyphicon-arrow-right"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     <div class="row" *ngIf="data == null || data?.length <= 0">

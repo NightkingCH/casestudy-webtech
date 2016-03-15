@@ -32,47 +32,53 @@
                     <legend>Resultate - {{ count }}</legend>
                 </fieldset>
             </form>
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        Nachfrage
-                    </th>
-                    <th>
-                        Produkt
-                    </th>
-                    <th>
-                        Teil
-                    </th>
-                    <th>
-                        Typ
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th>
-                        Aktionen
-                    </th>
-                </tr>
-                <tr *ngFor="#nachfrage of data; trackBy: trackByForSearch">
-                    <td>
-                        <a href="#/nachfrage/{{ nachfrage?.nachfrageId }}">{{ nachfrage?.nachfrageId }}</a>
-                    </td>
-                    <td>
-                        <a href="#/produkt/{{nachfrage?.produktId }}">{{ nachfrage?.produktName }}</a>
-                    </td>
-                    <td>{{nachfrage?.teilName}}</td>
-                    <td>{{nachfrage?.typName}}</td>
-                    <td class="table-cell-badge">
-                        <span *ngIf="!nachfrage?.hatBestellung" class="label label-warning label-as-badge center-block">Offen</span>
-                        <span *ngIf="nachfrage?.hatBestellung" class="label label-primary label-as-badge center-block">Geschlossen</span>
-                    </td>
-                    <td>
-                        <a *ngIf="!nachfrage?.hatBestellung && isAnbieter" href="#/angebot/add/{{nachfrage?.nachfrageId}}" class="btn btn-default center-block">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </a>
-                    </td>
-                </tr>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Nachfrage
+                        </th>
+                        <th>
+                            Produkt
+                        </th>
+                        <th>
+                            Teil
+                        </th>
+                        <th>
+                            Typ
+                        </th>
+                        <th>
+                            Anzahl
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Aktionen
+                        </th>
+                    </tr>
+                    <tr *ngFor="#nachfrage of data; trackBy: trackByForSearch">
+                        <td>
+                            <a href="#/nachfrage/{{ nachfrage?.nachfrageId }}">{{ nachfrage?.nachfrageId }}</a>
+                        </td>
+                        <td>
+                            <a href="#/produkt/{{nachfrage?.produktId }}">{{ nachfrage?.produktName }}</a>
+                        </td>
+                        <td>{{nachfrage?.teilName}}</td>
+                        <td>{{nachfrage?.typName}}</td>
+                        <td>{{nachfrage?.anzahl}}</td>
+                        <td class="table-cell-badge">
+                            <span *ngIf="!nachfrage?.hatBestellung" class="label label-warning label-as-badge center-block">Offen</span>
+                            <span *ngIf="nachfrage?.hatBestellung" class="label label-primary label-as-badge center-block">Geschlossen</span>
+                        </td>
+                        <td>
+                            <a *ngIf="!nachfrage?.hatBestellung && isAnbieter" href="#/angebot/add/{{nachfrage?.nachfrageId}}" class="btn btn-default center-block">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
