@@ -35,9 +35,15 @@ namespace BusinessStreamline.Controllers.WebAPI
             var entity = db.Login
                 .Include(x => x.Firma)
                 .Include(x => x.Anbieter)
-                .FirstOrDefault(x => x.Name == login.Name && x.Password == login.Password); // OPT: add crypto provider to hash password on db and on validation.
+                .FirstOrDefault(x => x.Name == login.Name);
 
-            if (entity == null) {
+            if (entity.Password != login.Password)
+            {
+                return BadRequest();
+            }
+
+            if (entity == null)
+            {
                 return BadRequest();
             }
 
