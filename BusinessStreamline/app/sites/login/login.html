@@ -4,7 +4,7 @@
             <h1>Login</h1>
         </div>
         <div class="container">
-            <form class="form-signin">
+            <form class="form-signin" (ngSubmit)="userLogin($event)">
                 <h2 class="form-signin-heading">Bitte melden Sie sich ein</h2>
                 <label for="inputEmail" class="sr-only">
                     Benutzername
@@ -14,7 +14,7 @@
                     Passwort
                 </label>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required="required" [(ngModel)]="model.password" #name="ngForm">
-                <button class="btn btn-lg btn-default btn-block" type="submit" (click)="userLogin($event)">
+                <button class="btn btn-lg btn-default btn-block" type="submit">
                     Anmelden
                 </button>
             </form>
