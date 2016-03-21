@@ -42,6 +42,9 @@
                             Bestelldatum
                         </th>
                         <th>
+                            Liefertermin
+                        </th>
+                        <th>
                         </th>
                     </tr>
                     <tr *ngFor="#bestellung of data">
@@ -77,6 +80,9 @@
                         </td>
                         <td>
                             {{bestellung?.bestellDatum | momentdate}}
+                        </td>
+                        <td>
+                            {{bestellung?.liefertermin | momentdate:'L'}}
                         </td>
                         <td>
                             <a href="api/bestellung/xml/get/{{bestellung?.firmaId}}/{{bestellung?.bestellungId}}" target="_blank" class="color-green">

@@ -27,7 +27,7 @@
         <EntityTypeShape EntityType="BusinessStreamlineModel.Qualitaet" Width="1.5" PointX="10.75" PointY="1" />
         <AssociationConnector Association="BusinessStreamlineModel.FK_QualitaetTeil" />
       </Diagram>
-      <Diagram DiagramId="3d0dbcf47b29486e89f27014e58f4c2d" Name="Views" ZoomLevel="98" >
+      <Diagram DiagramId="3d0dbcf47b29486e89f27014e58f4c2d" Name="Views" ZoomLevel="97" >
         <EntityTypeShape EntityType="BusinessStreamlineModel.ViewOffeneNachfrage" Width="2.125" PointX="6.875" PointY="5.625" />
         <EntityTypeShape EntityType="BusinessStreamlineModel.ViewSucheNachfrage" Width="2.125" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="BusinessStreamlineModel.ViewTeil" Width="1.5" PointX="2.75" PointY="4.5" />
@@ -37,7 +37,7 @@
         <EntityTypeShape EntityType="BusinessStreamlineModel.ViewNachfrage" Width="1.5" PointX="5.25" PointY="3.5" />
         <EntityTypeShape EntityType="BusinessStreamlineModel.ViewNachfrageBestellung" Width="2.5" PointX="6.875" PointY="2.375" />
         <EntityTypeShape EntityType="BusinessStreamlineModel.ViewAngebotAnbieter" Width="1.875" PointX="1" PointY="0.75" />
-        <EntityTypeShape EntityType="BusinessStreamlineModel.ViewBestellung" Width="1.5" PointX="1" PointY="3.375" />
+        <EntityTypeShape EntityType="BusinessStreamlineModel.ViewBestellung" Width="1.5" PointX="1" PointY="4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

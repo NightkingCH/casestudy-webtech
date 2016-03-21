@@ -31,6 +31,20 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <label>Qualität</label>
+                        <div class="input-group">
+                            <span class="form-control-static">{{ model?.teilQualitaetName }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Liefertermin</label>
+                        <div class="input-group">
+                            <span class="form-control-static">{{ model?.liefertermin | momentdate:'L' }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <label>Erledigt</label>
                         <div class="input-group">
                             <a *ngIf="model?.bestellungId" href="#/bestellungen">

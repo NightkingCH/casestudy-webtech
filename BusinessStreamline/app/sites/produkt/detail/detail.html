@@ -29,6 +29,9 @@
                             Typ
                         </th>
                         <th>
+                            Qualität
+                        </th>
+                        <th>
                             Menge
                         </th>
                         <th>
@@ -41,6 +44,7 @@
                     <tr *ngFor="#teil of data; trackBy: trackByForParts">
                         <td>{{ teil?.teilName }}</td>
                         <td>{{ teil?.typName }}</td>
+                        <td>{{ teil?.teilQualitaetName }}</td>
                         <td>{{ teil?.anzahl }}</td>
                         <td class="table-cell-badge">
                             <span *ngIf="teil.hatOffeneNachfrage" class="label label-info label-as-badge center-block">

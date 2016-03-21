@@ -8,7 +8,13 @@
     name: 'momentdate'
 })
 export class MomentDatePipe implements PipeTransform {
-    public transform(value: any): any {
-        return moment(value).format("L - LTS");
+    public transform(value: any, args: string[]): any {
+        var format = "L - LTS";
+
+        if (args != null && args.length > 0) {
+            format = args[0];
+        }
+
+        return moment(value).format(format);
     }
 }

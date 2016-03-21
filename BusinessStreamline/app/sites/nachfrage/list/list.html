@@ -39,6 +39,9 @@
                             Status
                         </th>
                         <th>
+                            Liefertermin
+                        </th>
+                        <th>
                         </th>
                     </tr>
                     <tr *ngFor="#nachfrage of data; trackBy: trackByForRequests">
@@ -61,6 +64,7 @@
                             <span *ngIf="nachfrage?.istOffen == 1" class="label label-warning label-as-badge center-block">Offen</span>
                             <span *ngIf="nachfrage?.istOffen == 0" class="label label-success label-as-badge center-block">Abgeschlossen</span>
                         </td>
+                        <td>{{nachfrage?.liefertermin | momentdate:'L'}}</td>
                         <td>
                             <a href="#/nachfrage/{{nachfrage?.nachfrageId}}" class="btn btn-info pull-right">
                                 <i class="glyphicon glyphicon-arrow-right"></i>

@@ -182,6 +182,9 @@ export class ViewAngebotAnbieter {
     public nachfrageId: number;
     public produktName: string;
     public teilName: string;
+    public liefertermin: Date;
+    public qualitaetId: number;
+    public teilQualitaetName: string;
 }
 
 export class ViewBestellung {
