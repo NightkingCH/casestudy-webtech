@@ -4,8 +4,11 @@ SELECT
 	n.NachfrageId
 	, n.Anzahl
 	, n.ErstelltAm
-	, t.TeilId
+	, n.Liefertermin
+	, t.TeilId	
 	, t.Name AS TeilName
+	, q.QualitaetId
+	, q.Name as TeilQualitaetName
 	, tt.TypId
 	, tt.Name AS TypName
 	, p.ProduktId
@@ -18,3 +21,4 @@ FROM dbo.Nachfrage n
 	INNER JOIN dbo.Teil t ON t.TeilId = n.TeilId
 	INNER JOIN dbo.Typ tt ON tt.TypId = t.TypId
 	INNER JOIN dbo.Produkt p ON p.ProduktId = t.ProduktId
+	INNER JOIN dbo.Qualitaet q ON q.QualitaetId = t.QualitaetId

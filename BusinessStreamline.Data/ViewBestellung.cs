@@ -28,5 +28,8 @@ namespace BusinessStreamline.Data
         public int FirmaId { get; set; }
         public int BestellungId { get; set; }
         public int AnbieterId { get; set; }
+        public int QualitaetId { get; set; }
+        public string TeilQualitaetName { get; set; }
+        public System.DateTime Liefertermin { get; set; }
     }
 }

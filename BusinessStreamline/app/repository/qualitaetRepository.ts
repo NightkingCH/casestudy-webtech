@@ -1,23 +1,23 @@
 ﻿import { EndpointConfiguration } from '../configuration/endpoints';
 import { Repository } from './baseRepository';
 
-import { Typ } from '../models/models';
+import { Qualitaet } from '../models/models';
 
 /**
  * @description Verwaltet den Zugriff auf den Webservice.
  */
-export class TypRepository extends Repository {
+export class QualitaetRepository extends Repository {
 
     constructor() {
-        super(EndpointConfiguration.WEB_API_HOST + EndpointConfiguration.WEB_API_TYP);
+        super(EndpointConfiguration.WEB_API_HOST + EndpointConfiguration.WEB_API_QUALITAET);
     }
 
-    public getAll(): Promise<Array<Typ>> {
+    public getAll(): Promise<Array<Qualitaet>> {
         var callConfiguration: RequestInit = {
             method: "get",
             headers: {
                 'Accept': "application/json",
-                'Content-Type': "application/json"
+                'Content-Qualitaete': "application/json"
             }
         };
 
@@ -33,12 +33,12 @@ export class TypRepository extends Repository {
         return queryPromise;
     }
 
-    public get(id: number): Promise<Array<Typ>> {
+    public get(id: number): Promise<Array<Qualitaet>> {
         var callConfiguration: RequestInit = {
             method: "get",
             headers: {
                 'Accept': "application/json",
-                'Content-Type': "application/json"
+                'Content-Qualitaete': "application/json"
             }
         };
 
@@ -47,7 +47,7 @@ export class TypRepository extends Repository {
         var queryPromise = window.fetch(callUri, callConfiguration)
             .then(this.parseText)
             .then(this.parseJson)
-            .then((data: Array<Typ>) => {
+            .then((data: Array<Qualitaet>) => {
                 return data;
             });
 

@@ -25,10 +25,12 @@ namespace BusinessStreamline.Data
         public int TypId { get; set; }
         public int Anzahl { get; set; }
         public string Name { get; set; }
+        public int QualitaetId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Nachfrage> Nachfrage { get; set; }
         public virtual Produkt Produkt { get; set; }
         public virtual Typ Typ { get; set; }
+        public virtual Qualitaet Qualitaet { get; set; }
     }
 }

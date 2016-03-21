@@ -24,5 +24,8 @@ namespace BusinessStreamline.Data
         public int ProduktId { get; set; }
         public string ProduktName { get; set; }
         public Nullable<bool> HatBestellung { get; set; }
+        public System.DateTime Liefertermin { get; set; }
+        public int QualitaetId { get; set; }
+        public string TeilQualitaetName { get; set; }
     }
 }

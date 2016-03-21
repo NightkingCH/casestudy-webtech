@@ -12,18 +12,19 @@ namespace BusinessStreamline.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ViewTeil
+    public partial class Qualitaet
     {
-        public int TeilId { get; set; }
-        public string TeilName { get; set; }
-        public int Anzahl { get; set; }
-        public int TypId { get; set; }
-        public string TypName { get; set; }
-        public int ProduktId { get; set; }
-        public string ProduktName { get; set; }
-        public Nullable<bool> HatOffeneNachfrage { get; set; }
-        public Nullable<int> OffeneNachfrageId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Qualitaet()
+        {
+            this.Teil = new HashSet<Teil>();
+        }
+    
         public int QualitaetId { get; set; }
-        public string TeilQualitaetName { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Teil> Teil { get; set; }
     }
 }

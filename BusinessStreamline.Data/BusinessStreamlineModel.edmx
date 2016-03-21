@@ -44,25 +44,34 @@
             <PropertyRef Name="LoginId" />
           </Key>
           <Property Name="LoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="Nachfrage">
           <Key>
             <PropertyRef Name="NachfrageId" />
           </Key>
           <Property Name="NachfrageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeilId" Type="int" Nullable="false" />
           <Property Name="Anzahl" Type="int" Nullable="false" />
           <Property Name="ErstelltAm" Type="datetime" Nullable="false" />
-          <Property Name="TeilId" Type="int" Nullable="false" />
+          <Property Name="Liefertermin" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Produkt">
           <Key>
             <PropertyRef Name="ProduktId" />
           </Key>
           <Property Name="ProduktId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="FirmaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Qualitaet">
+          <Key>
+            <PropertyRef Name="QualitaetId" />
+          </Key>
+          <Property Name="QualitaetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="Teil">
           <Key>
@@ -71,15 +80,16 @@
           <Property Name="TeilId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProduktId" Type="int" Nullable="false" />
           <Property Name="TypId" Type="int" Nullable="false" />
+          <Property Name="QualitaetId" Type="int" Nullable="false" />
           <Property Name="Anzahl" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="Typ">
           <Key>
             <PropertyRef Name="TypId" />
           </Key>
           <Property Name="TypId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -98,7 +108,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewAngebot' does not have 
           <Property Name="PreisProTeil" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="NachfrageId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="PreisTotal" Type="decimal" Precision="29" Scale="2" />
           <Property Name="IstBestesAngebot" Type="bit" />
         </EntityType>
@@ -121,8 +131,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewAngebotAnbieter' does n
           <Property Name="PreisProTeil" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="NachfrageId" Type="int" Nullable="false" />
-          <Property Name="ProduktName" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="TeilName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ProduktName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="TeilName" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BusinessStreamline.dbo.ViewAngebotBesterPreisNachfrage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -153,12 +163,15 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewBestellung' does not ha
             <PropertyRef Name="AnbieterLoginId" />
             <PropertyRef Name="PreisProTeil" />
             <PropertyRef Name="TeilName" />
+            <PropertyRef Name="QualitaetId" />
+            <PropertyRef Name="TeilQualitaetName" />
             <PropertyRef Name="ProduktId" />
             <PropertyRef Name="ProduktName" />
             <PropertyRef Name="AnbieterName" />
             <PropertyRef Name="FirmaName" />
             <PropertyRef Name="BestellDatum" />
             <PropertyRef Name="NachfrageId" />
+            <PropertyRef Name="Liefertermin" />
             <PropertyRef Name="FirmaId" />
             <PropertyRef Name="BestellungId" />
             <PropertyRef Name="AnbieterId" />
@@ -167,13 +180,16 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewBestellung' does not ha
           <Property Name="FirmaLoginId" Type="int" Nullable="false" />
           <Property Name="AnbieterLoginId" Type="int" Nullable="false" />
           <Property Name="PreisProTeil" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="TeilName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="TeilName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="QualitaetId" Type="int" Nullable="false" />
+          <Property Name="TeilQualitaetName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="ProduktId" Type="int" Nullable="false" />
-          <Property Name="ProduktName" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="AnbieterName" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="FirmaName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ProduktName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="AnbieterName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="FirmaName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="BestellDatum" Type="datetime" Nullable="false" />
           <Property Name="NachfrageId" Type="int" Nullable="false" />
+          <Property Name="Liefertermin" Type="datetime" Nullable="false" />
           <Property Name="FirmaId" Type="int" Nullable="false" />
           <Property Name="BestellungId" Type="int" Nullable="false" />
           <Property Name="AnbieterId" Type="int" Nullable="false" />
@@ -185,22 +201,28 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewNachfrage' does not hav
             <PropertyRef Name="NachfrageId" />
             <PropertyRef Name="Anzahl" />
             <PropertyRef Name="ErstelltAm" />
+            <PropertyRef Name="Liefertermin" />
             <PropertyRef Name="ProduktId" />
             
             
+            <PropertyRef Name="QualitaetId" />
+            <PropertyRef Name="TeilQualitaetName" />
             <PropertyRef Name="FirmaId" />
             <PropertyRef Name="LoginId" />
           </Key>
           <Property Name="NachfrageId" Type="int" Nullable="false" />
           <Property Name="Anzahl" Type="int" Nullable="false" />
           <Property Name="ErstelltAm" Type="datetime" Nullable="false" />
+          <Property Name="Liefertermin" Type="datetime" Nullable="false" />
           <Property Name="AnzahlAngebote" Type="int" />
           <Property Name="BesterPreis" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IstOffen" Type="bit" />
           <Property Name="BestellungId" Type="int" />
           <Property Name="ProduktId" Type="int" Nullable="false" />
-          <Property Name="ProduktName" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="TeilName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ProduktName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="TeilName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="QualitaetId" Type="int" Nullable="false" />
+          <Property Name="TeilQualitaetName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="FirmaId" Type="int" Nullable="false" />
           <Property Name="LoginId" Type="int" Nullable="false" />
         </EntityType>
@@ -231,8 +253,11 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewSucheNachfrage' does no
             <PropertyRef Name="NachfrageId" />
             <PropertyRef Name="Anzahl" />
             <PropertyRef Name="ErstelltAm" />
+            <PropertyRef Name="Liefertermin" />
             <PropertyRef Name="TeilId" />
             
+            <PropertyRef Name="QualitaetId" />
+            <PropertyRef Name="TeilQualitaetName" />
             <PropertyRef Name="TypId" />
             <PropertyRef Name="TypName" />
             <PropertyRef Name="ProduktId" />
@@ -241,12 +266,15 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewSucheNachfrage' does no
           <Property Name="NachfrageId" Type="int" Nullable="false" />
           <Property Name="Anzahl" Type="int" Nullable="false" />
           <Property Name="ErstelltAm" Type="datetime" Nullable="false" />
+          <Property Name="Liefertermin" Type="datetime" Nullable="false" />
           <Property Name="TeilId" Type="int" Nullable="false" />
-          <Property Name="TeilName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="TeilName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="QualitaetId" Type="int" Nullable="false" />
+          <Property Name="TeilQualitaetName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="TypId" Type="int" Nullable="false" />
-          <Property Name="TypName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="TypName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="ProduktId" Type="int" Nullable="false" />
-          <Property Name="ProduktName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ProduktName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="HatBestellung" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -258,16 +286,20 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
             
             <PropertyRef Name="TypId" />
             <PropertyRef Name="TypName" />
+            <PropertyRef Name="QualitaetId" />
+            <PropertyRef Name="TeilQualitaetName" />
             <PropertyRef Name="ProduktId" />
             
           </Key>
           <Property Name="TeilId" Type="int" Nullable="false" />
-          <Property Name="TeilName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="TeilName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="Anzahl" Type="int" Nullable="false" />
           <Property Name="TypId" Type="int" Nullable="false" />
-          <Property Name="TypName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="TypName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="QualitaetId" Type="int" Nullable="false" />
+          <Property Name="TeilQualitaetName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="ProduktId" Type="int" Nullable="false" />
-          <Property Name="ProduktName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ProduktName" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="HatOffeneNachfrage" Type="bit" />
           <Property Name="OffeneNachfrageId" Type="int" />
         </EntityType>
@@ -367,6 +399,18 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QualitaetTeil">
+          <End Role="Qualitaet" Type="Self.Qualitaet" Multiplicity="1" />
+          <End Role="Teil" Type="Self.Teil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualitaet">
+              <PropertyRef Name="QualitaetId" />
+            </Principal>
+            <Dependent Role="Teil">
+              <PropertyRef Name="QualitaetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TeilNachfrage">
           <End Role="Teil" Type="Self.Teil" Multiplicity="1" />
           <End Role="Nachfrage" Type="Self.Nachfrage" Multiplicity="*" />
@@ -399,6 +443,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nachfrage" EntityType="Self.Nachfrage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produkt" EntityType="Self.Produkt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qualitaet" EntityType="Self.Qualitaet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teil" EntityType="Self.Teil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Typ" EntityType="Self.Typ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ViewAngebot" EntityType="Self.ViewAngebot" store:Type="Views" store:Schema="dbo">
@@ -445,12 +490,15 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewBestellung].[AnbieterLoginId] AS [AnbieterLoginId], 
     [ViewBestellung].[PreisProTeil] AS [PreisProTeil], 
     [ViewBestellung].[TeilName] AS [TeilName], 
+    [ViewBestellung].[QualitaetId] AS [QualitaetId], 
+    [ViewBestellung].[TeilQualitaetName] AS [TeilQualitaetName], 
     [ViewBestellung].[ProduktId] AS [ProduktId], 
     [ViewBestellung].[ProduktName] AS [ProduktName], 
     [ViewBestellung].[AnbieterName] AS [AnbieterName], 
     [ViewBestellung].[FirmaName] AS [FirmaName], 
     [ViewBestellung].[BestellDatum] AS [BestellDatum], 
     [ViewBestellung].[NachfrageId] AS [NachfrageId], 
+    [ViewBestellung].[Liefertermin] AS [Liefertermin], 
     [ViewBestellung].[FirmaId] AS [FirmaId], 
     [ViewBestellung].[BestellungId] AS [BestellungId], 
     [ViewBestellung].[AnbieterId] AS [AnbieterId]
@@ -461,6 +509,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewNachfrage].[NachfrageId] AS [NachfrageId], 
     [ViewNachfrage].[Anzahl] AS [Anzahl], 
     [ViewNachfrage].[ErstelltAm] AS [ErstelltAm], 
+    [ViewNachfrage].[Liefertermin] AS [Liefertermin], 
     [ViewNachfrage].[AnzahlAngebote] AS [AnzahlAngebote], 
     [ViewNachfrage].[BesterPreis] AS [BesterPreis], 
     [ViewNachfrage].[IstOffen] AS [IstOffen], 
@@ -468,6 +517,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewNachfrage].[ProduktId] AS [ProduktId], 
     [ViewNachfrage].[ProduktName] AS [ProduktName], 
     [ViewNachfrage].[TeilName] AS [TeilName], 
+    [ViewNachfrage].[QualitaetId] AS [QualitaetId], 
+    [ViewNachfrage].[TeilQualitaetName] AS [TeilQualitaetName], 
     [ViewNachfrage].[FirmaId] AS [FirmaId], 
     [ViewNachfrage].[LoginId] AS [LoginId]
     FROM [dbo].[ViewNachfrage] AS [ViewNachfrage]</DefiningQuery>
@@ -489,8 +540,11 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewSucheNachfrage].[NachfrageId] AS [NachfrageId], 
     [ViewSucheNachfrage].[Anzahl] AS [Anzahl], 
     [ViewSucheNachfrage].[ErstelltAm] AS [ErstelltAm], 
+    [ViewSucheNachfrage].[Liefertermin] AS [Liefertermin], 
     [ViewSucheNachfrage].[TeilId] AS [TeilId], 
     [ViewSucheNachfrage].[TeilName] AS [TeilName], 
+    [ViewSucheNachfrage].[QualitaetId] AS [QualitaetId], 
+    [ViewSucheNachfrage].[TeilQualitaetName] AS [TeilQualitaetName], 
     [ViewSucheNachfrage].[TypId] AS [TypId], 
     [ViewSucheNachfrage].[TypName] AS [TypName], 
     [ViewSucheNachfrage].[ProduktId] AS [ProduktId], 
@@ -505,6 +559,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
     [ViewTeil].[Anzahl] AS [Anzahl], 
     [ViewTeil].[TypId] AS [TypId], 
     [ViewTeil].[TypName] AS [TypName], 
+    [ViewTeil].[QualitaetId] AS [QualitaetId], 
+    [ViewTeil].[TeilQualitaetName] AS [TeilQualitaetName], 
     [ViewTeil].[ProduktId] AS [ProduktId], 
     [ViewTeil].[ProduktName] AS [ProduktName], 
     [ViewTeil].[HatOffeneNachfrage] AS [HatOffeneNachfrage], 
@@ -541,6 +597,10 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           </AssociationSet>
           <AssociationSet Name="FK_ProduktTeil" Association="Self.FK_ProduktTeil">
             <End Role="Produkt" EntitySet="Produkt" />
+            <End Role="Teil" EntitySet="Teil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QualitaetTeil" Association="Self.FK_QualitaetTeil">
+            <End Role="Qualitaet" EntitySet="Qualitaet" />
             <End Role="Teil" EntitySet="Teil" />
           </AssociationSet>
           <AssociationSet Name="FK_TeilNachfrage" Association="Self.FK_TeilNachfrage">
@@ -616,6 +676,11 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySet Name="ViewNachfrageBestellung" EntityType="BusinessStreamlineModel.ViewNachfrageBestellung" />
           <EntitySet Name="ViewAngebotAnbieter" EntityType="BusinessStreamlineModel.ViewAngebotAnbieter" />
           <EntitySet Name="ViewBestellung" EntityType="BusinessStreamlineModel.ViewBestellung" />
+          <EntitySet Name="Qualitaet" EntityType="BusinessStreamlineModel.Qualitaet" />
+          <AssociationSet Name="FK_QualitaetTeil" Association="BusinessStreamlineModel.FK_QualitaetTeil">
+            <End Role="Qualitaet" EntitySet="Qualitaet" />
+            <End Role="Teil" EntitySet="Teil" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Anbieter">
           <Key>
@@ -665,8 +730,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
             <PropertyRef Name="LoginId" />
           </Key>
           <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Anbieter" Relationship="BusinessStreamlineModel.FK_LoginAnbieter" FromRole="Login" ToRole="Anbieter" />
           <NavigationProperty Name="Firma" Relationship="BusinessStreamlineModel.FK_LoginFirma" FromRole="Login" ToRole="Firma" />
         </EntityType>
@@ -681,13 +746,14 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <NavigationProperty Name="Angebot" Relationship="BusinessStreamlineModel.FK_NachfrageAngebot" FromRole="Nachfrage" ToRole="Angebot" />
           <NavigationProperty Name="Bestellung" Relationship="BusinessStreamlineModel.FK_NachfrageBestellung" FromRole="Nachfrage" ToRole="Bestellung" />
           <NavigationProperty Name="Teil" Relationship="BusinessStreamlineModel.FK_TeilNachfrage" FromRole="Nachfrage" ToRole="Teil" />
+          <Property Name="Liefertermin" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Produkt">
           <Key>
             <PropertyRef Name="ProduktId" />
           </Key>
           <Property Name="ProduktId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirmaId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Firma" Relationship="BusinessStreamlineModel.FK_FirmaProdukt" FromRole="Produkt" ToRole="Firma" />
           <NavigationProperty Name="Teil" Relationship="BusinessStreamlineModel.FK_ProduktTeil" FromRole="Produkt" ToRole="Teil" />
@@ -700,17 +766,19 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="ProduktId" Type="Int32" Nullable="false" />
           <Property Name="TypId" Type="Int32" Nullable="false" />
           <Property Name="Anzahl" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Nachfrage" Relationship="BusinessStreamlineModel.FK_TeilNachfrage" FromRole="Teil" ToRole="Nachfrage" />
           <NavigationProperty Name="Produkt" Relationship="BusinessStreamlineModel.FK_ProduktTeil" FromRole="Teil" ToRole="Produkt" />
           <NavigationProperty Name="Typ" Relationship="BusinessStreamlineModel.FK_TypTeil" FromRole="Teil" ToRole="Typ" />
+          <Property Name="QualitaetId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Qualitaet" Relationship="BusinessStreamlineModel.FK_QualitaetTeil" FromRole="Teil" ToRole="Qualitaet" />
         </EntityType>
         <EntityType Name="Typ">
           <Key>
             <PropertyRef Name="TypId" />
           </Key>
           <Property Name="TypId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Teil" Relationship="BusinessStreamlineModel.FK_TypTeil" FromRole="Typ" ToRole="Teil" />
         </EntityType>
@@ -851,17 +919,23 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
             <PropertyRef Name="TypId" />
             <PropertyRef Name="TypName" />
             <PropertyRef Name="ProduktId" />
+            <PropertyRef Name="Liefertermin" />
+            <PropertyRef Name="QualitaetId" />
+            <PropertyRef Name="TeilQualitaetName" />
           </Key>
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
           <Property Name="Anzahl" Type="Int32" Nullable="false" />
           <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TeilId" Type="Int32" Nullable="false" />
-          <Property Name="TeilName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TeilName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TypId" Type="Int32" Nullable="false" />
-          <Property Name="TypName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="TypName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="ProduktId" Type="Int32" Nullable="false" />
-          <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="HatBestellung" Type="Boolean" />
+          <Property Name="Liefertermin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QualitaetId" Type="Int32" Nullable="false" />
+          <Property Name="TeilQualitaetName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ViewTeil">
           <Key>
@@ -869,16 +943,20 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
             <PropertyRef Name="TypId" />
             <PropertyRef Name="TypName" />
             <PropertyRef Name="ProduktId" />
+            <PropertyRef Name="QualitaetId" />
+            <PropertyRef Name="TeilQualitaetName" />
           </Key>
           <Property Name="TeilId" Type="Int32" Nullable="false" />
-          <Property Name="TeilName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TeilName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Anzahl" Type="Int32" Nullable="false" />
           <Property Name="TypId" Type="Int32" Nullable="false" />
-          <Property Name="TypName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="TypName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="ProduktId" Type="Int32" Nullable="false" />
-          <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="HatOffeneNachfrage" Type="Boolean" />
           <Property Name="OffeneNachfrageId" Type="Int32" />
+          <Property Name="QualitaetId" Type="Int32" Nullable="false" />
+          <Property Name="TeilQualitaetName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ViewAngebotBesterPreisNachfrage">
           <Key>
@@ -909,7 +987,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PreisProTeil" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
           <Property Name="PreisTotal" Type="Decimal" Precision="29" Scale="2" />
           <Property Name="IstBestesAngebot" Type="Boolean" />
@@ -922,6 +1000,9 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
             <PropertyRef Name="ProduktId" />
             <PropertyRef Name="FirmaId" />
             <PropertyRef Name="LoginId" />
+            <PropertyRef Name="Liefertermin" />
+            <PropertyRef Name="QualitaetId" />
+            <PropertyRef Name="TeilQualitaetName" />
           </Key>
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
           <Property Name="Anzahl" Type="Int32" Nullable="false" />
@@ -930,11 +1011,14 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="BesterPreis" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IstOffen" Type="Boolean" />
           <Property Name="ProduktId" Type="Int32" Nullable="false" />
-          <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TeilName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProduktName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TeilName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirmaId" Type="Int32" Nullable="false" />
           <Property Name="LoginId" Type="Int32" Nullable="false" />
           <Property Name="BestellungId" Type="Int32" />
+          <Property Name="Liefertermin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QualitaetId" Type="Int32" Nullable="false" />
+          <Property Name="TeilQualitaetName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ViewNachfrageBestellung">
           <Key>
@@ -961,8 +1045,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="PreisProTeil" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="NachfrageId" Type="Int32" Nullable="false" />
-          <Property Name="ProduktName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="TeilName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ProduktName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="TeilName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ViewBestellung">
           <Key>
@@ -980,14 +1064,17 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
             <PropertyRef Name="FirmaId" />
             <PropertyRef Name="BestellungId" />
             <PropertyRef Name="AnbieterId" />
+            <PropertyRef Name="QualitaetId" />
+            <PropertyRef Name="TeilQualitaetName" />
+            <PropertyRef Name="Liefertermin" />
           </Key>
           <Property Name="AngebotId" Type="Int32" Nullable="false" />
           <Property Name="PreisProTeil" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TeilName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="TeilName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="ProduktId" Type="Int32" Nullable="false" />
-          <Property Name="ProduktName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="AnbieterName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="FirmaName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ProduktName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="AnbieterName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="FirmaName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="BestellDatum" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FirmaLoginId" Type="Int32" Nullable="false" />
           <Property Name="AnbieterLoginId" Type="Int32" Nullable="false" />
@@ -995,7 +1082,31 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <Property Name="FirmaId" Type="Int32" Nullable="false" />
           <Property Name="BestellungId" Type="Int32" Nullable="false" />
           <Property Name="AnbieterId" Type="Int32" Nullable="false" />
+          <Property Name="QualitaetId" Type="Int32" Nullable="false" />
+          <Property Name="TeilQualitaetName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Liefertermin" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="Qualitaet">
+          <Key>
+            <PropertyRef Name="QualitaetId" />
+          </Key>
+          <Property Name="QualitaetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Teil" Relationship="BusinessStreamlineModel.FK_QualitaetTeil" FromRole="Qualitaet" ToRole="Teil" />
+        </EntityType>
+        <Association Name="FK_QualitaetTeil">
+          <End Type="BusinessStreamlineModel.Qualitaet" Role="Qualitaet" Multiplicity="1" />
+          <End Type="BusinessStreamlineModel.Teil" Role="Teil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualitaet">
+              <PropertyRef Name="QualitaetId" />
+            </Principal>
+            <Dependent Role="Teil">
+              <PropertyRef Name="QualitaetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1052,6 +1163,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="Nachfrage">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.Nachfrage">
               <MappingFragment StoreEntitySet="Nachfrage">
+                <ScalarProperty Name="Liefertermin" ColumnName="Liefertermin" />
                 <ScalarProperty Name="TeilId" ColumnName="TeilId" />
                 <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
                 <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
@@ -1071,6 +1183,7 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="Teil">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.Teil">
               <MappingFragment StoreEntitySet="Teil">
+                <ScalarProperty Name="QualitaetId" ColumnName="QualitaetId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
                 <ScalarProperty Name="TypId" ColumnName="TypId" />
@@ -1099,6 +1212,9 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="ViewSucheNachfrage">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewSucheNachfrage">
               <MappingFragment StoreEntitySet="ViewSucheNachfrage">
+                <ScalarProperty Name="TeilQualitaetName" ColumnName="TeilQualitaetName" />
+                <ScalarProperty Name="QualitaetId" ColumnName="QualitaetId" />
+                <ScalarProperty Name="Liefertermin" ColumnName="Liefertermin" />
                 <ScalarProperty Name="HatBestellung" ColumnName="HatBestellung" />
                 <ScalarProperty Name="ProduktName" ColumnName="ProduktName" />
                 <ScalarProperty Name="ProduktId" ColumnName="ProduktId" />
@@ -1115,6 +1231,8 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="ViewTeil">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewTeil">
               <MappingFragment StoreEntitySet="ViewTeil">
+                <ScalarProperty Name="TeilQualitaetName" ColumnName="TeilQualitaetName" />
+                <ScalarProperty Name="QualitaetId" ColumnName="QualitaetId" />
                 <ScalarProperty Name="OffeneNachfrageId" ColumnName="OffeneNachfrageId" />
                 <ScalarProperty Name="HatOffeneNachfrage" ColumnName="HatOffeneNachfrage" />
                 <ScalarProperty Name="ProduktName" ColumnName="ProduktName" />
@@ -1161,6 +1279,9 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="ViewNachfrage">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewNachfrage">
               <MappingFragment StoreEntitySet="ViewNachfrage">
+                <ScalarProperty Name="TeilQualitaetName" ColumnName="TeilQualitaetName" />
+                <ScalarProperty Name="QualitaetId" ColumnName="QualitaetId" />
+                <ScalarProperty Name="Liefertermin" ColumnName="Liefertermin" />
                 <ScalarProperty Name="BestellungId" ColumnName="BestellungId" />
                 <ScalarProperty Name="LoginId" ColumnName="LoginId" />
                 <ScalarProperty Name="FirmaId" ColumnName="FirmaId" />
@@ -1201,6 +1322,9 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
           <EntitySetMapping Name="ViewBestellung">
             <EntityTypeMapping TypeName="BusinessStreamlineModel.ViewBestellung">
               <MappingFragment StoreEntitySet="ViewBestellung">
+                <ScalarProperty Name="Liefertermin" ColumnName="Liefertermin" />
+                <ScalarProperty Name="TeilQualitaetName" ColumnName="TeilQualitaetName" />
+                <ScalarProperty Name="QualitaetId" ColumnName="QualitaetId" />
                 <ScalarProperty Name="AnbieterId" ColumnName="AnbieterId" />
                 <ScalarProperty Name="BestellungId" ColumnName="BestellungId" />
                 <ScalarProperty Name="FirmaId" ColumnName="FirmaId" />
@@ -1215,6 +1339,15 @@ warning 6002: The table/view 'BusinessStreamline.dbo.ViewTeil' does not have a p
                 <ScalarProperty Name="TeilName" ColumnName="TeilName" />
                 <ScalarProperty Name="PreisProTeil" ColumnName="PreisProTeil" />
                 <ScalarProperty Name="AngebotId" ColumnName="AngebotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qualitaet">
+            <EntityTypeMapping TypeName="BusinessStreamlineModel.Qualitaet">
+              <MappingFragment StoreEntitySet="Qualitaet">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="QualitaetId" ColumnName="QualitaetId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

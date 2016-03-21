@@ -10,8 +10,8 @@ import { Validators as AppValidators } from '../../../validation/validation';
 
 import { UserService } from '../../../services/services';
 
-import { TeilRepository, ProduktRepository, TypRepository } from '../../../repository/repository';
-import { Teil, Produkt, Typ } from '../../../models/models';
+import { TeilRepository, ProduktRepository, TypRepository, QualitaetRepository } from '../../../repository/repository';
+import { Teil, Produkt, Typ, Qualitaet } from '../../../models/models';
 
 /**
  * @description
@@ -31,9 +31,11 @@ export class TeilAddComponent {
     private formModel: ControlGroup;
     private data: Produkt;
     private typList: Array<Typ> = [];
+    private qualitaetList: Array<Qualitaet> = [];
 
     private repository: TeilRepository = new TeilRepository();
     private typRepository: TypRepository = new TypRepository();
+    private qualitaetRepository: QualitaetRepository = new QualitaetRepository();
     private produktRepository: ProduktRepository = new ProduktRepository();
 
     constructor(private router: Router, private params: RouteParams, private title: Title, private userService: UserService, private formBuilder: FormBuilder) {
@@ -70,13 +72,17 @@ export class TeilAddComponent {
         this.formModel = this.formBuilder.group({
             name: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(40)])],
             typId: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])],
+            qualitaetId: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])],
             anzahl: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])]
         });
     }
 
     public ngOnInit(): void {
+
+        var lookupPromise = [this.fetchTyp(), this.fetchQualitaet()];
+
         // load lookup list.
-        this.fetchTyp().then(() => {
+        Promise.all(lookupPromise).then(() => {
             // load product details
             return this.fetchProdukt().then(() => {
                 // redirect the company if they don't own the product
@@ -93,10 +99,23 @@ export class TeilAddComponent {
             // add a selection element to the top.
             var nulloTyp = new Typ();
 
-            nulloTyp.name = "Typ Auswählen";
+            nulloTyp.name = "Typ auswählen";
             nulloTyp.typId = 0;
 
             this.typList = [nulloTyp].concat(data);
+        });
+    }
+
+    private fetchQualitaet(): Promise<void> {
+        return this.qualitaetRepository.getAll().then((data: Array<Qualitaet>) => {
+
+            // add a selection element to the top.
+            var nulloTyp = new Qualitaet();
+
+            nulloTyp.name = "Qualität auswählen";
+            nulloTyp.qualitaetId = 0;
+
+            this.qualitaetList = [nulloTyp].concat(data);
         });
     }
 
@@ -128,6 +147,7 @@ export class TeilAddComponent {
 
         var nameControl = this.formModel.controls["name"];
         var typControl = this.formModel.controls["typId"];
+        var qualitaetControl = this.formModel.controls["qualitaetId"];
         var anzahlControl = this.formModel.controls["anzahl"];
 
         if (nameControl.value == "") {
@@ -142,6 +162,14 @@ export class TeilAddComponent {
             return; // part requires a type
         }
 
+        if (isNaN(qualitaetControl.value)) {
+            return; // part requires a type
+        }
+
+        if (parseInt(qualitaetControl.value) <= 0) {
+            return; // part requires a type
+        }
+
         if (isNaN(anzahlControl.value)) {
             return; // part amount from which of the product consists is not a number
         }
@@ -153,6 +181,7 @@ export class TeilAddComponent {
         // link the part to the product
         this.model.produktId = this.produktId;
         this.model.typId = parseInt(typControl.value);
+        this.model.qualitaetId = parseInt(qualitaetControl.value);
         this.model.name = nameControl.value;
         this.model.anzahl = parseInt(anzahlControl.value);
 

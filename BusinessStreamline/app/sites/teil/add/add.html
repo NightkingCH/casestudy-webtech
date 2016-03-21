@@ -28,6 +28,19 @@
                             <div *ngIf="formModel.hasError('required', 'typId')" class="label label-danger label-as-badge">Typ ist ein Pflichtfeld!</div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Qualität</label>
+                            <span class="input-group">
+                                <select class="btn" [ngFormControl]="formModel.controls.qualitaetId" (change)="onQualitaetChange($event)">
+                                    <option *ngFor="#qualitaet of qualitaetList" [value]="qualitaet.qualitaetId">{{ qualitaet.name }}</option>
+                                </select>
+                            </span>
+                            <div *ngIf="formModel.hasError('required', 'qualitaetId')" class="label label-danger label-as-badge">Typ ist ein Pflichtfeld!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Anzahl</label>

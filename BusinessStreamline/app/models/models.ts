@@ -5,82 +5,91 @@
  ***/
 
 export class Login {
-    anbieter: Anbieter[];
-    firma: Firma[];
-    loginId: number;
-    name: string;
-    password: string;
+    public anbieter: Anbieter[];
+    public firma: Firma[];
+    public loginId: number;
+    public name: string;
+    public password: string;
 }
 
 export class Firma {
-    produkt: Produkt[];
-    login: Login;
-    firmaId: number;
-    loginId: number;
+   public produkt: Produkt[];
+   public login: Login;
+   public firmaId: number;
+   public loginId: number;
 }
 
 export class Anbieter {
-    angebot: Angebot[];
-    login: Login;
-    anbieterId: number;
-    loginId: number;
+   public angebot: Angebot[];
+   public login: Login;
+   public anbieterId: number;
+   public loginId: number;
 }
 
 export class Bestellung {
-    angebot: Angebot;
-    nachfrage: Nachfrage;
-    bestellungId: number;
-    erstelltAm: Date;
-    nachfrageId: number;
-    angebotId: number;
+    public angebot: Angebot;
+    public nachfrage: Nachfrage;
+    public bestellungId: number;
+    public erstelltAm: Date;
+    public nachfrageId: number;
+    public angebotId: number;
 }
 
 export class Angebot {
-    anbieter: Anbieter;
-    bestellung: Bestellung[];
-    nachfrage: Nachfrage;
-    angebotId: number;
-    erstelltAm: Date;
-    status: number;
-    preisProTeil: number;
-    anbieterId: number;
-    nachfrageId: number;
+    public anbieter: Anbieter;
+    public bestellung: Bestellung[];
+    public nachfrage: Nachfrage;
+    public angebotId: number;
+    public erstelltAm: Date;
+    public status: number;
+    public preisProTeil: number;
+    public anbieterId: number;
+    public nachfrageId: number;
 }
 
 export class Nachfrage {
-    angebot: Angebot[];
-    bestellung: Bestellung[];
-    teil: Teil;
-    nachfrageId: number;
-    anzahl: number;
-    erstelltAm: Date;
-    teilId: number;
+    public angebot: Angebot[];
+    public bestellung: Bestellung[];
+    public teil: Teil;
+    public nachfrageId: number;
+    public anzahl: number;
+    public erstelltAm: Date;
+    public liefertermin: Date;
+    public teilId: number;
 }
 
 export class Teil {
-    nachfrage: Nachfrage[];
-    produkt: Produkt;
-    typ: Typ;
-    teilId: number;
-    produktId: number;
-    typId: number = 0;
-    anzahl: number;
-    name: string;
+    public nachfrage: Nachfrage[];
+    public produkt: Produkt;
+    public typ: Typ;
+    public teilId: number;
+    public produktId: number;
+    public typId: number = 0;
+    public qualitaetId: number = 0;
+    public anzahl: number;
+    public name: string;
 }
 
 export class Typ {
-    typId: number;
-    name: string;
-    code: string;
-    teil: Teil[];
+    public typId: number;
+    public name: string;
+    public code: string;
+    public teil: Teil[];
+}
+
+export class Qualitaet {
+    public qualitaetId: number;
+    public name: string;
+    public code: string;
+    public teil: Teil[];
 }
 
 export class Produkt {
-    firma: Firma;
-    teil: Teil[];
-    produktId: number;
-    name: string;
-    firmaId: number;
+    public firma: Firma;
+    public teil: Teil[];
+    public produktId: number;
+    public name: string;
+    public firmaId: number;
 }
 
 /* Hilfsklassen / Models */
@@ -101,7 +110,6 @@ export class NachfrageSearch {
 }
 
 export class ViewTeil {
-
     public teilId: number;
     public teilName: string;
     public anzahl: number;
@@ -111,12 +119,15 @@ export class ViewTeil {
     public produktName: string;
     public hatOffeneNachfrage: boolean;
     public offeneNachfrageId: number;
+    public qualitaetId: number;
+    public teilQualitaetName: string;
 }
 
 export class ViewSucheNachfrage {
     public nachfrageId: number;
     public anzahl: number;
     public erstelltAm: Date;
+    public liefertermin: Date;
     public teilId: number;
     public teilName: string;
     public typId: number;
@@ -124,12 +135,15 @@ export class ViewSucheNachfrage {
     public produktId: number;
     public produktName: string;
     public hatBestellung: boolean;
+    public qualitaetId: number;
+    public teilQualitaetName: string;
 }
 
 export class ViewNachfrage {
     public nachfrageId: number;
     public anzahl: number;
     public erstelltAm: Date;
+    public liefertermin: Date;
     public anzahlAngebote: number;
     public besterPreis: number;
     public firmaId: number;
@@ -139,6 +153,8 @@ export class ViewNachfrage {
     public produktId: number;
     public teilName: string;
     public bestellungId: number;
+    public qualitaetId: number;
+    public teilQualitaetName: string;
 }
 
 export class ViewAngebot {
@@ -180,5 +196,11 @@ export class ViewBestellung {
     public firmaLoginId: number;
     public anbieterLoginId: number;
     public firmaId: number;
+    public erstelltAm: Date;
+    public nachfrageId: number;
+    public liefertermin: Date;
     public bestellungId: number;
+    public anbieterId: number;
+    public qualitaetId: number;
+    public teilQualitaetName: string;
 }

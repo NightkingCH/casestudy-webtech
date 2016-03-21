@@ -21,5 +21,9 @@ namespace BusinessStreamline.Data
         [Date()]
         [Required()]
         public DateTime ErstelltAm { get; set; }
+
+        [Date()]
+        [Required()]
+        public DateTime Liefertermin { get; set; }
     }
 }

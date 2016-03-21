@@ -206,6 +206,8 @@
     <TypeScriptCompile Include="app\bootstrap.ts" />
     <TypeScriptCompile Include="app\components\navigation\navigation.ts" />
     <TypeScriptCompile Include="app\configuration\endpoints.ts" />
+    <TypeScriptCompile Include="app\constants\constants.ts" />
+    <TypeScriptCompile Include="app\constants\momentLocale.ts" />
     <TypeScriptCompile Include="app\directives\routerOutlet.ts" />
     <TypeScriptCompile Include="app\models\models.ts" />
     <TypeScriptCompile Include="app\pipes\momentDate.ts" />
@@ -216,6 +218,7 @@
     <TypeScriptCompile Include="app\repository\nachfrageRepository.ts" />
     <TypeScriptCompile Include="app\repository\angebotRepository.ts" />
     <TypeScriptCompile Include="app\repository\teilRepository.ts" />
+    <TypeScriptCompile Include="app\repository\qualitaetRepository.ts" />
     <TypeScriptCompile Include="app\repository\typRepository.ts" />
     <TypeScriptCompile Include="app\repository\sucheNachfrageRepository.ts" />
     <TypeScriptCompile Include="app\repository\produktRepository.ts" />
@@ -238,6 +241,9 @@
     <TypeScriptCompile Include="app\sites\produkt\list\list.ts" />
     <None Include="tsconfig.json" />
     <TypeScriptCompile Include="app\sites\teil\add\add.ts" />
+    <TypeScriptCompile Include="app\utils\dateUtilities.ts" />
+    <TypeScriptCompile Include="app\utils\utils.ts" />
+    <TypeScriptCompile Include="app\validation\dateValidator.ts" />
     <TypeScriptCompile Include="app\validation\greaterThanValidator.ts" />
     <TypeScriptCompile Include="app\validation\validation.ts" />
     <TypeScriptCompile Include="typings\browser.d.ts" />

@@ -5,6 +5,8 @@ import { Title } from 'angular2/platform/browser';
 
 declare var $: JQueryStatic;
 
+import { MomentLocale } from '../../../constants/constants';
+import { DateUtilities } from '../../../utils/utils';
 import { PIPES } from '../../../pipes/pipes';
 import { Validators as AppValidators } from '../../../validation/validation';
 
@@ -30,6 +32,8 @@ export class NachfrageAddComponent {
     private model: Nachfrage = new Nachfrage();
     private formModel: ControlGroup;
     private data: ViewTeil;
+
+    private currentDateFormat: string = moment.localeData(MomentLocale.GERMAN).longDateFormat("L");
 
     private repository: TeilRepository = new TeilRepository();
     private nachfrageRepository: NachfrageRepository = new NachfrageRepository();
@@ -62,7 +66,8 @@ export class NachfrageAddComponent {
 
     private createModel(): void {
         this.formModel = this.formBuilder.group({
-            anzahl: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])]
+            anzahl: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0)])],
+            liefertermin: [null, Validators.compose([Validators.required, AppValidators.date()])]
         });
     }
 
@@ -83,6 +88,7 @@ export class NachfrageAddComponent {
         }
 
         var anzahlControl = this.formModel.controls["anzahl"];
+        var lieferterminControl = this.formModel.controls["liefertermin"];
 
         if (!this.formModel.valid) {
             return;
@@ -96,10 +102,19 @@ export class NachfrageAddComponent {
             return; // a product consists of more than 0 parts.
         }
 
+        if (lieferterminControl.value == null || lieferterminControl.value == "") {
+            return; // due date can't be empty!
+        }
+
+        if (!DateUtilities.isValidDate(lieferterminControl.value)) {
+            return; // date is not valid => but we need it!
+        }
+
         // prepare the entity
         this.model.teilId = this.teilId;
         this.model.erstelltAm = moment().toDate();
         this.model.anzahl = parseInt(anzahlControl.value);
+        this.model.liefertermin = moment(lieferterminControl.value).toDate(); // we need a valid javascript date object to save the date.
 
         // save the request.
         this.nachfrageRepository.post(this.userService.firma.firmaId, this.model).then((entity: Nachfrage) => {
