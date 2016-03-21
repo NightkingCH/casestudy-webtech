@@ -143,30 +143,39 @@ export class TeilAddComponent {
         this.model.typId = parseInt(selectElement.value);
     }
 
+
+    /**
+     * Temporary IE-fix.
+     */
+    public onQualitaetChange(event: Event): void {
+
+        if (!event) {
+            return;
+        }
+
+        var selectElement = (<HTMLSelectElement>event.target);
+
+        if (isNaN(parseInt(selectElement.value))) {
+            return;
+        }
+
+        this.model.qualitaetId = parseInt(selectElement.value);
+    }
+
     public onAdd(event: MouseEvent): void {
 
         var nameControl = this.formModel.controls["name"];
-        var typControl = this.formModel.controls["typId"];
-        var qualitaetControl = this.formModel.controls["qualitaetId"];
         var anzahlControl = this.formModel.controls["anzahl"];
 
         if (nameControl.value == "") {
             return; // part requires a name
         }
 
-        if (isNaN(typControl.value)) {
+        if (isNaN(this.model.typId)) {
             return; // part requires a type
         }
 
-        if (parseInt(typControl.value) <= 0) {
-            return; // part requires a type
-        }
-
-        if (isNaN(qualitaetControl.value)) {
-            return; // part requires a type
-        }
-
-        if (parseInt(qualitaetControl.value) <= 0) {
+        if (isNaN(this.model.qualitaetId)) {
             return; // part requires a type
         }
 
@@ -180,8 +189,6 @@ export class TeilAddComponent {
 
         // link the part to the product
         this.model.produktId = this.produktId;
-        this.model.typId = parseInt(typControl.value);
-        this.model.qualitaetId = parseInt(qualitaetControl.value);
         this.model.name = nameControl.value;
         this.model.anzahl = parseInt(anzahlControl.value);
 

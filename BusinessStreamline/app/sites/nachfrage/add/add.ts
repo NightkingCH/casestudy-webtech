@@ -114,7 +114,7 @@ export class NachfrageAddComponent {
         this.model.teilId = this.teilId;
         this.model.erstelltAm = moment().toDate();
         this.model.anzahl = parseInt(anzahlControl.value);
-        this.model.liefertermin = moment(lieferterminControl.value).toDate(); // we need a valid javascript date object to save the date.
+        this.model.liefertermin = moment(lieferterminControl.value, DateUtilities.RECOGNIZE_FORMAT).toDate(); // we need a valid javascript date object to save the date.
 
         // save the request.
         this.nachfrageRepository.post(this.userService.firma.firmaId, this.model).then((entity: Nachfrage) => {

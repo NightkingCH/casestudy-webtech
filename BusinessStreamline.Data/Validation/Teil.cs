@@ -19,7 +19,7 @@ namespace BusinessStreamline.Data
         public int TypId { get; set; }
 
         [Required]
-        public int Qualitaet { get; set; }
+        public int QualitaetId { get; set; }
 
         [StringLength(40, MinimumLength = 3)]
         public string Name { get; set; }

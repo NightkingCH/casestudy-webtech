@@ -12,27 +12,28 @@ using BusinessStreamline.Data;
 
 namespace BusinessStreamline.Controllers.WebAPI
 {
-    public class TypController : ApiController
+    public class QualitaetController : ApiController
     {
         private BusinessStreamlineEntities db = new BusinessStreamlineEntities();
 
-        // GET: api/Typ
-        public IQueryable<Typ> GetTyp()
+        // GET: api/qualitaet
+        public IQueryable<Qualitaet> GetQualitaet()
         {
-            return db.Typ;
+            return db.Qualitaet;
         }
 
-        // GET: api/Typ/5
-        [ResponseType(typeof(Typ))]
-        public IHttpActionResult GetTyp(int id)
+        // GET: api/qualitaet/5
+        [ResponseType(typeof(Qualitaet))]
+        public IHttpActionResult GetQualitaet(int id)
         {
-            Typ typ = db.Typ.Find(id);
-            if (typ == null)
+            Qualitaet qualitaet = db.Qualitaet.Find(id);
+
+            if (qualitaet == null)
             {
                 return NotFound();
             }
 
-            return Ok(typ);
+            return Ok(qualitaet);
         }
 
         protected override void Dispose(bool disposing)
@@ -43,6 +44,5 @@ namespace BusinessStreamline.Controllers.WebAPI
             }
             base.Dispose(disposing);
         }
-        
     }
 }
