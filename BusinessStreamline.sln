@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessStreamline", "BusinessStreamline\BusinessStreamline.csproj", "{820D79C5-6D69-4E3A-831D-CA2743646CDF}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BusinessStreamline.Sql", "BusinessStreamline.Sql\BusinessStreamline.Sql.sqlproj", "{8208A53A-CA7F-49F5-9D58-9CD9EC45FD4A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessStreamline.Data", "BusinessStreamline.Data\BusinessStreamline.Data.csproj", "{A40E7A8D-282C-42FB-9BE2-18AAD9D8AFE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C42A578B-220A-4407-BA71-42DA97B04A16}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
