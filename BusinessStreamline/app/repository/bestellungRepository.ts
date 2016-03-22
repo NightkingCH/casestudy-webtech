@@ -24,6 +24,7 @@ export class BestellungRepository extends Repository {
         var callUri = this.serviceConfig + "/" + id;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Bestellung) => {
@@ -45,6 +46,7 @@ export class BestellungRepository extends Repository {
         var callUri = this.serviceConfig + "/nachfrage/" + nachfrage;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<Bestellung>) => {
@@ -66,6 +68,7 @@ export class BestellungRepository extends Repository {
         var callUri = this.serviceConfig + "/angebot/" + nachfrage;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<Bestellung>) => {
@@ -87,6 +90,7 @@ export class BestellungRepository extends Repository {
         var callUri = this.serviceConfig + "/overview/anbieter/" + anbieter;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<Bestellung>) => {
@@ -108,6 +112,7 @@ export class BestellungRepository extends Repository {
         var callUri = this.serviceConfig + "/overview/firma/" + firma;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<Bestellung>) => {
@@ -153,6 +158,7 @@ export class BestellungRepository extends Repository {
         var callUri = this.serviceConfig + "/xml/create/" + firma + "/" + bestellung;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<Bestellung>) => {

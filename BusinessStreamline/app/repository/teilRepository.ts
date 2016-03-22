@@ -24,6 +24,7 @@ export class TeilRepository extends Repository {
         var callUri = this.serviceConfig + "/" + id;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: ViewTeil) => {
@@ -69,6 +70,7 @@ export class TeilRepository extends Repository {
         var callUri = this.serviceConfig + "/produkt/" + produkt;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<ViewTeil>) => {

@@ -24,6 +24,7 @@ export class TypRepository extends Repository {
         var callUri = this.serviceConfig;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: any) => {
@@ -45,6 +46,7 @@ export class TypRepository extends Repository {
         var callUri = this.serviceConfig + "/" + id;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<Typ>) => {

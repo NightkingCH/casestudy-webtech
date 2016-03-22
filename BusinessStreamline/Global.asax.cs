@@ -20,6 +20,8 @@ namespace BusinessStreamline
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FormatterConfig.RegisterFormatters(GlobalConfiguration.Configuration.Formatters);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
+            GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
         }
     }
 }

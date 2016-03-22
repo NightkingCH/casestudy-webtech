@@ -24,6 +24,7 @@ export class AngebotRepository extends Repository {
         var callUri = this.serviceConfig + "/" + id;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Angebot) => {
@@ -45,6 +46,7 @@ export class AngebotRepository extends Repository {
         var callUri = this.serviceConfig + "/nachfrage/" + nachfrage;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<ViewAngebot>) => {
@@ -66,6 +68,7 @@ export class AngebotRepository extends Repository {
         var callUri = this.serviceConfig + "/anbieter/" + anbieter;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<ViewAngebotAnbieter>) => {

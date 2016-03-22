@@ -25,6 +25,7 @@ export class SucheNachfrageRepository extends Repository {
         var callUri = this.serviceConfig + "/" + JSON.stringify(src);
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<ViewSucheNachfrage>) => {
@@ -47,9 +48,14 @@ export class SucheNachfrageRepository extends Repository {
         var callUri = this.serviceConfig + "/count/" + JSON.stringify(src);
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: number) => {
+                if (isNaN(data)) {
+                    return 0;
+                }
+
                 return data;
             });
 

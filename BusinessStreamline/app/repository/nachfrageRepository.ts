@@ -24,6 +24,7 @@ export class NachfrageRepository extends Repository {
         var callUri = this.serviceConfig + "/" + id;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: ViewNachfrage) => {
@@ -45,6 +46,7 @@ export class NachfrageRepository extends Repository {
         var callUri = this.serviceConfig + "/firma/" + firma + "/login/" + login;
 
         var queryPromise = window.fetch(callUri, callConfiguration)
+            .then(this.parseResponse)
             .then(this.parseText)
             .then(this.parseJson)
             .then((data: Array<ViewNachfrage>) => {
