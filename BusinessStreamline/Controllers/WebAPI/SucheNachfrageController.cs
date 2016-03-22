@@ -48,56 +48,65 @@ namespace BusinessStreamline.Controllers.WebAPI
         [HttpGet()]
         [Route("nachfrage/{src}")]
         [ResponseType(typeof(IQueryable<ViewSucheNachfrage>))]
-        public IQueryable<ViewSucheNachfrage> SearchNachfrage(string src)
+        public IHttpActionResult SearchNachfrage(string src)
         {
-            var search = new Search();
-
-            if (!string.IsNullOrWhiteSpace(src))
+            try
             {
-                search = Newtonsoft.Json.JsonConvert.DeserializeObject<Search>(src);
-            }
+                var search = new Search();
 
-            // min 10 records.
-            // avoid -1 and 0 over api call.
-            if (search.take <= 9)
+                if (!string.IsNullOrWhiteSpace(src))
+                {
+                    search = Newtonsoft.Json.JsonConvert.DeserializeObject<Search>(src);
+                }
+
+                // min 10 records.
+                // avoid -1 and 0 over api call.
+                if (search.take <= 9)
+                {
+                    search.take = 10;
+                }
+
+                // avoid -1 over api call.
+                if (search.page < 0)
+                {
+                    search.page = 0;
+                }
+
+                IQueryable<ViewSucheNachfrage> query = db.ViewSucheNachfrage;
+
+                // search through all parts
+                if (!string.IsNullOrWhiteSpace(search.search))
+                {
+                    query = query.Where(x => x.TeilName.Contains(search.search));
+                }
+
+                // add a type constraint
+                if (search.typ != 0)
+                {
+                    query = query.Where(x => x.TypId == search.typ);
+                }
+
+                if (search.state == 0)
+                {
+                    query = query.Where(x => x.HatBestellung == false);
+                }
+
+                if (search.state == 1)
+                {
+                    query = query.Where(x => x.HatBestellung == true);
+                }
+
+                // apply default sort => otherwise we can't add skip or take (paging)
+                query = query.OrderBy(x => x.TeilName);
+
+                return Ok(query.Skip(search.page * search.take).Take(search.take));
+            }
+            catch (Exception ex)
             {
-                search.take = 10;
+                NLog.LogManager.GetCurrentClassLogger().Fatal(ex, "SucheNachfrage");
+
+                return InternalServerError(ex);
             }
-
-            // avoid -1 over api call.
-            if (search.page < 0)
-            {
-                search.page = 0;
-            }
-
-            IQueryable<ViewSucheNachfrage> query = db.ViewSucheNachfrage;
-
-            // search through all parts
-            if (!string.IsNullOrWhiteSpace(search.search))
-            {
-                query = query.Where(x => x.TeilName.Contains(search.search));
-            }
-
-            // add a type constraint
-            if (search.typ != 0)
-            {
-                query = query.Where(x => x.TypId == search.typ);
-            }
-
-            if (search.state == 0)
-            {
-                query = query.Where(x => x.HatBestellung == false);
-            }
-
-            if (search.state == 1)
-            {
-                query = query.Where(x => x.HatBestellung == true);
-            }
-
-            // apply default sort => otherwise we can't add skip or take (paging)
-            query = query.OrderBy(x => x.TeilName);
-
-            return query.Skip(search.page * search.take).Take(search.take);
         }
 
         // GET: api/search
@@ -106,56 +115,66 @@ namespace BusinessStreamline.Controllers.WebAPI
         [HttpGet()]
         [Route("nachfrage/count/{src}")]
         [ResponseType(typeof(int))]
-        public int CountSearchNachfrage(string src)
+        public IHttpActionResult CountSearchNachfrage(string src)
         {
-            var search = new Search();
-
-            if (!string.IsNullOrWhiteSpace(src))
+            try
             {
-                search = Newtonsoft.Json.JsonConvert.DeserializeObject<Search>(src);
-            }
+                var search = new Search();
 
-            // min 10 records.
-            // avoid -1 and 0 over api call.
-            if (search.take <= 9)
+                if (!string.IsNullOrWhiteSpace(src))
+                {
+                    search = Newtonsoft.Json.JsonConvert.DeserializeObject<Search>(src);
+                }
+
+                // min 10 records.
+                // avoid -1 and 0 over api call.
+                if (search.take <= 9)
+                {
+                    search.take = 10;
+                }
+
+                // avoid -1 over api call.
+                if (search.page < 0)
+                {
+                    search.page = 0;
+                }
+
+                IQueryable<ViewSucheNachfrage> query = db.ViewSucheNachfrage;
+
+                // search through all parts
+                if (!string.IsNullOrWhiteSpace(search.search))
+                {
+                    query = query.Where(x => x.TeilName.Contains(search.search));
+                }
+
+                // add a type constraint
+                if (search.typ != 0)
+                {
+                    query = query.Where(x => x.TypId == search.typ);
+                }
+
+                if (search.state == 0)
+                {
+                    query = query.Where(x => x.HatBestellung == false);
+                }
+
+                if (search.state == 1)
+                {
+                    query = query.Where(x => x.HatBestellung == true);
+                }
+
+                // apply default sort => otherwise we can't add skip or take (paging)
+                query = query.OrderBy(x => x.TeilName);
+
+                return Ok(query.Count());
+
+            }
+            catch (Exception ex)
             {
-                search.take = 10;
+                NLog.LogManager.GetCurrentClassLogger().Fatal(ex, "SucheNachfrage");
+
+                return InternalServerError(ex);
             }
-
-            // avoid -1 over api call.
-            if (search.page < 0)
-            {
-                search.page = 0;
-            }
-
-            IQueryable<ViewSucheNachfrage> query = db.ViewSucheNachfrage;
-
-            // search through all parts
-            if (!string.IsNullOrWhiteSpace(search.search))
-            {
-                query = query.Where(x => x.TeilName.Contains(search.search));
-            }
-
-            // add a type constraint
-            if (search.typ != 0)
-            {
-                query = query.Where(x => x.TypId == search.typ);
-            }
-
-            if (search.state == 0)
-            {
-                query = query.Where(x => x.HatBestellung == false);
-            }
-
-            if (search.state == 1)
-            {
-                query = query.Where(x => x.HatBestellung == true);
-            }
-
-            // apply default sort => otherwise we can't add skip or take (paging)
-            query = query.OrderBy(x => x.TeilName);
-
-            return query.Count();
         }
     }
 }
