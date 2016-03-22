@@ -136,7 +136,7 @@
     <Content Include="app\sites\produkt\list\list.html" />
     <Content Include="app\sites\teil\add\add.html" />
     <Content Include="App_Data\Bestellungen\publish_placeholder_file.txt" />
-    <Content Include="App_Data\Logs\placeholder_file.txt" />
+    <Content Include="App_Data\Log\placeholder_file.txt" />
     <Content Include="content\css\bootstrap-theme.css" />
     <Content Include="content\css\bootstrap.css" />
     <Content Include="content\css\site.css" />
