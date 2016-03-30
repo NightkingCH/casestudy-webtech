@@ -60,7 +60,7 @@ export class AngebotAddComponent {
 
     private createModel(): void {
         this.formModel = this.formBuilder.group({
-            preisProTeil: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0.01)])]
+            preisProTeil: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0.01), AppValidators.nan()])]
         });
     }
 

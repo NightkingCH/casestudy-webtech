@@ -256,6 +256,7 @@
     <TypeScriptCompile Include="app\sites\teil\add\add.ts" />
     <TypeScriptCompile Include="app\utils\dateUtilities.ts" />
     <TypeScriptCompile Include="app\utils\utils.ts" />
+    <TypeScriptCompile Include="app\validation\nanValidator.ts" />
     <TypeScriptCompile Include="app\validation\dateValidator.ts" />
     <TypeScriptCompile Include="app\validation\greaterThanValidator.ts" />
     <TypeScriptCompile Include="app\validation\validation.ts" />
