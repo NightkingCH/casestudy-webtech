@@ -31,6 +31,10 @@ export class NachfrageDetailComponent {
     private canCreateOffer: boolean = false;
     private canChangeState: boolean = false;
 
+    private hasData: boolean = false;
+    private istFirma: boolean = false;
+    private istAnbieter: boolean = false;
+
     private repository: NachfrageRepository = new NachfrageRepository();
     private angebotRepository: AngebotRepository = new AngebotRepository();
     private bestellRepository: BestellungRepository = new BestellungRepository();
@@ -64,7 +68,13 @@ export class NachfrageDetailComponent {
      * Angular2 life cycle event.
      */
     public ngOnInit(): void {
+
+        this.istFirma = this.userService.isFirma();
+        this.istAnbieter = this.userService.isAnbieter();
+
         this.fetchDetail().then(() => {
+            this.hasData = true;
+
             // only a company and the owner of a request can change the state of an offer.
             this.canChangeState = this.userService.isFirma() && this.userService.firma.firmaId == this.model.firmaId;
 

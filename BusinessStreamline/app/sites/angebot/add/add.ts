@@ -81,6 +81,8 @@ export class AngebotAddComponent {
         var preisProTeilControl = this.formModel.controls["preisProTeil"];
 
         if (!this.formModel.valid) {
+            toastr.error("Ungültige Angaben! Bitte prüfen Sie ihre Eingaben.");
+
             return;
         }
 

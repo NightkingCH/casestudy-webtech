@@ -164,6 +164,16 @@ export class TeilAddComponent {
 
     public onAdd(event: MouseEvent): void {
 
+        if (this.userService.isAnbieter()) {
+            return; // suppliers can't create a part.
+        }
+
+        if (!this.formModel.valid) {
+            toastr.error("Ungültige Angaben! Bitte prüfen Sie ihre Eingaben.");
+
+            return;
+        }
+
         var nameControl = this.formModel.controls["name"];
         var anzahlControl = this.formModel.controls["anzahl"];
 

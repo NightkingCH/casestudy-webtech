@@ -1,4 +1,16 @@
-﻿import { bootstrap, BROWSER_PROVIDERS, Title } from 'angular2/platform/browser';
+﻿//HACK: https://github.com/angular/angular/issues/5169
+interface System {
+    register: Function
+}
+
+declare var System: System;
+
+// angular2 hotfix
+System.register("angular2/src/core/change_detection/pipe_lifecycle_reflector", [], true, function (require, exports, module) {
+    exports.implementsOnDestroy = (pipe) => pipe ? pipe.constructor.prototype.ngOnDestroy : false
+})
+
+import { bootstrap, BROWSER_PROVIDERS, Title } from 'angular2/platform/browser';
 import { bind, enableProdMode } from 'angular2/core';
 import { ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy } from 'angular2/router';
 
