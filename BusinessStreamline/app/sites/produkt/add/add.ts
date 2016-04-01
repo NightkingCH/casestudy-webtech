@@ -63,6 +63,12 @@ export class ProduktAddComponent {
             return; // suppliers can't create a product.
         }
 
+        if (!this.formModel.valid) {
+            toastr.error("Ungültige Angaben! Bitte prüfen Sie ihre Eingaben.");
+
+            return;
+        }
+
         var nameControl = this.formModel.controls["name"];
 
         if (nameControl.value == "" || nameControl.value == null) {

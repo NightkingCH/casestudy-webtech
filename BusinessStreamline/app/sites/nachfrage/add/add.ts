@@ -91,6 +91,8 @@ export class NachfrageAddComponent {
         var lieferterminControl = this.formModel.controls["liefertermin"];
 
         if (!this.formModel.valid) {
+            toastr.error("Ungültige Angaben! Bitte prüfen Sie ihre Eingaben.");
+
             return;
         }
 

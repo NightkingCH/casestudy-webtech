@@ -60,7 +60,7 @@ export class AngebotAddComponent {
 
     private createModel(): void {
         this.formModel = this.formBuilder.group({
-            preisProTeil: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0.01)])]
+            preisProTeil: [0, Validators.compose([Validators.required, AppValidators.greaterThan(0.01), AppValidators.nan()])]
         });
     }
 
@@ -81,6 +81,8 @@ export class AngebotAddComponent {
         var preisProTeilControl = this.formModel.controls["preisProTeil"];
 
         if (!this.formModel.valid) {
+            toastr.error("Ungültige Angaben! Bitte prüfen Sie ihre Eingaben.");
+
             return;
         }
 
