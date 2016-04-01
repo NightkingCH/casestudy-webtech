@@ -142,6 +142,7 @@
     <Content Include="content\css\site.css" />
     <Content Include="content\css\toastr.css" />
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="lib\angular2-polyfills.js" />
     <Content Include="lib\angular2.dev.js" />
