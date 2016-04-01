@@ -90,7 +90,7 @@ export class AngebotAddComponent {
             return; // provided amount isn't a number
         }
 
-        if (parseInt(preisProTeilControl.value) <= 0) {
+        if (parseFloat(preisProTeilControl.value) <= 0) {
             return; // a product consists of more than 0 parts.
         }
 
